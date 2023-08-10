@@ -1,5 +1,13 @@
 import React from 'react';
+import { useAppDispatch } from '../../../redux/hooks';
+import ProfileItemCard from '../../ui/ProfileItemCard';
 
 export default function ProfilePage(): JSX.Element {
-  return <div>ProfilePage</div>;
+  const dispatch = useAppDispatch();
+
+
+  return (
+
+    <ProfileItemCard />
+  )
 }

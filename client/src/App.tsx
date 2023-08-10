@@ -9,6 +9,7 @@ import AllCourses from './components/pages/courses/AllCourses';
 import CoursePage from './components/pages/courses/CoursePage';
 import TestPage from './components/pages/courses/TestPage';
 import Navbar from './components/ui/NavBar';
+import CompanyPage from './components/pages/company/CompanyPage';
 
 function App(): JSX.Element {
   return (
@@ -17,6 +18,7 @@ function App(): JSX.Element {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/profile/:id" element={<ProfilePage />} />
+        <Route path="/company/:id" element={<CompanyPage />} />
 
         <Route path="/allcourses" element={<AllCourses />} />
         <Route path="/allcorses/:id" element={<CoursePage />} />
