@@ -9,6 +9,7 @@ import AllCoursesPage from './components/pages/courses/AllCoursesPage';
 import CoursePage from './components/pages/courses/CoursePage';
 import TestPage from './components/pages/courses/TestPage';
 import Navbar from './components/ui/NavBar';
+import CompanyPage from './components/pages/company/CompanyPage';
 
 function App(): JSX.Element {
   return (
@@ -18,6 +19,7 @@ function App(): JSX.Element {
         <Route path="/" element={<MainPage />} />
 
         <Route path="/profile/:id" element={<ProfilePage />} />
+        <Route path="/company/:id" element={<CompanyPage />} />
 
         <Route path="/allcourses" element={<AllCoursesPage />} />
         <Route path="/allcourses/:id" element={<CoursePage />} />
