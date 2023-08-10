@@ -6,8 +6,6 @@ import allCoursesReducer from './slices/allcourses/allCoursesSlice';
 export const store = configureStore({
   reducer: {
     profile: profileReducer,
-
-
     allcourses: allCoursesReducer,
   },
 });
