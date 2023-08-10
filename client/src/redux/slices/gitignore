@@ -1,1 +1,2 @@
 vcvbn
+await axios.delete<CourseType['id']> (`/allcourses/{id}`);
