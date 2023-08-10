@@ -8,7 +8,7 @@ import type { YourProfileType } from '../../types/profileTypes';
 import { useAppDispatch } from '../../redux/hooks';
 
 type ProfileItemCardProps = {
-   profile: YourProfileType; //  тип данных  профиля
+   profile: YourProfileType | null; //  тип данных  профиля
 };
 
 export default function ProfileItemCard({ profile }: ProfileItemCardProps): JSX.Element {
@@ -28,7 +28,7 @@ export default function ProfileItemCard({ profile }: ProfileItemCardProps): JSX.
                variant="h5"
                component="div"
             >
-               {profile.name} {/* Пример вывода имени профиля */}
+               {profile?.name} {/* Пример вывода имени профиля */}
             </Typography>
 
             {/* Другие поля профиля */}
