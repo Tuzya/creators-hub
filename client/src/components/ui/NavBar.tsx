@@ -16,7 +16,7 @@ export default function Navbar(): JSX.Element {
 
   const links = [
     { to: '/', name: 'Home' },
-    { to: '/allcourses', name: 'База Знаний' },
+    { to: '/company/:id/allcourses/', name: 'База Знаний' },
     { to: '/signup', name: 'Sign Up' },
     { to: '/signin', name: 'Sign In' },
   ];
