@@ -1,12 +1,14 @@
-import { Box, Button } from '@mui/material';
-import React from 'react';
-import { Link } from 'react-router-dom';
-import CourseItem from '../../ui/CourseItem';
+import React, { useEffect } from 'react';
+import OneCourseItem from '../../ui/OneCourseItem';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import { getOneCourseThunk } from '../../../redux/slices/allcourses/allCoursesThunk';
 
 export default function CoursePage(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const onecourse = useAppSelector((store) => store.allcourses.onecourse)
+
+  useEffect(() => {void dispatch(getOneCourseThunk(onecourse?.id))}, [])
   return (
-    <Link to={`/test`}> 
-        <Button size='small' >Test</Button>
-        </Link>
+    <OneCourseItem />
   )
 }

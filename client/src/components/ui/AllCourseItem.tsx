@@ -31,12 +31,12 @@ export default function CourseItem({course}: CourseItemProps): JSX.Element {
         >
           {course.title}...
         </Typography>
-        <Typography
+        {/* <Typography
           sx={{ mb: 1.5 }}
           color='text.secondary'
         >
           {course.body}...
-        </Typography>
+        </Typography> */}
       </CardContent>
       <CardActions>
         <PrivateRouter isAllowed={}>
