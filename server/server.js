@@ -5,6 +5,8 @@ const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const postsRouter = require('./routes/postsRouter');
 const userRouter = require('./routes/userRouter');
+const coursesRouter = require('./routes/coursesRouter');
+const profileRuter = require('./routes/profileRouter');
 
 require('dotenv').config();
 
@@ -26,10 +28,12 @@ app.use(
       maxAge: 1000 * 60 * 60 * 12,
       httpOnly: true,
     },
-  }),
+  })
 );
 
 app.use('/api/posts', postsRouter);
 app.use('/api/user', userRouter);
+app.use('/api/company/:id/allcourses', coursesRouter);
+app.use('/api/company/', profileRuter);
 
 app.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));
