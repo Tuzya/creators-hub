@@ -16,6 +16,7 @@ function App(): JSX.Element {
       <Navbar />
       <Routes>
         <Route path="/" element={<MainPage />} />
+
         <Route path="/profile/:id" element={<ProfilePage />} />
 
         <Route path="/allcourses" element={<AllCoursesPage />} />
