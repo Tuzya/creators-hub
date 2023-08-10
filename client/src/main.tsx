@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import App from './App';
 import { store } from './redux/store';
 
+
 axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 axios.defaults.withCredentials = true;
 
