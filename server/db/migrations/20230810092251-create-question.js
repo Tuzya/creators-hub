@@ -10,20 +10,29 @@ module.exports = {
       },
       question: {
         type: Sequelize.TEXT,
+        allowNull: false,
       },
       answer: {
         type: Sequelize.TEXT,
+        allowNull: false,
       },
       test_id: {
         type: Sequelize.INTEGER,
+        references: {
+          model: 'Tests',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW'),
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW'),
       },
     });
   },
