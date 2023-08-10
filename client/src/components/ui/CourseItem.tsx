@@ -1,9 +1,11 @@
 import React from 'react'
 import { Button, Card, CardActions, CardContent, Typography } from '@mui/material'
+import { Link } from 'react-router-dom'
 import type { CourseType } from '../../types/courseType'
 import { cardStyle } from '../styles'
 import { useAppDispatch } from '../../redux/hooks'
 import { deleteCourseThunk } from '../../redux/slices/allcourses/allCoursesThunk'
+import PrivateRouter from '../hocs/PrivateRouter'
 
 type CourseItemProps = {
     course: CourseType
@@ -37,9 +39,12 @@ export default function CourseItem({course}: CourseItemProps): JSX.Element {
         </Typography>
       </CardContent>
       <CardActions>
+        <PrivateRouter isAllowed={}>
         <Button size='small' onClick={void dispath(deleteCourseThunk(course.id))}>Delete</Button>
-
+        </PrivateRouter>
+         <Link to={`/allcourses/${course.id}`}> 
         <Button size='small' >CoursePage</Button>
+        </Link>
       </CardActions>
     </Card>
   )
