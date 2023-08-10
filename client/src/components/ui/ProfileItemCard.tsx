@@ -13,6 +13,7 @@ type ProfileItemCardProps = {
 
 export default function ProfileItemCard({ profile }: ProfileItemCardProps): JSX.Element {
    const dispatch = useAppDispatch()
+
    return (
       <Card sx={cardStyle}>
          <CardContent>
