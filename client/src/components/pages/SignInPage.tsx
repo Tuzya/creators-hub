@@ -1,5 +1,58 @@
 import React, { useState } from 'react';
 
+type RegistrationPersonalFormProps = {
+  handleSignupClick: () => void;
+};
+function RegistrationPersonalForm({
+  handleSignupClick,
+}: RegistrationPersonalFormProps): JSX.Element {
+  const [showPassword, setShowPassword] = useState(false);
+
+  return (
+    <form id="registration-personal-form">
+      <input type="name" name="name" placeholder="Name" />
+      <input type="surname" name="surname" placeholder="Surname" />
+      <input type="email" name="email" placeholder="E-mail" />
+      <input
+        type={showPassword ? 'text' : 'password'} 
+        name="pass"
+        placeholder="Password"
+      />
+      <input
+        type= 'password'
+        name="repass"
+        placeholder="Repeat password"
+      />
+      <button
+        type="button"
+        className="password-toggle-btn"
+        onClick={() => setShowPassword(!showPassword)}
+      >
+        {showPassword ? 'Hide Password' : 'Show Password'}
+      </button>
+      <button type="button" className="login-btn" onClick={handleSignupClick}>
+        Sign Up
+      </button>
+    </form>
+  );
+}
+
+function RegistrationCompanyForm({
+  handleSignupClick,
+}: RegistrationPersonalFormProps): JSX.Element {
+  return (
+    <form id="registration-company-form">
+      <input type="company" name="company" placeholder="Company" />
+      <input type="email" name="email" placeholder="E-mail" />
+      <input type="password" name="pass" placeholder="Password" />
+      <input type="password" name="repass" placeholder="Repeat password" />
+      <button type="button" className="login-btn" onClick={handleSignupClick}>
+        Sign Up
+      </button>
+    </form>
+  );
+}
+
 export default function SignInPage(): JSX.Element {
   const [formType, setFormType] = useState('login');
   const [accountType, setAccountType] = useState('personal');
@@ -18,21 +71,19 @@ export default function SignInPage(): JSX.Element {
   const handlePersonalClick = (): void => setAccountType('personal');
   const handleCompanyClick = (): void => setAccountType('company');
 
-  let formTitle = '';
-  if (formType === 'login') {
-    formTitle = 'Log in';
-  } else if (formType === 'registrationCompany') {
-    formTitle = 'Registration Company';
-  } else if (formType === 'registrationPersonal') {
-    formTitle = 'Registration Personal';
-  } else {
-    formTitle = 'Forgotten password';
-  }
+  const isRegistrationForm =
+    formType === 'registrationPersonal' || formType === 'registrationCompany';
 
   return (
     <div className="mobile-screen">
       <div className="header">
-        <h1>{formTitle}</h1>
+        <h1>
+          {isRegistrationForm
+            ? `Registration ${accountType === 'personal' ? 'Personal' : 'Company'}`
+            : formType === 'login'
+            ? 'Log in'
+            : 'Forgotten password'}
+        </h1>
       </div>
       <div className="account-type-options">
         <div
@@ -66,53 +117,35 @@ export default function SignInPage(): JSX.Element {
       </div>
       <div className="logo" />
 
-      {formType === 'registrationPersonal' && (
-        <form id="registration-personal-form">
-          <input type="name" name="name" placeholder="Name" />
-          <input type="surname" name="surname" placeholder="Surname" />
-          <input type="email" name="email" placeholder="E-mail" />
-          <input type="password" name="pass" placeholder="Password" />
-          <input type="password" name="repass" placeholder="Repeat password" />
-          <a href="/" className="login-btn" onClick={handleSignupClick}>
-            Sign Up
-          </a>
-        </form>
-      )}
+      {isRegistrationForm &&
+        (accountType === 'personal' ? (
+          <RegistrationPersonalForm handleSignupClick={handleSignupClick} />
+        ) : accountType === 'company' ? (
+          <RegistrationCompanyForm handleSignupClick={handleSignupClick} />
+        ) : null)}
 
-      {formType === 'registrationCompany' && (
-        <form id="registration-company-form">
-          <input type="copmany" name="copmany" placeholder="Copmany" />
-          <input type="email" name="email" placeholder="E-mail" />
-          <input type="password" name="pass" placeholder="Password" />
-          <input type="password" name="repass" placeholder="Repeat password" />
-          <a href="/" className="login-btn" onClick={handleSignupClick}>
-            Sign Up
-          </a>
-        </form>
-      )}
-
-      {formType === 'login' && (
+      {formType === 'login' && !isRegistrationForm && (
         <form id="login-form">
           <input type="email" name="email" placeholder="E-mail" />
           <input type="password" name="pass" placeholder="Password" />
-          <a href="/" className="login-btn">
+          <button type="button" className="login-btn">
             Log in
-          </a>
+          </button>
         </form>
       )}
 
-      {formType === 'fpass' && (
+      {formType === 'fpass' && !isRegistrationForm && (
         <form id="fpass-form">
           <input type="text" name="forgotten" placeholder="E-mail or phone number" />
-          <a href="/" className="login-btn" onClick={handleSignupClick}>
+          <button type="button" className="login-btn" onClick={handleSignupClick}>
             Get Password
-          </a>
+          </button>
         </form>
       )}
 
       <div className="other-options">
         <button type="button" className="option" id="newUser" onClick={handleNewUserClick}>
-          <p className="option-text">Regestration</p>
+          <p className="option-text">Registration</p>
         </button>
         <button type="button" className="option" id="fPass" onClick={handleFPassClick}>
           <p className="option-text">Forgotten password</p>
