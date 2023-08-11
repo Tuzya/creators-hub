@@ -1,5 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import AllCoursesList from '../../ui/AllCoursesList';
+import { useAppDispatch } from '../../../redux/hooks';
+import { getAllCoursesThunk } from '../../../redux/slices/allcourses/allCoursesThunk';
 
 export default function AllCourses(): JSX.Element {
-  return <div>AllCourses</div>;
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {void dispatch(getAllCoursesThunk())}, [])
+  // SEARCH
+  return (
+    <AllCoursesList />
+  )
 }

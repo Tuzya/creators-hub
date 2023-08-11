@@ -9,10 +9,10 @@ export const store = configureStore({
     profile: profileReducer,
 
     allcourses: allCoursesReducer,
-
     user: userReducer,
     company: companyReducer, 
   },
+      
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
