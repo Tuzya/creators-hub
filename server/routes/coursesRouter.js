@@ -18,9 +18,9 @@ router
   });
 
 router.route('/:courseId').get(async (req, res) => {
-  const { id, courseId } = req.params.id;
+  const { id } = req.params.id;
   const oneCourses = await Course.findByPk({
-    where: { company_id: id, id: courseId },
+    where: { company_id: id },
   });
   res.json(oneCourses);
 });
