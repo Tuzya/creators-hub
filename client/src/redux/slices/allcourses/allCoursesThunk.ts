@@ -1,9 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import type { CourseType } from "../../../types/courseType";
-import type { CompanyType } from "../../../types/companyType";
+import type { CompanyModelType } from "../../../types/companyTypes";
 
-export const getAllCoursesThunk = createAsyncThunk<CourseType[], CompanyType['id']>(
+
+export const getAllCoursesThunk = createAsyncThunk<CourseType[], CompanyModelType['id']>(
     'allcourses/getAllCourses',
     async (id) => {
       const  { data } = await axios<CourseType[]>(`/company/${id}/allcourses`);
