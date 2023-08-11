@@ -6,7 +6,7 @@ const router = express.Router();
 router
   .route('/')
   .get(async (req, res) => {
-    const { id } = req.params.id;
+    const { id } = req.session.company.id;
     const courses = await Course.findAll({
       where: { company_id: id },
     });
@@ -18,9 +18,9 @@ router
   });
 
 router.route('/:courseId').get(async (req, res) => {
-  const { id } = req.params.id;
+  const { id, courseId } = req.params.id;
   const oneCourses = await Course.findByPk({
-    where: { company_id: id },
+    where: { company_id: id, id: courseId },
   });
   res.json(oneCourses);
 });
