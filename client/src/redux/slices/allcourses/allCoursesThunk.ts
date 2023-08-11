@@ -1,21 +1,22 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import type { CourseType } from "../../../types/courseType";
-import type { CompanyType } from "../../../types/companyType";
+import type { CompanyModelType } from "../../../types/companyTypes";
 
-export const getAllCoursesThunk = createAsyncThunk<CourseType[], CompanyType['id']>(
+
+export const getAllCoursesThunk = createAsyncThunk<CourseType[], CompanyModelType['id']>(
     'allcourses/getAllCourses',
-    async (id) => {
-      const  { data } = await axios<CourseType[]>(`/company/${id}/allcourses`);
+    async (companyId) => {
+      const  { data } = await axios<CourseType[]>(`/company/${companyId}/allcourses`);
     return data
     }
 );
 // для удаления курсов КОМПАНИЕЙ
-export const deleteCourseThunk = createAsyncThunk<CourseType['id'], CourseType['id']> (
+export const deleteCourseThunk = createAsyncThunk< CompanyModelType['id'], CourseType['id'], CourseType['id']> (
     'course/deleteCourse',
-    async (id) => {
-        await axios.delete<CourseType['id']> ('/allcourses');
-        return id;
+    async (companyId, courseId) => {
+        await axios.delete<CourseType['id']> (`/company/${companyId}/allcourses/${courseId}`);
+        return courseId;
     }
 )
 export const getOneCourseThunk = createAsyncThunk<CourseType, CourseType['id']>(

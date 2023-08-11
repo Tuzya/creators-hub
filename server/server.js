@@ -35,7 +35,7 @@ app.use('/api/posts', postsRouter);
 app.use('/api/user', userRouter);
 // app.use('/api/companys',)
 app.use('/api/company', companyRouter);
-app.use('/api/company/:id/allcourses', coursesRouter);
-app.use('/api/company/', profileRuter);
+// app.use('/api/company/:id/allcourses', coursesRouter);
+// app.use('/api/company/', profileRuter);
 
 app.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));
