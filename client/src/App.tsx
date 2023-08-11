@@ -1,5 +1,5 @@
 import { Container } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import MainPage from './components/pages/MainPage';
 import SignInPage from './components/pages/SignInPage';
@@ -10,8 +10,16 @@ import CoursePage from './components/pages/courses/CoursePage';
 import TestPage from './components/pages/test/TestPage';
 import Navbar from './components/ui/NavBar';
 import CompanyPage from './components/pages/company/CompanyPage';
+import { useAppDispatch, useAppSelector } from './redux/hooks';
+import { checkCompanyThunk } from './redux/slices/company/companyThunks';
 
 function App(): JSX.Element {
+  const company = useAppSelector((store) => store.company);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    void dispatch(checkCompanyThunk());
+  }, []);
   return (
     <Container>
       <Navbar />
@@ -22,7 +30,7 @@ function App(): JSX.Element {
         <Route path="/company/:id" element={<CompanyPage />} />
 
         <Route path="/company/:id/allcourses" element={<AllCoursesPage />} />
-        <Route path="/allcourses/:id" element={<CoursePage />} />
+        <Route path="/company/:id/allcourses/:courseId" element={<CoursePage />} />
         <Route path="/allcourses/:id/test/:testId" element={<TestPage />} />
 
         <Route path="/signup" element={<SignUpPage />} />

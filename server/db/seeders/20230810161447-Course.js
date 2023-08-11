@@ -9,6 +9,11 @@ module.exports = {
           email: '1@1',
           password: '1',
         },
+        {
+          name: 'Companya 222Adidasdasdas',
+          email: '1@1222',
+          password: '2',
+        },
       ],
       {}
     );
@@ -20,6 +25,62 @@ module.exports = {
           body: 'bbuygfjoskpdlpksgdjkgldjfmsl;dfmsgjbfopkokpsjjsdfbnkosjgbfiupfahoisugyfoiusafogyui',
           downloadLink: '/sadpogfhsjak/njhokfl;/.sad',
           company_id: 1,
+        },
+        {
+          title: 'John Doe',
+          body: 'bbuygfjoskpdlpksgdjkgldjfmsl;dfmsgjbfopkokpsjjsdfbnkosjgbfiupfahoisugyfoiusafogyui',
+          downloadLink: '/sadpogfhsjak/njhokfl;/.sad',
+          company_id: 1,
+        },
+        {
+          title: 'John Doe',
+          body: 'bbuygfjoskpdlpksgdjkgldjfmsl;dfmsgjbfopkokpsjjsdfbnkosjgbfiupfahoisugyfoiusafogyui',
+          downloadLink: '/sadpogfhsjak/njhokfl;/.sad',
+          company_id: 2,
+        },
+        {
+          title: 'John Doe',
+          body: 'bbuygfjoskpdlpksgdjkgldjfmsl;dfmsgjbfopkokpsjjsdfbnkosjgbfiupfahoisugyfoiusafogyui',
+          downloadLink: '/sadpogfhsjak/njhokfl;/.sad',
+          company_id: 2,
+        },
+        {
+          title: 'John Doe',
+          body: 'bbuygfjoskpdlpksgdjkgldjfmsl;dfmsgjbfopkokpsjjsdfbnkosjgbfiupfahoisugyfoiusafogyui',
+          downloadLink: '/sadpogfhsjak/njhokfl;/.sad',
+          company_id: 2,
+        },
+      ],
+      {}
+    );
+
+    await queryInterface.bulkInsert(
+      'Questions',
+      [
+        {
+          question: 'John Doe',
+          courses_id: 1,
+        },
+      ],
+      {}
+    );
+    await queryInterface.bulkInsert(
+      'Answers',
+      [
+        {
+          answer: 'John 2Doe',
+          isCorrect: false,
+          question_id: 1,
+        },
+        {
+          answer: 'John2 Do2e',
+          isCorrect: false,
+          question_id: 1,
+        },
+        {
+          answer: 'John2 Doe2',
+          isCorrect: false,
+          question_id: 1,
         },
       ],
       {}
@@ -38,6 +99,8 @@ module.exports = {
   async down(queryInterface, Sequelize) {
     await queryInterface.bulkDelete('Course', null, {});
     await queryInterface.bulkDelete('Companies', null, {});
+    await queryInterface.bulkDelete('Questions', null, {});
+    await queryInterface.bulkDelete('Answers', null, {});
 
     /**
      * Add commands to revert seed here.
