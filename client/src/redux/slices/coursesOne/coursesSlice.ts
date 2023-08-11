@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addCompanyThunk } from "./companyThunk";
+
 import type { CoursesOneType } from "../../../types/coursesOneType";
 
 export type CoursesType = CoursesOneType[]
