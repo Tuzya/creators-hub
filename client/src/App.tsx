@@ -1,8 +1,8 @@
 import { Container } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import MainPage from './components/pages/MainPage';
-import SignInPage from './components/pages/SignInPage';
+import SignInPage from './components/pages/auth/SignInPage';
 import SignUpPage from './components/pages/SignUpPage';
 import ProfilePage from './components/pages/user/ProfilePage';
 import AllCoursesPage from './components/pages/courses/AllCoursesPage';
@@ -10,8 +10,18 @@ import CoursePage from './components/pages/courses/CoursePage';
 import TestPage from './components/pages/test/TestPage';
 import Navbar from './components/ui/NavBar';
 import CompanyPage from './components/pages/company/CompanyPage';
+import PrivateRouter from './components/hocs/PrivateRouter';
+import { useAppDispatch, useAppSelector } from './redux/hooks';
+import { checkUserThunk } from './redux/slices/user/userThunks';
 
 function App(): JSX.Element {
+  const user = useAppSelector((store) => store.user);
+  const dispatch = useAppDispatch();
+
+  // useEffect(() => {
+  //   void dispatch(checkUserThunk());
+  // }, []);
+
   return (
     <Container>
       <Navbar />
@@ -25,7 +35,14 @@ function App(): JSX.Element {
         <Route path="/allcourses/:id" element={<CoursePage />} />
         <Route path="/allcourses/:id/test/:testId" element={<TestPage />} />
 
-        <Route path="/signup" element={<SignUpPage />} />
+        <Route
+          path="/signup"
+          element={
+            <PrivateRouter isAllowed={user.status === 'logged'}>
+              <SignUpPage />
+            </PrivateRouter>
+          }
+        />
         <Route path="/signin" element={<SignInPage />} />
       </Routes>
     </Container>
