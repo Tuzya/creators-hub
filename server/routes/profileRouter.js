@@ -11,15 +11,15 @@ router
     });
     res.json(courses);
   })
-  .delete('/:id', async (req, res) => {
-    try {
-      await User.destroy({ where: { id: req.params.id } });
-      res.sendStatus(200);
-    } catch (err) {
-      console.error(err);
-      res.sendStatus(500);
-    }
-  });
+  // .delete('/:id', async (req, res) => {
+  //   try {
+  //     await User.destroy({ where: { id: req.params.id } });
+  //     res.sendStatus(200);
+  //   } catch (err) {
+  //     console.error(err);
+  //     res.sendStatus(500);
+  //   }
+  // });
 
 router.route('/id/profile/:profileId').get(async (req, res) => {
   const courses = await User.findByPk({
