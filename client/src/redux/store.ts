@@ -3,6 +3,8 @@ import profileReducer from './slices/profiles/profileSlice';
 import allCoursesReducer from './slices/allcourses/allCoursesSlice';
 import userReducer from './slices/user/userSlice';
 import companyReducer from './slices/company/companySlice';
+import coursesReducer from './slices/coursesOne/coursesSlice';
+import questionsAnswersReducer from './slices/test/testSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +12,8 @@ export const store = configureStore({
     allcourses: allCoursesReducer,
     user: userReducer,
     company: companyReducer,
+    courses: coursesReducer,
+    // questionsAnswers: questionsAnswersReducer,
   },
 });
 

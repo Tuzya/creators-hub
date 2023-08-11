@@ -1,78 +1,9 @@
 import React, { useState } from 'react';
-import { useAppDispatch } from '../../redux/hooks';
-import { signUpUserThunk } from '../../redux/slices/user/userThunks';
-import { signUpCompanyThunk } from '../../redux/slices/company/companyThunks';
-
-type RegistrationPersonalFormProps = {
-  handleSignupClick: () => void;
-};
-
-function RegistrationPersonalForm({
-  handleSignupClick,
-}: RegistrationPersonalFormProps): JSX.Element {
-  const [showPassword, setShowPassword] = useState(false);
-  const dispatch = useAppDispatch();
-
-  const handleRegistrationPersonal = (formData: Record<string, any>) => {
-    dispatch(signUpUserThunk(formData));
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const formDataObject = Object.fromEntries(formData.entries());
-
-    handleRegistrationPersonal(formDataObject);
-  };
-
-  return (
-    <form id="registration-personal-form" onSubmit={handleSubmit}>
-      <input type="name" name="username" placeholder="Name" />
-      <input type="email" name="email" placeholder="E-mail" />
-      <input type={showPassword ? 'text' : 'password'} name="password" placeholder="Password" />
-      <input type="password" name="repass" placeholder="Repeat password" />
-      <button
-        type="button"
-        className="password-toggle-btn"
-        onClick={() => setShowPassword(!showPassword)}
-      >
-        {showPassword ? 'Hide Password' : 'Show Password'}
-      </button>
-      <button type="submit" className="login-btn">
-        Sign Up
-      </button>
-    </form>
-  );
-}
-
-function RegistrationCompanyForm({
-  handleSignupClick,
-}: RegistrationPersonalFormProps): JSX.Element {
-  const dispatch = useAppDispatch();
-
-  const handleRegistrationCompany = (formData: Record<string, any>) => {
-    dispatch(signUpCompanyThunk(formData));
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const formDataObject = Object.fromEntries(formData.entries());
-    handleRegistrationCompany(formDataObject);
-  };
-
-  return (
-    <form id="registration-company-form" onSubmit={handleSubmit}>
-      <input type="name" name="name" placeholder="Company" />
-      <input type="email" name="email" placeholder="E-mail" />
-      <input type="password" name="password" placeholder="Password" />
-      <input type="password" name="repass" placeholder="Repeat password" />
-      <button type="submit" className="login-btn">
-        Sign Up
-      </button>
-    </form>
-  );
-}
+import RegistrationPersonalForm from './RegistrationPersonalForm';
+import RegistrationCompanyForm from './RegistrationCompanyForm';
+import { useAppDispatch } from '../../../redux/hooks';
+import { checkUserThunk } from '../../../redux/slices/user/userThunks';
+import { checkCompanyThunk } from '../../../redux/slices/company/companyThunks';
 
 export default function SignInPage(): JSX.Element {
   const [formType, setFormType] = useState('login');
@@ -86,6 +17,9 @@ export default function SignInPage(): JSX.Element {
     }
   };
 
+  const dispatch = useAppDispatch();
+
+  const handleLoginClick = (): void => setFormType('login');
   const handleSignupClick = (): void => setFormType('login');
   const handleFPassClick = (): void => setFormType('fpass');
 
@@ -154,7 +88,9 @@ export default function SignInPage(): JSX.Element {
               type="button"
               className="login-btn"
               onClick={() => {
-                // Your login logic here
+                {
+                  handleLoginClick(dispatch(checkCompanyThunk || checkUserThunk));
+                }
               }}
             >
               Log in

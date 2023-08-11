@@ -9,6 +9,16 @@ export type QuestionModelType = {
     question: string,
     test_id: number
 };
+export type QuestionFormType = {
+    question: string
+}
+export type AnswerFormType = {
+    answer: string
+}
+export type QuestionAnswerType = {
+    question: string,
+    answers: []
+}
 
 export type AnswerModelType = {
     id: number,
