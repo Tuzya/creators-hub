@@ -32,9 +32,9 @@ export default function OneCourseItem(): JSX.Element {
         </Typography>
       </CardContent>
       <CardActions>
-        <PrivateRouter isAllowed={}>
+        
         <Button size='small' onClick={void dispath(deleteCourseThunk(onecourse?.id))}>Delete</Button>
-        </PrivateRouter>
+        
         
         <Button size='small' >Test</Button>
         
