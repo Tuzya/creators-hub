@@ -1,21 +1,24 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Questions', {
+    await queryInterface.createTable('Answers', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      question: {
+      answer: {
         type: Sequelize.TEXT,
-        allowNull: false,
       },
-      test_id: {
+      isCorrect: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+      },
+      question_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Tests',
+          model: 'Questions',
           key: 'id',
         },
         onDelete: 'CASCADE',
@@ -33,6 +36,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Questions');
+    await queryInterface.dropTable('Answers');
   },
 };
