@@ -13,12 +13,23 @@ function RegistrationPersonalForm({
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useAppDispatch();
 
-  const handleRegistrationPersonal = (formData) => dispatch(signUpUserThunk(formData));
+  const handleRegistrationPersonal = (formData: Record<string, any>) => {
+    dispatch(signUpUserThunk(formData));
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const formDataObject = Object.fromEntries(formData.entries());
+
+    handleRegistrationPersonal(formDataObject);
+  };
+
   return (
-    <form id="registration-personal-form">
-      <input type="name" name="name" placeholder="Name" />
+    <form id="registration-personal-form" onSubmit={handleSubmit}>
+      <input type="name" name="username" placeholder="Name" />
       <input type="email" name="email" placeholder="E-mail" />
-      <input type={showPassword ? 'text' : 'password'} name="pass" placeholder="Password" />
+      <input type={showPassword ? 'text' : 'password'} name="password" placeholder="Password" />
       <input type="password" name="repass" placeholder="Repeat password" />
       <button
         type="button"
@@ -27,13 +38,7 @@ function RegistrationPersonalForm({
       >
         {showPassword ? 'Hide Password' : 'Show Password'}
       </button>
-      <button
-        type="button"
-        className="login-btn"
-        onClick={() => {
-          handleRegistrationPersonal(formData);
-        }}
-      >
+      <button type="submit" className="login-btn">
         Sign Up
       </button>
     </form>
@@ -45,23 +50,24 @@ function RegistrationCompanyForm({
 }: RegistrationPersonalFormProps): JSX.Element {
   const dispatch = useAppDispatch();
 
-  const handleRegistrationCompany = (formData) => {
+  const handleRegistrationCompany = (formData: Record<string, any>) => {
     dispatch(signUpCompanyThunk(formData));
   };
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const formDataObject = Object.fromEntries(formData.entries());
+    handleRegistrationCompany(formDataObject);
+  };
+
   return (
-    <form id="registration-company-form">
-      <input type="company" name="company" placeholder="Company" />
+    <form id="registration-company-form" onSubmit={handleSubmit}>
+      <input type="name" name="name" placeholder="Company" />
       <input type="email" name="email" placeholder="E-mail" />
-      <input type="password" name="pass" placeholder="Password" />
+      <input type="password" name="password" placeholder="Password" />
       <input type="password" name="repass" placeholder="Repeat password" />
-      <button
-        type="button"
-        className="login-btn"
-        onClick={() => {
-          handleRegistrationCompany(formData);
-        }}
-      >
+      <button type="submit" className="login-btn">
         Sign Up
       </button>
     </form>
@@ -71,7 +77,6 @@ function RegistrationCompanyForm({
 export default function SignInPage(): JSX.Element {
   const [formType, setFormType] = useState('login');
   const [accountType, setAccountType] = useState('personal');
-  // const dispatch = useDispatch();
 
   const handleNewUserClick = (): void => {
     if (accountType === 'personal') {
@@ -149,7 +154,7 @@ export default function SignInPage(): JSX.Element {
               type="button"
               className="login-btn"
               onClick={() => {
-                handleLogin(formData);
+                // Your login logic here
               }}
             >
               Log in

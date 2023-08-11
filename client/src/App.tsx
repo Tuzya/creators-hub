@@ -21,7 +21,7 @@ function App(): JSX.Element {
         <Route path="/profile/:id" element={<ProfilePage />} />
         <Route path="/company/:id" element={<CompanyPage />} />
 
-        <Route path="/company/:id/allcourses/:courseId" element={<AllCoursesPage />} />
+        <Route path="/company/:id/allcourses" element={<AllCoursesPage />} />
         <Route path="/allcourses/:id" element={<CoursePage />} />
         <Route path="/allcourses/:id/test/:testId" element={<TestPage />} />
 

@@ -5,6 +5,7 @@ const { Company } = require('../db/models');
 const router = express.Router();
 
 router.post('/signup', async (req, res) => {
+  console.log('data:', req.body);
   const { name, email, password } = req.body;
   if (name && email && password) {
     try {
@@ -13,16 +14,18 @@ router.post('/signup', async (req, res) => {
         defaults: { name, password: await bcrypt.hash(password, 10) },
       });
       if (!created) return res.sendStatus(401);
-
       const sessionUser = JSON.parse(JSON.stringify(user));
       delete sessionUser.password;
       req.session.user = sessionUser;
       return res.json(sessionUser);
     } catch (e) {
+      console.log('privet');
       console.log(e);
       return res.sendStatus(500);
     }
   }
+  console.log('poka');
+
   return res.sendStatus(500);
 });
 
@@ -30,7 +33,7 @@ router.post('/login', async (req, res) => {
   const { email, password } = req.body;
   if (email && password) {
     try {
-      const user = await User.findOne({
+      const user = await Company.findOne({
         where: { email },
       });
       if (!(await bcrypt.compare(password, user.password))) {

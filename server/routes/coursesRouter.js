@@ -4,12 +4,11 @@ const { Course } = require('../db/models');
 const router = express.Router();
 
 router
-  .route('/')
+  .route('/:id/allcourses')
   .get(async (req, res) => {
-    const { id } = req.session.company.id;
-    const courses = await Course.findAll({
-      where: { company_id: id },
-    });
+    console.log(req.session.user.id);
+    // const { id } = req.session.user;
+    const courses = await Course.findAll();
     res.json(courses);
   })
   .post(async (req, res) => {
