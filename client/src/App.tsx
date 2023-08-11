@@ -13,15 +13,19 @@ import CompanyPage from './components/pages/company/CompanyPage';
 import PrivateRouter from './components/hocs/PrivateRouter';
 import { useAppDispatch, useAppSelector } from './redux/hooks';
 import { checkUserThunk } from './redux/slices/user/userThunks';
+import { checkCompanyThunk } from './redux/slices/company/companyThunks';
+
+
+
 
 function App(): JSX.Element {
+  const dispatch = useAppDispatch()
   const user = useAppSelector((store) => store.user);
-  const dispatch = useAppDispatch();
 
-  // useEffect(() => {
-  //   void dispatch(checkUserThunk());
-  // }, []);
 
+  useEffect(() => {
+    void dispatch(checkCompanyThunk())
+  }, [])
   return (
     <Container>
       <Navbar />

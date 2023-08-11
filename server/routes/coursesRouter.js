@@ -1,5 +1,7 @@
 const express = require('express');
 const { Course } = require('../db/models');
+const { route } = require('./postsRouter');
+const upload = require('../middleware/multerMiddleware');
 
 const router = express.Router();
 
@@ -34,4 +36,22 @@ router.route('/:courseId').get(async (req, res) => {
 //   }
 // });
 
+router.post('/:id', upload.single('downloadLink'), async (req, res) => {
+  const { title, body } = req.body;
+  const downloadLink = req.file ? req.file.filename : '';
+  const { id } = req.session.user;
+  try {
+    const course = await Course.create({
+      title,
+      body,
+      downloadLink,
+      company_id: id,
+    });
+
+    res.status(201).json(course);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Произошла ошибка при добавлении курса!' });
+  }
+});
 module.exports = router;
