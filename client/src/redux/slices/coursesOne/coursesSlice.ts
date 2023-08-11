@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import type { CoursesOneType } from "../../../types/coursesOneType";
+import { addCompanyThunk } from "./coursesThunk";
 
-export type CoursesType = CoursesOneType[]
+export type CoursesType = CoursesOneType[];
 
-const initialState: CoursesType = []
+const initialState: CoursesType = [];
 
 
 

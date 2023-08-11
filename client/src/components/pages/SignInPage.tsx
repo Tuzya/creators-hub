@@ -31,7 +31,7 @@ function RegistrationPersonalForm({
         type="button"
         className="login-btn"
         onClick={() => {
-          handleRegistrationPersonal(formData);
+          void handleRegistrationPersonal(formData);
         }}
       >
         Sign Up
@@ -46,7 +46,7 @@ function RegistrationCompanyForm({
   const dispatch = useAppDispatch();
 
   const handleRegistrationCompany = (formData) => {
-    dispatch(signUpCompanyThunk(formData));
+    void dispatch(signUpCompanyThunk(formData));
   };
 
   return (
@@ -98,8 +98,8 @@ export default function SignInPage(): JSX.Element {
             {isRegistrationForm
               ? `Registration ${accountType === 'personal' ? 'Personal' : 'Company'}`
               : formType === 'login'
-              ? 'Log in'
-              : 'Forgotten password'}
+                ? 'Log in'
+                : 'Forgotten password'}
           </h1>
         </div>
         <div className="account-type-options">
