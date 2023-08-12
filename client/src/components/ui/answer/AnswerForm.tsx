@@ -14,6 +14,8 @@ export default function AnswerForm(): JSX.Element {
   const changeHandler: React.ChangeEventHandler<HTMLInputElement> = (e): void => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
+
+
   return (
     <Grid container direction="row" sx={postFormGridStyles}>
       <Grid item xs={3} />
@@ -34,6 +36,15 @@ export default function AnswerForm(): JSX.Element {
             onChange={changeHandler}
             sx={textFieldStyle}
           />
+           <TextField
+            size="small"
+            variant="outlined"
+            name="status"
+            label="status"
+            value={input.isCorrect}
+            onChange={changeHandler}
+            sx={{width: '20px'}}
+          />
           
           <Button
             variant="outlined"
@@ -43,7 +54,7 @@ export default function AnswerForm(): JSX.Element {
               setInput({ answer: '', isCorrect: false });
             }}
           >
-            Записать вопрос
+            Добавить ответ
           </Button>
         </Box>
       </Grid>
