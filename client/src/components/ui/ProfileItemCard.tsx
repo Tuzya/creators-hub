@@ -4,7 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Button } from '@mui/material';
 import { cardStyle } from '../styles';
-import type { YourProfileType } from '../../types/profileTypes';
+import type { YourProfileType } from '../../types/profileType/profileTypes';
 import { useAppDispatch } from '../../redux/hooks';
 
 type ProfileItemCardProps = {
