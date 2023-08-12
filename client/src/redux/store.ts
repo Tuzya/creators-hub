@@ -4,18 +4,19 @@ import allCoursesReducer from './slices/allcourses/allCoursesSlice';
 import userReducer from './slices/user/userSlice';
 import companyReducer from './slices/company/companySlice';
 import coursesReducer from './slices/coursesOne/coursesSlice';
+import findCockieReducer from './slices/findCockie/findCockieSlice';
 import questionsAnswersReducer from './slices/test/testSlice';
 
 export const store = configureStore({
   reducer: {
     profile: profileReducer,
-    courses: coursesReducer,
     allcourses: allCoursesReducer,
     user: userReducer,
     company: companyReducer,
-    questionsAnswers: questionsAnswersReducer,
+    courses: coursesReducer,
+    findCockie: findCockieReducer,
+    // questionsAnswers: questionsAnswersReducer,
   },
-
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
