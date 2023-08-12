@@ -1,17 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { YourProfileType } from "../../../types/profileTypes";
-import { getOneProfileThunk, getProfileThunk } from "./profileThunk";
+import type { EditProfileType, YourProfileType } from "../../../types/profileType/profileTypes";
+import { editProfileThunk, getOneProfileThunk, getProfileThunk } from "./profileThunk";
 
 
 type ProfileSliceTypes = {
    profiles: YourProfileType[];
    oneProfile: YourProfileType | null;
+   editProfile: EditProfileType | null;
 
 }
 
 const initialState: ProfileSliceTypes = {
    profiles: [],
-   oneProfile: null
+   oneProfile: null,
+   editProfile: null
 }
 
 export const profileSlice = createSlice({
@@ -26,6 +28,10 @@ export const profileSlice = createSlice({
 
       builder.addCase(getOneProfileThunk.fulfilled, (state, action) => {
          state.oneProfile = action.payload
+      })
+      builder.addCase(editProfileThunk.fulfilled, (state, action) => {
+         state.editProfile = action.payload
+
       })
    }
 });
