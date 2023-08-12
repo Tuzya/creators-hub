@@ -38,6 +38,8 @@ function App(): JSX.Element {
   }, []);
 
   const company = useAppSelector((store) => store.company);
+  console.log('popa vlad');
+
 
   return (
     <Container>
