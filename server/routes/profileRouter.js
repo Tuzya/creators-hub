@@ -3,19 +3,32 @@ const { User } = require('../db/models');
 
 const router = express.Router();
 
-router.route('/:id').get(async (req, res) => {
-  try {
-    const { id } = req.session.company.id;
-    const courses = await User.findAll({
-      where: { company_id: id },
-    });
-    res.json(courses);
-  } catch (err) {
-    console.log('Ручка, get User: ', err);
-  }
-});
+router
+  .route('/lk')
+  .get(async (req, res) => {
+    try {
+      console.log('sadasd', req.session.user);
+      const { id } = req.session.user;
+      const userProfile = await User.findAll({ where: { company_id: id } });
+      console.log('asdasd', userProfile);
+      res.json(userProfile);
+    } catch (err) {
+      console.log('Ручка, get User: ', err);
+    }
+  })
+  .get(async (req, res) => {
+    try {
+      console.log('sadasd', req.session.user);
+      const { id } = req.session.user;
+      const userProfile = await User.findByPk(id);
+      console.log('asdasd', userProfile);
+      res.json(userProfile);
+    } catch (err) {
+      console.log('Ручка, get User: ', err);
+    }
+  });
 
-router.route('/:id/profile/:profileId').get(async (req, res) => {
+router.route('/profile/:profileId').get(async (req, res) => {
   const { id, profileId } = req.params;
   const courses = await User.findByPk({
     where: { company_id: id, id: profileId },

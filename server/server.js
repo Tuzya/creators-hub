@@ -9,6 +9,7 @@ const companyRouter = require('./routes/companyRouter');
 const coursesRouter = require('./routes/coursesRouter');
 // const profileRuter = require('./routes/profileRouter');
 const findCockieRouter = require('./routes/findCockieRouter');
+const profileRouter = require('./routes/profileRouter');
 
 require('dotenv').config();
 
@@ -36,7 +37,7 @@ app.use(
 app.use('/api/posts', postsRouter);
 app.use('/api/user', userRouter);
 app.use('/api', findCockieRouter);
-// app.use('/api/companys',)
+app.use('/api/profile', profileRouter);
 app.use('/api/company', companyRouter);
 app.use('/api/company', coursesRouter);
 // app.use('/api/company/:id/allcourses', coursesRouter);
