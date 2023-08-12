@@ -1,24 +1,8 @@
-export type TestModelType = {
-id: number,
-theme: string, 
-courses_id: number
-};
-
 export type QuestionModelType = {
     id: number,
     question: string,
-    test_id: number
+    course_id: number // заменила на course_id, т. к. будем удалять из БД Тест
 };
-export type QuestionFormType = {
-    question: string
-}
-export type AnswerFormType = {
-    answer: string
-}
-export type QuestionAnswerType = {
-    question: string,
-    answers: []
-}
 
 export type AnswerModelType = {
     id: number,
@@ -26,3 +10,12 @@ export type AnswerModelType = {
     isCorrect: boolean,
     question_id: number
 }
+export type QuestionFormType = Omit<QuestionModelType, 'id' | 'test_id'>;
+
+export type AnswerFormType = Omit<AnswerModelType, 'id' | 'question_id'>;
+
+export type QuestionAnswerType = {
+    question: string,
+    answers: AnswerModelType[]
+}
+

@@ -5,7 +5,7 @@ import CompanyFormAddCourses from '../../ui/CompanyFormAddCourses';
 export default function CompanyPage(): JSX.Element {
   return (
     <Container>
-      <CompanyFormAddCourses />
+      {/* <CompanyFormAddCourses /> */}
     </Container>
   );
 }

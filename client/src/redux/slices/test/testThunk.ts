@@ -1,38 +1,47 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import type { AnswerFormType, AnswerModelType, QuestionAnswerType, QuestionFormType, QuestionModelType } from "../../../types/testTypes";
+import type { 
+    QuestionFormType, 
+    QuestionModelType, 
+    AnswerFormType, 
+    QuestionAnswerType, 
+    AnswerModelType} from "../../../types/testTypes";
 
 
 // 
-export const addQuestionsThunk = createAsyncThunk<QuestionModelType, QuestionFormType>(
+export const addQuestionsThunk = createAsyncThunk(
     'questions/addQuestions',
-    async(companyId, courseId, formData) => {
-        const {data} = await axios.post<QuestionFormType>
+    async({companyId, courseId, formData}: 
+        {companyId: number, courseId: number, formData: QuestionFormType}) => {
+        const {data} = await axios.post<QuestionModelType>
         (`/company/${companyId}/allcourses/${courseId}/addQuestions`, formData);
         return data;
     }
 )
-export const getAllQuestionsThunk = createAsyncThunk<QuestionModelType[]>(
+export const getAllQuestionsThunk = createAsyncThunk(
     'questions/getAllQuestions',
-    async(companyId, courseId) => {
+    async({companyId, courseId}: 
+        {companyId: number, courseId: number}) => {
         const {data} = await axios<QuestionModelType[]>
         (`/company/${companyId}/allcourses/${courseId}/allquestions`);
         return data
     }
 )
 
-export const addAnswersThunk = createAsyncThunk<AnswerModelType, AnswerFormType>(
+export const addAnswersThunk = createAsyncThunk(
     'questions/addAnswers',
-    async(companyId, courseId, questionId, formData) => {
-        const {data} = await axios.post<AnswerFormType>
+    async({companyId, courseId, questionId, formData}: 
+        {companyId: number, courseId: number, questionId: number, formData: AnswerFormType}) => {
+        const {data} = await axios.post<AnswerModelType>
         (`/company/${companyId}/allcourses/${courseId}/allquestions/${questionId}`, formData);
         return data;
     }
 )
 
-export const getQuestionsAnswersThunk = createAsyncThunk<QuestionAnswerType[]>(
+export const getQuestionsAnswersThunk = createAsyncThunk(
     'questionsanswers/getQuestionsAnswers',
-    async (courseId) => {
+    async ({companyId, courseId}: 
+        {companyId: number, courseId: number}) => {
         const {data} = await axios<QuestionAnswerType[]>
         (`/company/${companyId}/allcourses/${courseId}/questionsanswers`);
         return data

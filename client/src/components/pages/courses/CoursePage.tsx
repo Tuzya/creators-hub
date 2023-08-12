@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import OneCourseItem from '../../ui/OneCourseItem';
+import OneCourseItem from '../../ui/course/OneCourseItem';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { getOneCourseThunk } from '../../../redux/slices/allcourses/allCoursesThunk';
 
