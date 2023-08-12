@@ -8,7 +8,7 @@ import type { CoursesOneFormType, CoursesOneType } from '../../types/coursesOneT
 export default function CompanyFormAddCourses(): JSX.Element {
    const dispatch = useAppDispatch();
    const company = useAppSelector(store => store.company)
-
+   
    const [courseData, setCourseData] = useState<CoursesOneFormType>({
       title: '',
       body: '',

@@ -3,30 +3,26 @@ import axios from 'axios';
 import type { CourseType } from '../../../types/courseType';
 import type { CompanyModelType, CompanyType } from '../../../types/companyTypes';
 
-export const getAllCoursesThunk = createAsyncThunk<CourseType[], CompanyModelType['id']>(
+export const getAllCoursesThunk = createAsyncThunk<CourseType[]>(
   'allcourses/getAllCourses',
-  async (companyId) => {
-    const { data } = await axios<CourseType[]>(`/company/${companyId}/allcourses`);
+  async (): Promise<CourseType[]> => {
+    const { data } = await axios<CourseType[]>(`/company/allcourses`);
     return data;
   },
 );
 // для удаления курсов КОМПАНИЕЙ
-// export const deleteCourseThunk = createAsyncThunk<CompanyModelType['id'], CourseType['id']>(
-//   'course/deleteCourse',
-//   async (companyId, courseId) => {
-//     await axios.delete<CourseType['id']>(`/company/${companyId}/allcourses/${courseId}`);
-//     return courseId;
-//   },
-// );
+export const deleteCourseThunk = createAsyncThunk<CompanyModelType['id'], CourseType['id']>(
+  'course/deleteCourse',
+  async (coursesId) => {
+    await axios.delete<CourseType['id']>(`/company/allcourses/${coursesId}`);
+    return coursesId;
+  },
+);
 
-type CouresCompanyType = {
-  id: CompanyModelType['id'];
-  coursesId: CourseType['id'];
-};
-export const getOneCourseThunk = createAsyncThunk<CourseType, CouresCompanyType>(
+export const getOneCourseThunk = createAsyncThunk<CourseType, CourseType['id']>(
   'course/getOneCourse',
-  async ({ id, coursesId }) => {
-    const { data } = await axios<CourseType>(`/company/${id}/allcourses/${coursesId}`);
+  async (coursesId) => {
+    const { data } = await axios<CourseType>(`/company/allcourses/${coursesId}`);
     return data;
   },
 );

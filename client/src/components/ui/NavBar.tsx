@@ -6,19 +6,21 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { Link as NavLink } from 'react-router-dom';
 import { Link } from '@mui/material';
-// import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-// import { logoutUserThunk } from '../../redux/slices/user/userThunks';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { linkStyle } from '../styles';
+import { logoutUserThunk } from '../../redux/slices/user/userThunks';
 
 export default function Navbar(): JSX.Element {
-  //   const dispatch = useAppDispatch();
-  //   const user = useAppSelector((store) => store.user);
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((store) => store.user);
 
   const links = [
     { to: '/', name: 'Home' },
-    { to: '/company/:id/allcourses/', name: 'База Знаний' },
+    { to: '/company/lk', name: 'Лк компании' },
+    { to: '/profile/lk', name: 'Лк Юзер' },
+    { to: '/company/allcourses/', name: 'База Знаний' },
     { to: '/signup', name: 'Sign Up' },
-    { to: '/signin', name: 'Sign In' },
+    { to: '/login', name: 'Sign In' },
   ];
 
   return (
@@ -44,7 +46,7 @@ export default function Navbar(): JSX.Element {
           <Button
             color="inherit"
             onClick={() => {
-              // void dispatch(logoutUserThunk());
+              void dispatch(logoutUserThunk());
             }}
           >
             Logout

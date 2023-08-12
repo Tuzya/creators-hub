@@ -3,5 +3,5 @@ import React from 'react';
 import CompanyFormAddCourses from '../../ui/CompanyFormAddCourses';
 
 export default function CompanyPage(): JSX.Element {
-  return <Container>{/* <CompanyFormAddCourses /> */}</Container>;
+  return <Container>{/* <CompanyFormAddCourses /> */} Добрый день </Container>;
 }

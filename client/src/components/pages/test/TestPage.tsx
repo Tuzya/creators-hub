@@ -1,7 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import { getQuestionsAnswersThunk } from '../../../redux/slices/test/testThunk';
 
 
 export default function TestPage(): JSX.Element {
+  const courseId = useParams();
+  // const questionsanswers = useAppSelector((store) => store.questionsAnswers.questionsAnswers);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    void dispatch(getQuestionsAnswersThunk({courseId: Number(courseId)}))
+  })
 
   const questions = [
 {
@@ -54,7 +65,9 @@ export default function TestPage(): JSX.Element {
 <h2>Ваш результат {score}</h2>
 <h2> {score} из {questions.length}</h2>
 {/* редирект в личный кабинет */}
+<Link to='/profile/lk'>
 <button className='test-button'>Закрыть</button>
+</Link>
 </div>
 ) : (
   <div className='question-card'>

@@ -4,6 +4,7 @@ import allCoursesReducer from './slices/allcourses/allCoursesSlice';
 import userReducer from './slices/user/userSlice';
 import companyReducer from './slices/company/companySlice';
 import coursesReducer from './slices/coursesOne/coursesSlice';
+import findCockieReducer from './slices/findCockie/findCockieSlice';
 import questionsAnswersReducer from './slices/test/testSlice';
 
 export const store = configureStore({
@@ -13,6 +14,7 @@ export const store = configureStore({
     user: userReducer,
     company: companyReducer,
     courses: coursesReducer,
+    findCockie: findCockieReducer,
     // questionsAnswers: questionsAnswersReducer,
   },
 });

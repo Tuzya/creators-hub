@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Paper } from '@mui/material';
-import { useAppSelector } from '../../redux/hooks';
-import { postListPaperStyles } from '../styles';
+import { useAppSelector } from '../../../redux/hooks';
+import { postListPaperStyles } from '../../styles';
 import AllCourseItem from './AllCourseItem';
 
 export default function AllCoursesList(): JSX.Element {

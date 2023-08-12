@@ -5,7 +5,7 @@ export type UserModelType = {
   company_id: number;
 };
 
-export type UserSignUpFormType = Omit<UserModelType, 'id'> & { password: string };
+export type UserSignUpFormType = Omit<UserModelType, 'id' | 'company_id'> & { password: string };
 export type UserLoginFormType = Omit<UserSignUpFormType, 'username'>;
 
 export type UserType =
