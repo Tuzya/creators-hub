@@ -11,39 +11,39 @@ import type {
 // 
 export const addQuestionsThunk = createAsyncThunk(
     'questions/addQuestions',
-    async({companyId, courseId, formData}: 
-        {companyId: number, courseId: number, formData: QuestionFormType}) => {
+    async({courseId, input}: 
+        {courseId: number, input: QuestionFormType}) => {
         const {data} = await axios.post<QuestionModelType>
-        (`/company/${companyId}/allcourses/${courseId}/addQuestions`, formData);
+        (`/company/allcourses/${courseId}/addQuestions`, input);
         return data;
     }
 )
 export const getAllQuestionsThunk = createAsyncThunk(
     'questions/getAllQuestions',
-    async({companyId, courseId}: 
-        {companyId: number, courseId: number}) => {
+    async({courseId}: 
+        {courseId: number}) => {
         const {data} = await axios<QuestionModelType[]>
-        (`/company/${companyId}/allcourses/${courseId}/allquestions`);
+        (`/company/allcourses/${courseId}/allquestions`);
         return data
     }
 )
 
 export const addAnswersThunk = createAsyncThunk(
     'questions/addAnswers',
-    async({companyId, courseId, questionId, formData}: 
-        {companyId: number, courseId: number, questionId: number, formData: AnswerFormType}) => {
+    async({courseId, questionId, input}: 
+        {courseId: number, questionId: number, input: AnswerFormType}) => {
         const {data} = await axios.post<AnswerModelType>
-        (`/company/${companyId}/allcourses/${courseId}/allquestions/${questionId}`, formData);
+        (`/company/allcourses/${courseId}/allquestions/${questionId}`, input);
         return data;
     }
 )
 
 export const getQuestionsAnswersThunk = createAsyncThunk(
     'questionsanswers/getQuestionsAnswers',
-    async ({companyId, courseId}: 
-        {companyId: number, courseId: number}) => {
+    async ({courseId}: 
+        {courseId: number}) => {
         const {data} = await axios<QuestionAnswerType[]>
-        (`/company/${companyId}/allcourses/${courseId}/questionsanswers`);
+        (`/company/allcourses/${courseId}/questionsanswers`);
         return data
     }
 )

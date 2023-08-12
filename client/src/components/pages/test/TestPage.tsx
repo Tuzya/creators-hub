@@ -1,7 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import { getQuestionsAnswersThunk } from '../../../redux/slices/test/testThunk';
 
 
 export default function TestPage(): JSX.Element {
+  const questionsanswers = useAppSelector((store) => store.questionsAnswers.questionsAnswers);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    void dispatch(getQuestionsAnswersThunk())
+  })
 
   const questions = [
 {

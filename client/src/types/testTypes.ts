@@ -10,7 +10,7 @@ export type AnswerModelType = {
     isCorrect: boolean,
     question_id: number
 }
-export type QuestionFormType = Omit<QuestionModelType, 'id' | 'test_id'>;
+export type QuestionFormType = Omit<QuestionModelType, 'id' | 'course_id'>;
 
 export type AnswerFormType = Omit<AnswerModelType, 'id' | 'question_id'>;
 

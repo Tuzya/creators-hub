@@ -13,7 +13,7 @@ export const store = configureStore({
     allcourses: allCoursesReducer,
     user: userReducer,
     company: companyReducer,
-    // questionsAnswers: questionsAnswersReducer,
+    questionsAnswers: questionsAnswersReducer,
   },
 
 });
