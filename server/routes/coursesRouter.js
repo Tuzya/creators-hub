@@ -8,7 +8,7 @@ const upload = require('../middleware/multerMiddleware');
 const router = express.Router();
 
 router.route('/allcourses').get(async (req, res) => {
-  const { id } = req.session.user;
+  // const { id } = req.session.user;
   console.log('server', id);
   const courses = await Course.findAll({
     where: { company_id: 2 },
