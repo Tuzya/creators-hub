@@ -5,11 +5,9 @@ import { getAllCoursesThunk } from '../../../redux/slices/allcourses/allCoursesT
 
 export default function AllCourses(): JSX.Element {
   const dispatch = useAppDispatch();
-  // const company_id = JSON.parse(localStorage?.getItem('id'));
-  const sessionData = document.cookie;
-  console.log(sessionData);
+
   useEffect(() => {
-    void dispatch(getAllCoursesThunk(1));
+    void dispatch(getAllCoursesThunk());
   }, []);
   // SEARCH
   return <AllCoursesList />;

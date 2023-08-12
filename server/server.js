@@ -7,7 +7,9 @@ const postsRouter = require('./routes/postsRouter');
 const userRouter = require('./routes/userRouter');
 const companyRouter = require('./routes/companyRouter');
 const coursesRouter = require('./routes/coursesRouter');
-const profileRuter = require('./routes/profileRouter');
+// const profileRuter = require('./routes/profileRouter');
+const findCockieRouter = require('./routes/findCockieRouter');
+
 require('dotenv').config();
 
 const app = express();
@@ -28,11 +30,12 @@ app.use(
       maxAge: 1000 * 60 * 60 * 12,
       httpOnly: true,
     },
-  }),
+  })
 );
 
 app.use('/api/posts', postsRouter);
 app.use('/api/user', userRouter);
+app.use('/api', findCockieRouter);
 // app.use('/api/companys',)
 app.use('/api/company', companyRouter);
 app.use('/api/company', coursesRouter);

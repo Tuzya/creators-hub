@@ -5,13 +5,13 @@ import type { CourseType } from '../../types/courseType';
 import { cardStyle } from '../styles';
 import { useAppDispatch } from '../../redux/hooks';
 // import deleteCourseThunk from '../../redux/slices/allcourses/allCoursesThunk';
-import PrivateRouter from '../hocs/PrivateRouter';
+// import PrivateRouter from '../hocs/PrivateRouter';
 
 type CourseItemProps = {
   course: CourseType;
 };
 
-export default function CourseItem({ course }: CourseItemProps): JSX.Element {
+function CourseItem({ course }: CourseItemProps): JSX.Element {
   const dispath = useAppDispatch();
 
   return (
@@ -31,9 +31,9 @@ export default function CourseItem({ course }: CourseItemProps): JSX.Element {
         </Typography> */}
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={void dispath(deleteCourseThunk(course.id))}>
+        {/* <Button size="small" onClick={void dispath(deleteCourseThunk(course.id))}>
           Delete
-        </Button>
+        </Button> */}
 
         <Link to={`/company/:id/allcourses/${course.id}`}>
           <Button size="small">CoursePage</Button>
@@ -42,3 +42,5 @@ export default function CourseItem({ course }: CourseItemProps): JSX.Element {
     </Card>
   );
 }
+
+export default React.memo(CourseItem);

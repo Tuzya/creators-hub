@@ -18,6 +18,17 @@ module.exports = {
       {}
     );
     await queryInterface.bulkInsert(
+      'Users',
+      [
+        {
+          username: 2,
+          email: '2@2',
+          password: '2',
+        },
+      ],
+      {}
+    );
+    await queryInterface.bulkInsert(
       'Courses',
       [
         {
@@ -30,7 +41,7 @@ module.exports = {
           title: 'John Doe',
           body: 'bbuygfjoskpdlpksgdjkgldjfmsl;dfmsgjbfopkokpsjjsdfbnkosjgbfiupfahoisugyfoiusafogyui',
           downloadLink: '/sadpogfhsjak/njhokfl;/.sad',
-          company_id: 1,
+          company_id: 2,
         },
         {
           title: 'John Doe',
@@ -97,7 +108,9 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Course', null, {});
+    await queryInterface.bulkDelete('Courses', null, {});
+    await queryInterface.bulkDelete('Users', null, {});
+
     await queryInterface.bulkDelete('Companies', null, {});
     await queryInterface.bulkDelete('Questions', null, {});
     await queryInterface.bulkDelete('Answers', null, {});

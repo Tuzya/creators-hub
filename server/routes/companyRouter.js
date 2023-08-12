@@ -31,14 +31,18 @@ router.post('/signup', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
+  console.log('зашли в ручку 1');
   if (email && password) {
     try {
+      console.log('зашли в ручку 2');
+
       const user = await Company.findOne({
         where: { email },
       });
-      if (!(await bcrypt.compare(password, user.password))) {
-        return res.sendStatus(401);
-      }
+      // if (!(await bcrypt.compare(password, user.password))) {
+      //   return res.sendStatus(401);
+      // }
+      console.log('зашли в ручку 3');
 
       const sessionUser = JSON.parse(JSON.stringify(user));
       delete sessionUser.password;

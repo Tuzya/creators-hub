@@ -5,7 +5,7 @@ import { useAppDispatch } from '../../../redux/hooks';
 import { checkUserThunk } from '../../../redux/slices/user/userThunks';
 import { checkCompanyThunk } from '../../../redux/slices/company/companyThunks';
 
-export default function SignInPage(): JSX.Element {
+export default function SignInPageVlad(): JSX.Element {
   const [formType, setFormType] = useState('login');
   const [accountType, setAccountType] = useState('personal');
 
@@ -81,21 +81,38 @@ export default function SignInPage(): JSX.Element {
           ) : null)}
 
         {formType === 'login' && !isRegistrationForm && (
-          <form id="login-form">
-            <input type="email" name="email" placeholder="E-mail" />
-            <input type="password" name="pass" placeholder="Password" />
-            <button
-              type="button"
-              className="login-btn"
-              onClick={() => {
-                {
-                  handleLoginClick(dispatch(checkCompanyThunk || checkUserThunk));
-                }
-              }}
-            >
-              Log in
-            </button>
-          </form>
+          <>
+            <form id="login-form">
+              <input type="email" name="email" placeholder="E-mail" />
+              <input type="password" name="pass" placeholder="Password" />
+              <button
+                type="button"
+                className="login-btn"
+                onClick={() => {
+                  {
+                    void dispatch(checkCompanyThunk());
+                  }
+                }}
+              >
+                Log in Company
+              </button>
+            </form>
+            <form id="login-form">
+              <input type="email" name="email" placeholder="E-mail" />
+              <input type="password" name="pass" placeholder="Password" />
+              <button
+                type="button"
+                className="login-btn"
+                onClick={() => {
+                  {
+                    void dispatch(checkUserThunk);
+                  }
+                }}
+              >
+                Log in Users
+              </button>
+            </form>
+          </>
         )}
 
         {formType === 'fpass' && !isRegistrationForm && (
