@@ -5,6 +5,7 @@ const { User } = require('../db/models');
 const router = express.Router();
 
 router.post('/signup', async (req, res) => {
+  console.log(req.body);
   const { username, email, password } = req.body;
   if (username && email && password) {
     try {
@@ -28,18 +29,23 @@ router.post('/signup', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
+  // console.log('заходит в ручку');
   if (email && password) {
     try {
       const user = await User.findOne({
         where: { email },
       });
-      if (!(await bcrypt.compare(password, user.password))) {
-        return res.sendStatus(401);
-      }
 
+      // if (!(await bcrypt.compare(password, user.password))) {
+      //   console.log('asd', user);
+      //   return res.status(401).json({ message: 'Не прошёл проверку пароля' });
+      // }
+      console.log('user', user);
       const sessionUser = JSON.parse(JSON.stringify(user));
       delete sessionUser.password;
+      delete sessionUser.company_id;
       req.session.user = sessionUser;
+
       return res.json(sessionUser);
     } catch (e) {
       console.log(e);
