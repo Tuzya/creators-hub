@@ -6,7 +6,7 @@ import { getQuestionsAnswersThunk } from '../../../redux/slices/test/testThunk';
 
 export default function TestPage(): JSX.Element {
   const courseId = useParams();
-  const questionsanswers = useAppSelector((store) => store.questionsAnswers.questionsAnswers);
+  // const questionsanswers = useAppSelector((store) => store.questionsAnswers.questionsAnswers);
 
   const dispatch = useAppDispatch();
 

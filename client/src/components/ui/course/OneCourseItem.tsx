@@ -1,9 +1,12 @@
 import React from 'react';
 import { Button, Card, CardActions, CardContent, Typography } from '@mui/material';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import { cardStyle } from '../../styles';
+import { deleteCourseThunk } from '../../../redux/slices/allcourses/allCoursesThunk';
+
 // import PrivateRouter from '../hocs/PrivateRouter';
-import { cardStyle } from '../styles';
-import { deleteCourseThunk } from '../../redux/slices/allcourses/allCoursesThunk';
+
+
 
 export default function OneCourseItem(): JSX.Element {
   const onecourse = useAppSelector((store) => store.allcourses.onecourse);
