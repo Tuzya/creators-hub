@@ -15,7 +15,7 @@ export const store = configureStore({
     company: companyReducer,
     courses: coursesReducer,
     findCockie: findCockieReducer,
-    // questionsAnswers: questionsAnswersReducer,
+    questionsAnswers: questionsAnswersReducer,
   },
 });
 

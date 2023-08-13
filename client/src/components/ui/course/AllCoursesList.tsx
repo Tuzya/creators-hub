@@ -5,7 +5,7 @@ import { postListPaperStyles } from '../../styles';
 import AllCourseItem from './AllCourseItem';
 
 export default function AllCoursesList(): JSX.Element {
-    const allcourses = useAppSelector((store) => store.allcourses.courses);
+  const allcourses = useAppSelector((store) => store.allcourses.courses);
   return (
     <Paper elevation={0} sx={postListPaperStyles}>
       <Box mt={1} py={2} px={2} display="flex" flexDirection="row" flexWrap="wrap">
@@ -16,5 +16,5 @@ export default function AllCoursesList(): JSX.Element {
         ))}
       </Box>
     </Paper>
-  )
+  );
 }

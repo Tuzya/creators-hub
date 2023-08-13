@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { Link as NavLink } from 'react-router-dom';
+import { Link as NavLink, useParams } from 'react-router-dom';
 import { Link } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { linkStyle } from '../styles';

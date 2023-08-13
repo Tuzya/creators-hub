@@ -8,36 +8,30 @@ import type { YourProfileType } from '../../types/profileType/profileTypes';
 import { useAppDispatch } from '../../redux/hooks';
 
 type ProfileItemCardProps = {
-   profile: YourProfileType | null; //  тип данных  профиля
+  profile: YourProfileType | null; //  тип данных  профиля
 };
 
 export default function ProfileItemCard({ profile }: ProfileItemCardProps): JSX.Element {
-   const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
-   return (
-      <Card sx={cardStyle}>
-         <CardContent>
-            <Typography
-               sx={{ fontSize: 14 }}
-               color="text.secondary"
-               gutterBottom
-            >
-               Profile Details
-            </Typography>
-            <Typography
-               variant="h5"
-               component="div"
-            >
-               {profile?.name} {/* Пример вывода имени профиля */}
-            </Typography>
+  return (
+    <Card sx={cardStyle}>
+      <CardContent>
+        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+          Profile Details
+        </Typography>
+        <Typography variant="h5" component="div">
+          {profile?.name} {/* Пример вывода имени профиля */}
+        </Typography>
 
-            {/* Другие поля профиля */}
-         </CardContent>
-         {/* Кнопки для редактирования, удаления и т.д. */}
-         <Button variant='outlined' color='primary' size='small' sx={{ mr: 2 }}>Пригласить</Button>
-      </Card>
-   );
+        {/* Другие поля профиля */}
+      </CardContent>
+      {/* Кнопки для редактирования, удаления и т.д. */}
+      <Button variant="outlined" color="primary" size="small" sx={{ mr: 2 }}>
+        Пригласить
+      </Button>
+    </Card>
+  );
 }
 
-
-// onClick={() => void dispatch()(profile.id)} 
+// onClick={() => void dispatch()(profile.id)}

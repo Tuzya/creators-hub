@@ -7,7 +7,6 @@ import AllCoursesPage from './components/pages/courses/AllCoursesPage';
 import CoursePage from './components/pages/courses/CoursePage';
 import TestPage from './components/pages/test/TestPage';
 import Navbar from './components/ui/NavBar';
-// import CompanyPage from './components/pages/company/CompanyPage';
 import { useAppDispatch, useAppSelector } from './redux/hooks';
 import { checkCompanyThunk } from './redux/slices/company/companyThunks';
 import PrivateRouter from './components/hocs/PrivateRouter';
@@ -17,6 +16,8 @@ import LoginInPage from './components/pages/LoginInPage';
 import SignUpPage from './components/pages/SignUpPage';
 import Loader from './components/hocs/Loader';
 import CompanyPage from './components/pages/company/CompanyPage';
+import QuestionPage from './components/pages/QuestionPage';
+import AnswersAddPage from './components/pages/AnswersAddPage';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -37,10 +38,6 @@ function App(): JSX.Element {
     }
   }, []);
 
-  const company = useAppSelector((store) => store.company);
-  console.log('popa vlad');
-
-
   return (
     <Container>
       <Loader isLoading={user.status === 'loading'}>
@@ -48,16 +45,22 @@ function App(): JSX.Element {
           <Navbar />
           <Routes>
             <Route path="/" element={<MainPage />} />
-            <Route>
+            <Route element={<PrivateRouter isAllowed={user.status === 'logged'} />}>
               <Route path="/profile/lk" element={<ProfilePage />} />
+              <Route path="/company/lk" element={<CompanyPage />} />
+              <Route path="/company/allcourses" element={<AllCoursesPage />} />
+              <Route
+                path="/company/allcourses/:courseId/addQuestion/:questionId/addAnswers"
+                element={<AnswersAddPage />}
+              />
+              <Route path="/company/allcourses/:courseId/addQuestion" element={<QuestionPage />} />
+              <Route path="/company/allcourses/:courseId/test" element={<TestPage />} />
+              <Route path="/company/allcourses/:courseId" element={<CoursePage />} />
             </Route>
-            <Route path="/company/lk" element={<CompanyPage />} />
-            <Route path="/company/allcourses" element={<AllCoursesPage />} />
-            <Route path="/company/allcourses/:courseId" element={<CoursePage />} />
-            <Route path="/allcourses/:courseId/" element={<TestPage />} />
-            <Route element={<PrivateRouter isAllowed={user.status === 'guest'} />} />
-            <Route path="/login" element={<LoginInPage />} />
-            <Route path="/signup" element={<SignUpPage />} />
+            <Route element={<PrivateRouter isAllowed={user.status === 'guest'} />}>
+              <Route path="/login" element={<LoginInPage />} />
+              <Route path="/signup" element={<SignUpPage />} />
+            </Route>
           </Routes>
         </>
       </Loader>

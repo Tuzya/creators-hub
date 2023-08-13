@@ -4,6 +4,6 @@ import { apiService } from './apiServiceConfig';
 
 export const findCockieService = async (): Promise<FindCockie> => {
   const { data } = await apiService<FindCockie>('/');
-  console.log('data', data);
+  // console.log('data', data);
   return data;
 };
