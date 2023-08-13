@@ -6,12 +6,12 @@ module.exports = {
       [
         {
           name: 'Companya Adidasdasdas',
-          email: '1@1',
+          email: 'a@a',
           password: '1',
         },
         {
           name: 'Companya 222Adidasdasdas',
-          email: '1@1222',
+          email: 'b@b',
           password: '2',
         },
       ],
@@ -21,9 +21,40 @@ module.exports = {
       'Users',
       [
         {
+          username: 1,
+          email: '1@1',
+          password: '1',
+          company_id: 1,
+        },
+        {
           username: 2,
           email: '2@2',
-          password: '2',
+          password: '1',
+          company_id: 1,
+        },
+        {
+          username: 3,
+          email: '3@3',
+          password: '1',
+          company_id: 1,
+        },
+        {
+          username: 4,
+          email: '4@4',
+          password: '1',
+          company_id: 2,
+        },
+        {
+          username: 3,
+          email: '5@5',
+          password: '1',
+          company_id: 2,
+        },
+        {
+          username: 3,
+          email: '6@6',
+          password: '1',
+          company_id: 2,
         },
       ],
       {}
