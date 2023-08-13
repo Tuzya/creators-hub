@@ -1,12 +1,14 @@
+const path = require('path');
 const multer = require('multer');
 
 const storage = multer.diskStorage({
-   destination(req, file, cb) {
-      cb(null, 'uploads/'); // Папка, куда будут сохраняться загруженные файлы
-   },
-   filename(req, file, cb) {
-      cb(null, file.originalname); // Имя файла останется таким же, как оригинальное имя
-   },
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/'); // Set the destination folder for uploaded files
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
+    cb(null, `${uniqueSuffix}-${file.originalname}`); // Set the unique filename
+  },
 });
 
 const upload = multer({ storage });

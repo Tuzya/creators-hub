@@ -21,15 +21,15 @@ router
   .route('/allcourses/:courseId/question-all-answers')
   .get(async (req, res) => {
     try {
-      console.log(req.body);
       const { courseId } = req.params;
       const allQuestionAnswers = await Question.findAll({
-        where: { courses_id: courseId },
+        where: { courses_id: Number(courseId) },
         include: Answer,
       });
       res.json(allQuestionAnswers);
     } catch (err) {
       console.log('Ручка, достаём вопросы и ответы: ', err);
+      res.status(500).json({ error: 'Internal server error' });
     }
   });
 

@@ -35,8 +35,8 @@ export default function Navbar(): JSX.Element {
     { to: '/company/lk', name: 'Лк компании', icon: <BusinessIcon /> },
     { to: '/profile/lk', name: 'Лк Юзер', icon: <PersonIcon /> },
     { to: '/company/allcourses/', name: 'База Знаний', icon: <BookIcon /> },
-    { to: '/signup', name: 'Sign Up', icon: null },
-    { to: '/login', name: 'Sign In', icon: null },
+    { to: '/signup', name: 'Sign Up', icon: <BookIcon /> },
+    { to: '/login', name: 'Sign In', icon: <BookIcon /> },
   ];
 
   return (
