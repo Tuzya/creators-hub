@@ -1,4 +1,4 @@
-import { Container } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import MainPage from './components/pages/MainPage';
@@ -39,12 +39,13 @@ function App(): JSX.Element {
   }, []);
 
   return (
-    <Container>
+    <Box>
       <Loader isLoading={user.status === 'loading'}>
         <>
           <Navbar />
           <Routes>
             <Route path="/" element={<MainPage />} />
+            
             <Route element={<PrivateRouter isAllowed={user.status === 'logged'} />}>
               <Route path="/profile/lk" element={<ProfilePage />} />
               <Route path="/company/lk" element={<CompanyPage />} />
@@ -64,7 +65,7 @@ function App(): JSX.Element {
           </Routes>
         </>
       </Loader>
-    </Container>
+    </Box>
   );
 }
 
