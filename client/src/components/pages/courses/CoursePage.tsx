@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Button } from '@mui/material';
+import { Button, Container } from '@mui/material';
 import OneCourseItem from '../../ui/course/OneCourseItem';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { getOneCourseThunk } from '../../../redux/slices/allcourses/allCoursesThunk';
@@ -15,7 +15,7 @@ export default function CoursePage(): JSX.Element {
     void dispatch(getOneCourseThunk(Number(courseId)));
   }, []);
   return (
-    <>
+    <Container>
       <OneCourseItem />
       {/* <QuestionList /> */}
       {/* ссылка на скачивание материала */}
@@ -24,6 +24,6 @@ export default function CoursePage(): JSX.Element {
           <Button>Пройти тест</Button>
         </Link>
       )}
-    </>
+    </Container>
   );
 }

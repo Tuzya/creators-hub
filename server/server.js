@@ -11,6 +11,7 @@ const coursesRouter = require('./routes/coursesRouter');
 const findCockieRouter = require('./routes/findCockieRouter');
 const profileRouter = require('./routes/profileRouter');
 const questionRouter = require('./routes/questionRouter');
+const personEditRouter = require('./routes/personEditRouter');
 
 require('dotenv').config();
 
@@ -42,6 +43,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api/user', userRouter);
 app.use('/api', findCockieRouter);
 app.use('/api/profile', profileRouter);
+app.use('/api/profile', personEditRouter);
 app.use('/api/company', companyRouter);
 app.use('/api/company', coursesRouter);
 app.use('/api/company', questionRouter);
