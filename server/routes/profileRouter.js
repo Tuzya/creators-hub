@@ -3,16 +3,7 @@ const { User, Course } = require('../db/models');
 
 const router = express.Router();
 
-router.route('/lk').get(async (req, res) => {
-  try {
-    const { id } = req.session.user;
-    const userProfile = await User.findAll({ where: { company_id: id } });
-    res.json(userProfile);
-  } catch (err) {
-    console.log('Ручка, get User: ', err);
-  }
-});
-// .get('/one', async (req, res) => {
+// .get('/lk', async (req, res) => {
 //   const { id } = req.session.user;
 //   User.findByPk(id, {
 //     include: [
@@ -37,12 +28,41 @@ router.route('/lk').get(async (req, res) => {
 //   res.sendStatus(500);
 // });
 
-router.route('/profile/lk/:profileId').get(async (req, res) => {
-  const { id, profileId } = req.params;
-  const courses = await User.findByPk({
-    where: { company_id: id, id: profileId },
-  });
-  res.status(200).json(courses);
+router.get('/lk', async (req, res) => {
+  console.log(req.params);
+  const { id } = req.session.user;
+  try {
+    const user = await User.findByPk(id);
+
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      console.log('User not found');
+      res.sendStatus(404);
+    }
+  } catch (error) {
+    console.error('Error fetching user:', error);
+    res.sendStatus(500);
+  }
+});
+
+router.get('/lk/:profileId', async (req, res) => {
+  console.log(req.params);
+  const { profileId } = req.params;
+  console.log('Received profileId:', profileId);
+  try {
+    const user = await User.findByPk(profileId);
+
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      console.log('User not found');
+      res.sendStatus(404);
+    }
+  } catch (error) {
+    console.error('Error fetching user:', error);
+    res.sendStatus(500);
+  }
 });
 
 //   .delete('/:id', async (req, res) => {

@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from '@mui/material';
+import { Button, Container } from '@mui/material';
 import { useAppSelector } from '../../../redux/hooks';
 
 export default function TestListItem(): JSX.Element {
@@ -31,46 +31,48 @@ export default function TestListItem(): JSX.Element {
   };
 
   return (
-    <div className="test">
-      <h1>{course?.title}</h1>
+    <Container>
+      <div className="test">
+        <h1>{course?.title}</h1>
 
-      {showFinalRez ? (
-        <div className="final-rez">
-          <h2>Ваш результат {score}</h2>
-          <h2>
-            {' '}
-            {score} из {questions.length}
-          </h2>
-          {/* редирект в личный кабинет */}
-          <Link to="/profile/lk">
-            <Button className="test-button"> Закрыть </Button>
-          </Link>
-        </div>
-      ) : (
-        <div className="question-card">
-          <h2>Текущие баллы: {score}</h2>
-          <h2>
-            Вопрос {currentQuestion + 1} из {questions.length}
-          </h2>
-          {questions.length > 0 && <h2>{questions[currentQuestion].question}</h2>}
+        {showFinalRez ? (
+          <div className="final-rez">
+            <h2>Ваш результат {score}</h2>
+            <h2>
+              {' '}
+              {score} из {questions.length}
+            </h2>
+            {/* редирект в личный кабинет */}
+            <Link to="/profile/lk">
+              <Button className="test-button"> Закрыть </Button>
+            </Link>
+          </div>
+        ) : (
+          <div className="question-card">
+            <h2>Текущие баллы: {score}</h2>
+            <h2>
+              Вопрос {currentQuestion + 1} из {questions.length}
+            </h2>
+            {questions.length > 0 && <h2>{questions[currentQuestion].question}</h2>}
 
-          <ul>
-            <div className="li-question">
-              {questions.length > 0 &&
-                questions[currentQuestion].Answers.map((el) => (
-                  <li
-                    onClick={() => elClicked(el.isCorrect)}
-                    key={el.id}
-                    style={{ background: 'grey' }}
-                  >
-                    {el.answer}
-                  </li>
-                ))}
-            </div>
-          </ul>
-        </div>
-      )}
-    </div>
+            <ul>
+              <div className="li-question">
+                {questions.length > 0 &&
+                  questions[currentQuestion].Answers.map((el) => (
+                    <li
+                      onClick={() => elClicked(el.isCorrect)}
+                      key={el.id}
+                      style={{ background: 'grey' }}
+                    >
+                      {el.answer}
+                    </li>
+                  ))}
+              </div>
+            </ul>
+          </div>
+        )}
+      </div>
+    </Container>
   );
 }
 

@@ -3,16 +3,19 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Button } from '@mui/material';
+import { Link, useParams } from 'react-router-dom';
 import { cardStyle } from '../../styles';
-import type { YourProfileType } from '../../../types/profileType/profileTypes';
+import type {} from '../../../types/profileType/profileTypes';
 import { useAppDispatch } from '../../../redux/hooks';
+import type { UserModelType } from '../../../types/userTypes';
 
 type ProfileItemCardProps = {
-  profile: YourProfileType | null; //  тип данных  профиля
+  profile: UserModelType | null; //  тип данных  профиля
 };
 
 export default function ProfileItemCard({ profile }: ProfileItemCardProps): JSX.Element {
   const dispatch = useAppDispatch();
+  const { profileId } = useParams();
 
   return (
     <Card sx={cardStyle}>
@@ -20,8 +23,12 @@ export default function ProfileItemCard({ profile }: ProfileItemCardProps): JSX.
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Profile Details
         </Typography>
+        <Link to={`/profile/lk/${profile.id}`}>
+          <Button size="small"> {profile?.username} </Button>
+        </Link>
+
         <Typography variant="h5" component="div">
-          {profile?.name}
+          {profile?.username}
         </Typography>
 
         {/* Другие поля профиля */}

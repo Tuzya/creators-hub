@@ -1,7 +1,7 @@
 const { threadId } = require('worker_threads');
 const express = require('express');
-const { Course } = require('../db/models');
-const upload = require('../middleware/multerMiddleware');
+const { Course, User } = require('../db/models');
+const upload = require('../middleware/multerPdfMiddleware');
 
 const router = express.Router();
 
@@ -27,6 +27,18 @@ router.delete('/allcourses/:courseId', async (req, res) => {
   } catch (err) {
     console.error(err);
     res.sendStatus(500);
+  }
+});
+
+router.route('/lk/alluser').get(async (req, res) => {
+  try {
+    console.log('сюда зашёл');
+    const { id } = req.session.user;
+    const userProfile = await User.findAll({ where: { company_id: id } });
+    console.log(userProfile);
+    res.json(userProfile);
+  } catch (err) {
+    console.log('Ручка, get User: ', err);
   }
 });
 

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Container } from '@mui/material';
 import AllCoursesList from '../../ui/course/AllCoursesList';
 import { useAppDispatch } from '../../../redux/hooks';
 import { getAllCoursesThunk } from '../../../redux/slices/allcourses/allCoursesThunk';
@@ -10,5 +11,9 @@ export default function AllCourses(): JSX.Element {
     void dispatch(getAllCoursesThunk());
   }, []);
   // SEARCH
-  return <AllCoursesList />;
+  return (
+    <Container>
+      <AllCoursesList />
+    </Container>
+  );
 }
