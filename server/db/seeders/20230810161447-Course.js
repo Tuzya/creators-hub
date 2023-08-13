@@ -96,6 +96,28 @@ module.exports = {
       {}
     );
 
+    // await queryInterface.bulkInsert(
+    //   'Courses_Users',
+    //   [
+    //     {
+    //       user_id: 1,
+    //       courses_id: 1,
+    //       status: false,
+    //     },
+    //     {
+    //       user_id: 1,
+    //       courses_id: 3,
+    //       status: false,
+    //     },
+    //     {
+    //       user_id: 1,
+    //       courses_id: 2,
+    //       status: false,
+    //     },
+    //   ],
+    //   {}
+    // );
+
     await queryInterface.bulkInsert(
       'Questions',
       [

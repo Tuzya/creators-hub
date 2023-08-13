@@ -1,7 +1,7 @@
 import { Container } from '@mui/material';
 import React, { useEffect } from 'react';
 import CompanyFormAddCourses from '../../ui/CompanyFormAddCourses';
-import ProfileList from '../../ui/ProfileList';
+import ProfileList from '../../ui/profileForCompany/ProfileList';
 import { useAppDispatch } from '../../../redux/hooks';
 import { getProfileThunk } from '../../../redux/slices/profiles/profileThunk';
 

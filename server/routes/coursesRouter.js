@@ -48,4 +48,5 @@ router.post('/lk', upload.single('downloadLink'), async (req, res) => {
     res.status(500).json({ error: 'Произошла ошибка при добавлении курса!' });
   }
 });
+
 module.exports = router;

@@ -5,10 +5,14 @@ import axios from 'axios';
 import type { CoursesOneType } from '../../../types/coursesOneType';
 import type { CompanyModelType } from '../../../types/companyTypes';
 
-export const addCompanyThunk = createAsyncThunk<CoursesOneType, Omit<CoursesOneType, 'id'>>(
+export const addCompanyThunk = createAsyncThunk<CoursesOneType, FormData>(
   'companys/addCourses',
   async (formData) => {
-    const { data } = await axios.post<CoursesOneType>(`/company/lk`, formData);
+    const { data } = await axios.post<CoursesOneType>('/company/lk', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data', // Set the proper content type for formData
+      },
+    });
     return data;
   },
 );
