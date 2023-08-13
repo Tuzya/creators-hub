@@ -1,16 +1,16 @@
 import React from 'react';
 import { Button, Card, CardActions, CardContent, Typography } from '@mui/material';
+import { Link, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { cardStyle } from '../../styles';
 import { deleteCourseThunk } from '../../../redux/slices/allcourses/allCoursesThunk';
 
 // import PrivateRouter from '../hocs/PrivateRouter';
 
-
-
 export default function OneCourseItem(): JSX.Element {
   const onecourse = useAppSelector((store) => store.allcourses.onecourse);
   const dispath = useAppDispatch();
+  const { courseId } = useParams();
   return (
     <Card sx={cardStyle}>
       <CardContent>
@@ -25,11 +25,16 @@ export default function OneCourseItem(): JSX.Element {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={void dispath(deleteCourseThunk(onecourse?.id))}>
-          Delete
-        </Button>
-
-        <Button size="small">Test</Button>
+        {courseId && (
+          <Link to={`/company/allcourses/${courseId}/addQuestion`}>
+            <Button size="small">Доавить тест</Button>
+          </Link>
+        )}
+        {courseId && (
+          <Link to={`/company/allcourses/${courseId}/test`}>
+            <Button size="small">Пройти тест</Button>
+          </Link>
+        )}
       </CardActions>
     </Card>
   );

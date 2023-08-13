@@ -1,19 +1,16 @@
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 
-import { getProfileThunk } from '../../../redux/slices/profiles/profileThunk';
+import { getOneProfileThunk } from '../../../redux/slices/profiles/profileThunk';
 import ProfileItemCard from '../../ui/ProfileItemCard';
 
 export default function ProfilePage(): JSX.Element {
   const dispatch = useAppDispatch();
-  const profile = useAppSelector((state) => state.profile.oneProfile)
-
+  const profile = useAppSelector((state) => state.profile.oneProfile);
 
   useEffect(() => {
-    void dispatch(getProfileThunk())
-  }, [])
+    void dispatch(getOneProfileThunk());
+  }, []);
 
-  return (
-    <ProfileItemCard profile={profile} />
-  )
+  return <ProfileItemCard profile={profile} />;
 }

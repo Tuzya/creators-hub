@@ -1,14 +1,12 @@
 import { Box, Button, Container, TextField } from '@mui/material';
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import type { UserLoginFormType, UserSignUpFormType } from '../../types/userTypes';
+import type { UserSignUpFormType } from '../../types/userTypes';
 import { useAppDispatch } from '../../redux/hooks';
-import { loginUserThunk, signUpUserThunk } from '../../redux/slices/user/userThunks';
+import { signUpUserThunk } from '../../redux/slices/user/userThunks';
 import type { CompanySignUpFormType } from '../../types/companyTypes';
 import { signUpCompanyThunk } from '../../redux/slices/company/companyThunks';
 
 export default function SignUpPage(): JSX.Element {
-  const { auth } = useParams();
   const dispatch = useAppDispatch();
 
   // Company Sign Up
