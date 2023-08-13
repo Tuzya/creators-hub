@@ -1,4 +1,4 @@
-import { Container } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import MainPage from './components/pages/MainPage';
@@ -40,28 +40,28 @@ function App(): JSX.Element {
   const company = useAppSelector((store) => store.company);
   console.log('popa vlad');
 
-
   return (
-    <Container>
+    <Box>
       <Loader isLoading={user.status === 'loading'}>
         <>
           <Navbar />
           <Routes>
             <Route path="/" element={<MainPage />} />
-            <Route>
+            
+            <Route element={<PrivateRouter isAllowed={user.status === 'logged'} />}>
               <Route path="/profile/lk" element={<ProfilePage />} />
+              <Route path="/company/lk" element={<CompanyPage />} />
+              <Route path="/company/allcourses" element={<AllCoursesPage />} />
+              <Route path="/company/allcourses/:courseId" element={<CoursePage />} />
+              <Route path="/allcourses/:courseId/" element={<TestPage />} />
             </Route>
-            <Route path="/company/lk" element={<CompanyPage />} />
-            <Route path="/company/allcourses" element={<AllCoursesPage />} />
-            <Route path="/company/allcourses/:courseId" element={<CoursePage />} />
-            <Route path="/allcourses/:courseId/" element={<TestPage />} />
             <Route element={<PrivateRouter isAllowed={user.status === 'guest'} />} />
             <Route path="/login" element={<LoginInPage />} />
             <Route path="/signup" element={<SignUpPage />} />
           </Routes>
         </>
       </Loader>
-    </Container>
+    </Box>
   );
 }
 
