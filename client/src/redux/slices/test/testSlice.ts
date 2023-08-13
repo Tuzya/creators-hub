@@ -49,7 +49,6 @@ export const testSlice = createSlice({
     builder.addCase(getAllAnswerThunk.rejected, (state) => state);
 
     builder.addCase(getQuestionsAnswersThunk.fulfilled, (state, { payload }) => {
-      console.log(payload);
       state.questionsAnswers = payload;
     });
     builder.addCase(getQuestionsAnswersThunk.rejected, (state) => state);

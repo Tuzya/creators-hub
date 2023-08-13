@@ -54,7 +54,6 @@ export const getAllAnswerThunk = createAsyncThunk(
     const { data } = await axios<AnswerModelType[]>(
       `/company/allcourses/${courseId}/allquestions/${questionId}`,
     );
-
     return data;
   },
 );
@@ -62,12 +61,9 @@ export const getAllAnswerThunk = createAsyncThunk(
 export const getQuestionsAnswersThunk = createAsyncThunk(
   'questionsanswers/getQuestionsAnswers',
   async ({ courseId }: { courseId: number }) => {
-    // Ensure courseId is a number
-
     const { data } = await axios<QuestionAnswerType[]>(
       `/company/allcourses/${courseId}/question-all-answers`,
     );
-    console.log('Thunk getQuestionsAnswers: ', data);
     return data;
   },
 );

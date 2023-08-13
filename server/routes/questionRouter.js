@@ -21,17 +21,11 @@ router
   .route('/allcourses/:courseId/question-all-answers')
   .get(async (req, res) => {
     try {
-      const { courseId } = req.params; // Parse the courseId to an integer
-      console.log(courseId);
-      // if (isNaN(courseId)) {
-      //   return res.status(400).json({ error: 'Invalid courseId' });
-      // }
-
+      const { courseId } = req.params;
       const allQuestionAnswers = await Question.findAll({
         where: { courses_id: Number(courseId) },
         include: Answer,
       });
-      console.log('res: ', allQuestionAnswers);
       res.json(allQuestionAnswers);
     } catch (err) {
       console.log('Ручка, достаём вопросы и ответы: ', err);

@@ -74,7 +74,8 @@ export default function CompanyFormAddCourses(): JSX.Element {
         />
         <input
           type="file"
-          accept=".pdf"
+          name="downloadLink"
+          value={courseData.downloadLink}
           onChange={handleFileChange} // Обработчик выбора файла
         />
       </div>

@@ -7,10 +7,8 @@ router
   .route('/lk')
   .get(async (req, res) => {
     try {
-      console.log('sadasd', req.session.user);
       const { id } = req.session.user;
       const userProfile = await User.findAll({ where: { company_id: id } });
-      console.log('asdasd', userProfile);
       res.json(userProfile);
     } catch (err) {
       console.log('Ручка, get User: ', err);
@@ -18,10 +16,8 @@ router
   })
   .get(async (req, res) => {
     try {
-      console.log('sadasd', req.session.user);
       const { id } = req.session.user;
       const userProfile = await User.findByPk(id);
-      console.log('asdasd', userProfile);
       res.json(userProfile);
     } catch (err) {
       console.log('Ручка, get User: ', err);
