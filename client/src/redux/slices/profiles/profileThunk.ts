@@ -13,7 +13,7 @@ export const getProfileThunk = createAsyncThunk<YourProfileType[]>(
 export const getOneProfileThunk = createAsyncThunk<YourProfileType>(
   'profile/getOneProfile',
   async () => {
-    const { data } = await axios.get<YourProfileType>(`/profile/lk`);
+    const { data } = await axios.get<YourProfileType>(`/profile`);
     return data;
   },
 );

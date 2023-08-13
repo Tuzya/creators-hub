@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
@@ -33,6 +34,9 @@ app.use(
     },
   })
 );
+
+// Serve uploaded PDF files
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // app.use('/api/posts', postsRouter);
 app.use('/api/user', userRouter);

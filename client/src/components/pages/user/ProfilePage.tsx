@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 
 import { getOneProfileThunk } from '../../../redux/slices/profiles/profileThunk';
-import ProfileItemCard from '../../ui/ProfileItemCard';
+import ProfileItemCard from '../../ui/profileForCompany/ProfileItemCard';
 
 export default function ProfilePage(): JSX.Element {
   const dispatch = useAppDispatch();
