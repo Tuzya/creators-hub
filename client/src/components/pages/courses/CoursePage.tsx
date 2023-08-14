@@ -19,11 +19,11 @@ export default function CoursePage(): JSX.Element {
       <OneCourseItem />
       {/* <QuestionList /> */}
       {/* ссылка на скачивание материала */}
-      {courseId && (
+      {/* {courseId && (
         <Link to={`/allcourses/${courseId}/test/`}>
           <Button>Пройти тест</Button>
         </Link>
-      )}
+      )} */}
     </Container>
   );
 }

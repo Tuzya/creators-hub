@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom';
-import { Box, Button, Grid, TextField } from '@mui/material';
+import { Box, Button, Checkbox, Grid, TextField } from '@mui/material';
 import { useAppDispatch } from '../../../redux/hooks';
 import { buttonStyle, postFormGridStyles, textFieldStyle } from '../../styles';
 import { addAnswersThunk } from '../../../redux/slices/test/testThunk';
@@ -36,16 +36,8 @@ export default function AnswerForm(): JSX.Element {
             onChange={changeHandler}
             sx={textFieldStyle}
           />
-           <TextField
-            size="small"
-            variant="outlined"
-            name="status"
-            label="status"
-            value={input.isCorrect}
-            onChange={changeHandler}
-            sx={{width: '20px'}}
-          />
           
+                  
           <Button
             variant="outlined"
             sx={buttonStyle}

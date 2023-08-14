@@ -13,7 +13,7 @@ export const addQuestionsThunk = createAsyncThunk(
   'questions/addQuestions',
   async ({ courseId, input }: { courseId: number; input: QuestionFormType }) => {
     const { data } = await axios.post<QuestionModelType>(
-      `/company/allcourses/${courseId}/addQuestion`,
+      `/company/bbbb/allcourses/${courseId}/addQuestion`,
       input,
     );
     return data;
@@ -65,5 +65,23 @@ export const getQuestionsAnswersThunk = createAsyncThunk(
       `/company/allcourses/${courseId}/question-all-answers`,
     );
     return data;
+  },
+);
+
+export const changeStatusAnswerThunk = createAsyncThunk(
+  'questions/changeStatusAnswer',
+  async ({ courseId, questionId, answerId }: { courseId: number; questionId: number, answerId: number }) => {
+    const { data } = await axios.put<AnswerModelType>(
+      `/company/hhhh/allcourses/${courseId}/allquestions/${questionId}/answer/${answerId}`,
+    );
+    return data;
+  },
+);
+
+export const deleteAnswerThunk = createAsyncThunk(
+  'questions/deleteAnswer',
+  async ({ courseId, questionId, answerId }: { courseId: number; questionId: number, answerId: number }) => {
+    await axios.delete<AnswerModelType ['id']>(`/company/allcourses/${courseId}/allquestions/${questionId}/answer/${answerId}`);
+    return answerId;
   },
 );
