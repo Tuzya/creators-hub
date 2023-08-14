@@ -3,7 +3,7 @@ const { Question, Answer } = require('../db/models');
 
 const router = express.Router();
 
-router.post('/bbbb/allcourses/:courseId/addQuestion', async (req, res) => {
+router.post('/allcourses/:courseId/addQuestion', async (req, res) => {
   try {
     const { courseId } = req.params;
     console.log('asdas', req.body);
@@ -76,7 +76,7 @@ router
   });
 
 router
-  .route('/hhhh/allcourses/:courseId/allquestions/:questionId/answer/:answerId')
+  .route('/allcourses/:courseId/allquestions/:questionId/answer/:answerId')
   .put(async (req, res) => {
     // console.log('=======');
     const { answerId } = req.params;
@@ -94,5 +94,5 @@ router
       console.error(err);
       res.sendStatus(500);
     }
-  })
+  });
 module.exports = router;

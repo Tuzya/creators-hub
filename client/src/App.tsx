@@ -38,14 +38,10 @@ function App(): JSX.Element {
     console.log(user.status);
   }, []);
 
-  // useEffect(() => {
-  //   if (user) {
-  //     void dispatch(getFindCockieThunk());
-  //   }
-  // }, []);
-
   useEffect(() => {
-    void dispatch(getAllCoursesThunk());
+    if (user) {
+      void dispatch(getFindCockieThunk());
+    }
   }, []);
 
   return (

@@ -1,4 +1,4 @@
-const { fs } = require('fs');
+const { fs } = require('fs/promises');
 const path = require('path');
 const sharp = require('sharp');
 
@@ -8,7 +8,7 @@ const fileUpload = require('../middleware/multerWebMiddleware');
 
 const router = express.Router();
 
-router.get('/person', async (req, res) => {
+router.get('/personFindOne', async (req, res) => {
   const { id } = req.session.user;
   try {
     const user = await Person.findOne({
@@ -48,37 +48,25 @@ router.get('/personInfo/:profileId', async (req, res) => {
 });
 router.post('/edit', fileUpload.single('photo'), async (req, res) => {
   const { id } = req.session.user;
-  console.log('ghbhghbhbg', req.body);
-  const {
-    city, birthDate, phone, about, companies, sex,
-  } = req.body;
-  console.log(sex);
-  console.log(req.file);
+  const { city, birthDate, phone, about, companies, sex } = req.body;
   if (req.file) {
     const outputBuffer = req.file.buffer;
     const imageExtension = path.extname(req.file.originalname);
     let image = `${Date.now()}${imageExtension}`;
-
     // Если изображение не в формате .webp, конвертировать
     if (imageExtension.toLowerCase() !== '.webp') {
       const convertedBuffer = await sharp(req.file.buffer).webp().toBuffer();
       image = `${Date.now()}.webp`;
       await fs.promises.writeFile(
         path.join(__dirname, '..', 'public', 'img', image),
-        convertedBuffer,
+        console.log(convertedBuffer)
       );
     } else {
       await fs.promises.writeFile(
         path.join(__dirname, '..', 'public', 'img', image),
-        outputBuffer,
+        console.log(outputBuffer)
       );
     }
-
-    console.log(image);
-
-
-
-    console.log(image);
     const [updatedRowsCount, updatedRows] = await Person.create(
       // Объект данных для обновления/вставки
       {
@@ -94,7 +82,7 @@ router.post('/edit', fileUpload.single('photo'), async (req, res) => {
       // Опции
       {
         returning: true, // Получить обновленные данные
-      },
+      }
     );
 
     if (updatedRowsCount > 0) {

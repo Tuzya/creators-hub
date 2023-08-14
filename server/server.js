@@ -33,22 +33,22 @@ app.use(
       maxAge: 1000 * 60 * 60 * 12,
       httpOnly: true,
     },
-  }),
+  })
 );
 
 // Serve uploaded PDF files
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-app.use(express.static('public'));
 
-// app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 // app.use('/api/posts', postsRouter);
-app.use('/api/company', companyRouter);
-app.use('/api/company', questionRouter);
+
 app.use('/api/user', userRouter);
 app.use('/api', findCockieRouter);
 app.use('/api/profile', profileRouter);
-app.use('/api/profile', personEditRouter);
-app.use('/api/company', coursesRouter);
+app.use('/api/person', personEditRouter);
+app.use('/api/company', companyRouter);
+app.use('/api/courses', coursesRouter);
+app.use('/api/question', questionRouter);
 
 app.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));

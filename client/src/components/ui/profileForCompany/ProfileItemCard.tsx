@@ -41,11 +41,14 @@ export default function ProfileItemCard({ profile }: ProfileItemCardProps): JSX.
         {/* Другие поля профиля */}
       </CardContent>
       {/* Кнопки для редактирования, удаления и т.д. */}
-      <Button variant="outlined" color="secondary" size="small" sx={{ mr: 2 }} onClick={handleOpen}>
+      <Button
+        variant="outlined"
+        color="secondary"
+        size="small"
+        sx={{ mr: 2, mt: 20, width: '100%' }}
+        onClick={handleOpen}
+      >
         Назначить курс
-      </Button>
-      <Button variant="outlined" color="primary" size="small" sx={{ mr: 2 }}>
-        Пригласить
       </Button>
       <ModalAssigningCourseToUser profile={profile} setOpen={setOpen} open={open} />
     </Card>
