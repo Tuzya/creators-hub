@@ -8,7 +8,7 @@ import CoursePage from './components/pages/courses/CoursePage';
 import TestPage from './components/pages/test/TestPage';
 import Navbar from './components/ui/NavBar';
 // import CompanyPage from './components/pages/company/CompanyPage';
-import { useAppDispatch, useAppSelector } from './redux/hooks';
+
 import { checkCompanyThunk } from './redux/slices/company/companyThunks';
 import PrivateRouter from './components/hocs/PrivateRouter';
 import { checkUserThunk } from './redux/slices/user/userThunks';
@@ -17,6 +17,7 @@ import LoginInPage from './components/pages/LoginInPage';
 import SignUpPage from './components/pages/SignUpPage';
 import Loader from './components/hocs/Loader';
 import CompanyPage from './components/pages/company/CompanyPage';
+import { useAppDispatch, useAppSelector } from './redux/hooks';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();

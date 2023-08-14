@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 
-import { getProfileThunk } from '../../../redux/slices/profiles/profileThunk';
+import { getOneProfileThunk, getProfileThunk } from '../../../redux/slices/profiles/profileThunk';
 import ProfileItemCard from '../../ui/ProfileItemCard';
 
 export default function ProfilePage(): JSX.Element {
@@ -10,7 +10,7 @@ export default function ProfilePage(): JSX.Element {
 
 
   useEffect(() => {
-    void dispatch(getProfileThunk())
+    void dispatch(getOneProfileThunk())
   }, [])
 
   return (

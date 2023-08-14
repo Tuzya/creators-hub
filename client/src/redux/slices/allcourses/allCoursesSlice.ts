@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { CourseType } from '../../../types/courseType';
+
 import { getAllCoursesThunk, getOneCourseThunk } from './allCoursesThunk';
+import type { CourseType } from '../../../types/courseType/courseType';
 
 export type CourseSliceType = {
   courses: CourseType[];

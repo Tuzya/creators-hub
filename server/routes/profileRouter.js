@@ -3,13 +3,15 @@ const { User } = require('../db/models');
 
 const router = express.Router();
 
-router.route('/:id').get(async (req, res) => {
+router.route('/lk').get(async (req, res) => {
   try {
-    const { id } = req.session.company.id;
-    const courses = await User.findAll({
-      where: { company_id: id },
+    console.log('sadasd', req.session.user);
+    const { id } = req.session.user;
+    const userProfile = await User.findByPk({
+      where: { id },
     });
-    res.json(courses);
+    console.log('asdasd', userProfile);
+    res.json(userProfile);
   } catch (err) {
     console.log('Ручка, get User: ', err);
   }
