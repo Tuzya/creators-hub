@@ -12,9 +12,8 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(Company, { foreignKey: 'company_id' });
       this.belongsToMany(User, {
         through: 'CoursesUsers',
-        foreignKey: 'course_id',
+        foreignKey: 'courses_id',
       });
-      // // define association here
     }
   }
   Course.init(
