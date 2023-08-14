@@ -84,5 +84,15 @@ router
     answer.isCorrect = !answer.isCorrect;
     await answer.save();
     return res.status(200).json(answer);
-  });
+  })
+  .delete(async (req, res) => {
+    try {
+      const { answerId } = req.params;
+      await Answer.destroy({ where: { id: answerId } });
+      res.sendStatus(200);
+    } catch (err) {
+      console.error(err);
+      res.sendStatus(500);
+    }
+  })
 module.exports = router;

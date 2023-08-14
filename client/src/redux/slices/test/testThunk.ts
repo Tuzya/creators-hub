@@ -77,3 +77,11 @@ export const changeStatusAnswerThunk = createAsyncThunk(
     return data;
   },
 );
+
+export const deleteAnswerThunk = createAsyncThunk(
+  'questions/deleteAnswer',
+  async ({ courseId, questionId, answerId }: { courseId: number; questionId: number, answerId: number }) => {
+    await axios.delete<AnswerModelType ['id']>(`/company/allcourses/${courseId}/allquestions/${questionId}/answer/${answerId}`);
+    return answerId;
+  },
+);

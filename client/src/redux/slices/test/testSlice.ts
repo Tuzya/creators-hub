@@ -3,6 +3,7 @@ import {
   addAnswersThunk,
   addQuestionsThunk,
   changeStatusAnswerThunk,
+  deleteAnswerThunk,
   getAllAnswerThunk,
   getAllQuestionsThunk,
   getQuestionsAnswersThunk,
@@ -59,10 +60,9 @@ export const testSlice = createSlice({
       if ((changeAnsIndex => 0)) {state.answers[changeAnsIndex] = payload}
     });
 
-    // builder.addCase(changeStatusAnswerThunk.fulfilled, (state, {payload})=> {
-    //   const answerIndex = state.answers.findIndex((el) => el.id === payload.id);
-    //   if ((answerIndex ) => 0) state.answers[answerIndex] = payload;
-    // }) 
+    builder.addCase(deleteAnswerThunk.fulfilled, (state,{payload}) => {
+      state.answers = state.answers.filter((el) => el.id !== payload);
+    })
   }
   })
 
