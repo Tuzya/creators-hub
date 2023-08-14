@@ -2,8 +2,9 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Container } from '@mui/material';
+import { Button, Checkbox, Container } from '@mui/material';
 import { useAppSelector } from '../../../redux/hooks';
+
 
 export default function TestListItem(): JSX.Element {
   const questions = useAppSelector((store) => store.questionsAnswers.questionsAnswers);
@@ -41,6 +42,8 @@ export default function TestListItem(): JSX.Element {
             <h2>
               {' '}
               {score} из {questions.length}
+              ({Math.floor((score/questions.length)*100)}%) 
+              {((score/questions.length)*100) > 74 ? <h4>Вы прошли!</h4> : <h4>Вы не прошли!</h4>}
             </h2>
             {/* редирект в личный кабинет */}
             <Link to="/profile/lk">
@@ -49,10 +52,11 @@ export default function TestListItem(): JSX.Element {
           </div>
         ) : (
           <div className="question-card">
-            <h2>Текущие баллы: {score}</h2>
+            
             <h2>
               Вопрос {currentQuestion + 1} из {questions.length}
             </h2>
+            
             {questions.length > 0 && <h2>{questions[currentQuestion].question}</h2>}
 
             <ul>
@@ -65,6 +69,7 @@ export default function TestListItem(): JSX.Element {
                       style={{ background: 'grey' }}
                     >
                       {el.answer}
+                      <Checkbox  />
                     </li>
                   ))}
               </div>

@@ -6,6 +6,8 @@ import {
   getPersonLoggedInfoThunk,
 } from '../../../redux/slices/profiles/profileThunk';
 import PersonProfileLoggedItem from '../../ui/profilePerson/PersonProfileLoggedItem';
+import { fetchAllCourseUserThunk } from '../../../redux/slices/allCourseOneUser/allCourseOneUserThunk';
+import AllCourseOneUserList from '../../ui/course/AllCourseOneUserList';
 
 export default function ProfileLoggedPage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -18,9 +20,14 @@ export default function ProfileLoggedPage(): JSX.Element {
     void dispatch(getOneProfileThunk());
   }, []);
 
+  useEffect(() => {
+    void dispatch(fetchAllCourseUserThunk());
+  }, []);
+
   return (
     <Container>
       <PersonProfileLoggedItem />
+      <AllCourseOneUserList />
     </Container>
   );
 }
