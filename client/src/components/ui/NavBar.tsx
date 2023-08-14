@@ -17,7 +17,8 @@ import BusinessIcon from '@mui/icons-material/Business';
 import PersonIcon from '@mui/icons-material/Person';
 import BookIcon from '@mui/icons-material/Book';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import { Link as NavLink } from 'react-router-dom';
+import { Link, Link as NavLink } from 'react-router-dom';
+import KeyIcon from '@mui/icons-material/Key';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { logoutUserThunk } from '../../redux/slices/user/userThunks';
 
@@ -73,6 +74,21 @@ export default function Navbar(): JSX.Element {
             </ListItem>
           ))}
         </List>
+        <Box sx={{ position: 'absolute', float: 'left', bottom: 50, width: '100%' }}>
+          <ListItem
+            button
+            onClick={() => {
+              // Handle settings action
+            }}
+            sx={{ display: 'flex', justifyContent: 'flex-end', pr: 1 }}
+          >
+            <Link to="/admin/signup-user">
+              <ListItemIcon>
+                <KeyIcon />
+              </ListItemIcon>
+            </Link>
+          </ListItem>
+        </Box>
         <Box sx={{ position: 'absolute', bottom: 0, width: '100%' }}>
           <ListItem
             button
@@ -121,6 +137,7 @@ export default function Navbar(): JSX.Element {
               background: '#2E3B55',
             }}
           >
+            <ExitToAppIcon />
             Logout
           </Button>
         </Toolbar>

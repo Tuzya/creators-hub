@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(Company, { foreignKey: 'company_id' });
       this.belongsToMany(Course, {
         through: 'CoursesUsers',
+        foreignKey: 'user_id',
       });
       // define association here
     }
