@@ -20,6 +20,7 @@ import EditPersonInfo from './components/pages/editPersonInfo/EditPersonInfo';
 import AdminSignUpUser from './components/pages/adminPanel/AdminSignUpUser';
 import AnswersAddPage from './components/pages/test/addTest/AnswersAddPage';
 import QuestionPage from './components/pages/test/addTest/QuestionPage';
+import { getAllCoursesThunk } from './redux/slices/allcourses/allCoursesThunk';
 import Loader from './components/hocs/Loader';
 
 function App(): JSX.Element {
@@ -39,6 +40,10 @@ function App(): JSX.Element {
     if (user) {
       void dispatch(getFindCockieThunk());
     }
+  }, []);
+
+  useEffect(() => {
+    void dispatch(getAllCoursesThunk());
   }, []);
 
   return (
