@@ -1,10 +1,9 @@
-import { Box, Container } from '@mui/material';
 import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { CssBaseline, Container, Paper } from '@mui/material';
 import MainPage from './components/pages/MainPage';
 import ProfilePage from './components/pages/user/ProfilePage';
 import AllCoursesPage from './components/pages/courses/AllCoursesPage';
-import CoursePage from './components/pages/courses/CoursePage';
 import TestPage from './components/pages/test/TestPage';
 import Navbar from './components/ui/NavBar';
 import { useAppDispatch, useAppSelector } from './redux/hooks';
@@ -16,11 +15,12 @@ import LoginInPage from './components/pages/LoginInPage';
 import SignUpPage from './components/pages/SignUpPage';
 import Loader from './components/hocs/Loader';
 import CompanyPage from './components/pages/company/CompanyPage';
-import QuestionPage from './components/pages/test/addTest/QuestionPage';
-import AnswersAddPage from './components/pages/test/addTest/AnswersAddPage';
+import CoursePage from './components/pages/courses/CoursePage';
 import ProfileLoggedPage from './components/pages/user/ProfileLoggedPage';
 import EditPersonInfo from './components/pages/editPersonInfo/EditPersonInfo';
 import AdminSignUpUser from './components/pages/adminPanel/AdminSignUpUser';
+import AnswersAddPage from './components/pages/test/addTest/AnswersAddPage';
+import QuestionPage from './components/pages/test/addTest/QuestionPage';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -42,10 +42,11 @@ function App(): JSX.Element {
   }, []);
 
   return (
-    <Box>
-      <Loader isLoading={user.status === 'loading'}>
-        <>
-          <Navbar />
+    <>
+      <CssBaseline />
+      <Navbar />
+      <Container sx={{ marginTop: '30px' }}>
+        <Paper>
           <Routes>
             <Route path="/" element={<MainPage />} />
             <Route
@@ -75,9 +76,9 @@ function App(): JSX.Element {
               <Route path="/signup" element={<SignUpPage />} />
             </Route>
           </Routes>
-        </>
-      </Loader>
-    </Box>
+        </Paper>
+      </Container>
+    </>
   );
 }
 
