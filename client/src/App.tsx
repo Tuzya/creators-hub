@@ -6,7 +6,8 @@ import ProfilePage from './components/pages/user/ProfilePage';
 import AllCoursesPage from './components/pages/courses/AllCoursesPage';
 import TestPage from './components/pages/test/TestPage';
 import Navbar from './components/ui/NavBar';
-import { useAppDispatch, useAppSelector } from './redux/hooks';
+// import CompanyPage from './components/pages/company/CompanyPage';
+
 import { checkCompanyThunk } from './redux/slices/company/companyThunks';
 import PrivateRouter from './components/hocs/PrivateRouter';
 import { checkUserThunk } from './redux/slices/user/userThunks';
@@ -14,6 +15,7 @@ import { getFindCockieThunk } from './redux/slices/findCockie/findCockieThunk';
 import LoginInPage from './components/pages/LoginInPage';
 import SignUpPage from './components/pages/SignUpPage';
 import CompanyPage from './components/pages/company/CompanyPage';
+import { useAppDispatch, useAppSelector } from './redux/hooks';
 import CoursePage from './components/pages/courses/CoursePage';
 import ProfileLoggedPage from './components/pages/user/ProfileLoggedPage';
 import EditPersonInfo from './components/pages/editPersonInfo/EditPersonInfo';

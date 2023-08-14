@@ -1,5 +1,6 @@
 import React from 'react';
+import EditPersonInfoForm from '../../ui/editPersonInfo/EditPersonInfoForm';
 
 export default function EditPersonInfo(): JSX.Element {
-  return <div>Привет тут будет редактирование лич инфо</div>;
+  return <div><EditPersonInfoForm /></div>;
 }

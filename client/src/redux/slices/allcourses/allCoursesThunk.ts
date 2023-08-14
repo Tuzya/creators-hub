@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+
 import type { CompanyModelType } from '../../../types/companyTypes';
 import type { CourseType } from '../../../types/courseType/courseType';
 
