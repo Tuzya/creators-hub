@@ -18,6 +18,8 @@ import CompanyPage from './components/pages/company/CompanyPage';
 import QuestionPage from './components/pages/QuestionPage';
 import AnswersAddPage from './components/pages/AnswersAddPage';
 import CoursePage from './components/pages/courses/CoursePage';
+import ProfileLoggedPage from './components/pages/user/ProfileLoggedPage';
+import { getOneProfileThunk } from './redux/slices/profiles/profileThunk';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -48,7 +50,8 @@ function App(): JSX.Element {
             <Route path="/" element={<MainPage />} />
 
             <Route element={<PrivateRouter isAllowed={user.status === 'logged'} />}>
-              <Route path="/profile/lk" element={<ProfilePage />} />
+              <Route path="/profile/lk" element={<ProfileLoggedPage />} />
+              <Route path="/profile/lk/:profileId" element={<ProfilePage />} />
               <Route path="/company/lk" element={<CompanyPage />} />
               <Route path="/company/allcourses" element={<AllCoursesPage />} />
               <Route

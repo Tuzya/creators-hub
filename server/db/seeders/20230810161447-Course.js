@@ -95,6 +95,42 @@ module.exports = {
       ],
       {}
     );
+    await queryInterface.bulkInsert(
+      'People',
+      [
+        {
+          city: 'Moscow',
+          birthDate: '22.12.2010',
+          phone: '+792266479644',
+          about: 'Люблю Оладушки',
+          companies: 'OOO Швабибас',
+          sex: 'Жен',
+          photo: 'Тут типо путь до фото',
+          user_id: 1,
+        },
+        {
+          city: 'Париж',
+          birthDate: '22.12.2010',
+          phone: '+792266479644',
+          about: 'Люблю Оладушки',
+          companies: 'OOO Швабибас',
+          sex: 'Жен',
+          photo: 'Тут типо путь до фото',
+          user_id: 2,
+        },
+        {
+          city: 'Берлин',
+          birthDate: '22.12.2010',
+          phone: '+792266479644',
+          about: 'Люблю Оладушки',
+          companies: 'OOO Швабибас',
+          sex: 'Жен',
+          photo: 'Тут типо путь до фото',
+          user_id: 3,
+        },
+      ],
+      {}
+    );
 
     // await queryInterface.bulkInsert(
     //   'Courses_Users',
@@ -163,7 +199,7 @@ module.exports = {
   async down(queryInterface, Sequelize) {
     await queryInterface.bulkDelete('Courses', null, {});
     await queryInterface.bulkDelete('Users', null, {});
-
+    await queryInterface.bulkDelete('People', null, {});
     await queryInterface.bulkDelete('Companies', null, {});
     await queryInterface.bulkDelete('Questions', null, {});
     await queryInterface.bulkDelete('Answers', null, {});

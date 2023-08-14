@@ -1,13 +1,16 @@
-export type YourProfileType = {
-   id: number;
-   name: string;
-}
+// export type YourProfileType = {
+//   id: number;
+//   username: string;
+// };
 
 export type EditProfileType = {
-   city: string;
-   birthDate: string;
-   phone: string;
-   about: string;
-   companies: string;
-   photo: string;
+  city: string;
+  birthDate: string;
+  phone: string;
+  about: string;
+  companies: string;
+  sex: string;
+  photo: string;
+  user_id: number;
 };
+export type PersonInfoType = Omit<EditProfileType, 'user_id'>;
