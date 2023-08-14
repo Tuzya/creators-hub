@@ -3,7 +3,7 @@ const { Question, Answer } = require('../db/models');
 
 const router = express.Router();
 
-router.post('/allcourses/:courseId/addQuestion', async (req, res) => {
+router.post('/bbbb/allcourses/:courseId/addQuestion', async (req, res) => {
   try {
     const { courseId } = req.params;
     console.log('asdas', req.body);
@@ -74,4 +74,25 @@ router
       console.log('Ручка, get Достать все ответы к вопросу: ', err);
     }
   });
+
+router
+  .route('/hhhh/allcourses/:courseId/allquestions/:questionId/answer/:answerId')
+  .put(async (req, res) => {
+    // console.log('=======');
+    const { answerId } = req.params;
+    const answer = await Answer.findOne({ where: { id: answerId } });
+    answer.isCorrect = !answer.isCorrect;
+    await answer.save();
+    return res.status(200).json(answer);
+  })
+  .delete(async (req, res) => {
+    try {
+      const { answerId } = req.params;
+      await Answer.destroy({ where: { id: answerId } });
+      res.sendStatus(200);
+    } catch (err) {
+      console.error(err);
+      res.sendStatus(500);
+    }
+  })
 module.exports = router;

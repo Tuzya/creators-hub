@@ -10,6 +10,7 @@ import {
   companyLoginService,
   companyLogoutService,
   companySignUpService,
+  putCourseToUserFromCompanyService,
 } from '../../../services/apiCompanyService';
 
 export const checkCompanyThunk = createAsyncThunk<CompanyModelType>(
@@ -29,4 +30,9 @@ export const loginCompanyThunk = createAsyncThunk<CompanyModelType, CompanyLogin
 
 export const logoutCompanyThunk = createAsyncThunk('company/logout', async () =>
   companyLogoutService(),
+);
+export const putCourseToUserFromCompanyThunk = createAsyncThunk(
+  'company/putCourseToUser',
+  async ({ userId, selectedCourses }) =>
+    putCourseToUserFromCompanyService({ userId, selectedCourses }),
 );

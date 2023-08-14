@@ -7,9 +7,9 @@ import { getAllCoursesThunk } from '../../../redux/slices/allcourses/allCoursesT
 export default function AllCourses(): JSX.Element {
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    void dispatch(getAllCoursesThunk());
-  }, []);
+  // useEffect(() => {
+  //   void dispatch(getAllCoursesThunk());
+  // }, []);
   // SEARCH
   return (
     <Container>

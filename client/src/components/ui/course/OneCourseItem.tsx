@@ -37,7 +37,7 @@ export default function OneCourseItem(): JSX.Element {
       <CardActions>
         {courseId && (
           <Link to={`/company/allcourses/${courseId}/addQuestion`}>
-            <Button size="small">Доавить тест</Button>
+            <Button size="small">Добавить тест</Button>
           </Link>
         )}
         {courseId && (
