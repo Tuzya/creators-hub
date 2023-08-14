@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
   addAnswersThunk,
   addQuestionsThunk,
+  changeStatusAnswerThunk,
   getAllAnswerThunk,
   getAllQuestionsThunk,
   getQuestionsAnswersThunk,
@@ -52,7 +53,18 @@ export const testSlice = createSlice({
       state.questionsAnswers = payload;
     });
     builder.addCase(getQuestionsAnswersThunk.rejected, (state) => state);
-  },
-});
+
+    builder.addCase(changeStatusAnswerThunk.fulfilled, (state, {payload}) => {
+      const changeAnsIndex = state.answers.findIndex((ans) => ans.id === payload.id);
+      if ((changeAnsIndex => 0)) {state.answers[changeAnsIndex] = payload}
+    });
+
+    // builder.addCase(changeStatusAnswerThunk.fulfilled, (state, {payload})=> {
+    //   const answerIndex = state.answers.findIndex((el) => el.id === payload.id);
+    //   if ((answerIndex ) => 0) state.answers[answerIndex] = payload;
+    // }) 
+  }
+  })
+
 
 export default testSlice.reducer;

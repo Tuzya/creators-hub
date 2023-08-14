@@ -67,3 +67,13 @@ export const getQuestionsAnswersThunk = createAsyncThunk(
     return data;
   },
 );
+
+export const changeStatusAnswerThunk = createAsyncThunk(
+  'questions/changeStatusAnswer',
+  async ({ courseId, questionId, answerId }: { courseId: number; questionId: number, answerId: number }) => {
+    const { data } = await axios.put<AnswerModelType>(
+      `/company/hhhh/allcourses/${courseId}/allquestions/${questionId}/answer/${answerId}`,
+    );
+    return data;
+  },
+);

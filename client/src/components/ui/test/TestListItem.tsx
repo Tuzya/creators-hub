@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Container } from '@mui/material';
+import { Button, Checkbox, Container } from '@mui/material';
 import { useAppSelector } from '../../../redux/hooks';
 
 export default function TestListItem(): JSX.Element {
@@ -53,6 +53,7 @@ export default function TestListItem(): JSX.Element {
             <h2>
               Вопрос {currentQuestion + 1} из {questions.length}
             </h2>
+            
             {questions.length > 0 && <h2>{questions[currentQuestion].question}</h2>}
 
             <ul>
@@ -65,6 +66,7 @@ export default function TestListItem(): JSX.Element {
                       style={{ background: 'grey' }}
                     >
                       {el.answer}
+                      <Checkbox  />
                     </li>
                   ))}
               </div>

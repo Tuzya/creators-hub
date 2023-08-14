@@ -13,7 +13,6 @@ import { checkUserThunk } from './redux/slices/user/userThunks';
 import { getFindCockieThunk } from './redux/slices/findCockie/findCockieThunk';
 import LoginInPage from './components/pages/LoginInPage';
 import SignUpPage from './components/pages/SignUpPage';
-import Loader from './components/hocs/Loader';
 import CompanyPage from './components/pages/company/CompanyPage';
 import CoursePage from './components/pages/courses/CoursePage';
 import ProfileLoggedPage from './components/pages/user/ProfileLoggedPage';
