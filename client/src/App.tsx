@@ -44,10 +44,6 @@ function App(): JSX.Element {
     }
   }, []);
 
-  useEffect(() => {
-    void dispatch(getAllCoursesThunk());
-  }, []);
-
   return (
     <Loader isLoading={user.status === 'loading'}>
       <>

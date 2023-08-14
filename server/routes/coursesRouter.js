@@ -88,7 +88,6 @@ router.post('/addcourse', async (req, res) => {
   }
 });
 
-
 // router.post('/addcourse', async (req, res) => {
 //   const { userId, selectedCourses } = req.body;
 
