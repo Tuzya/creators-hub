@@ -14,7 +14,6 @@ import { checkUserThunk } from './redux/slices/user/userThunks';
 import { getFindCockieThunk } from './redux/slices/findCockie/findCockieThunk';
 import LoginInPage from './components/pages/LoginInPage';
 import SignUpPage from './components/pages/SignUpPage';
-import Loader from './components/hocs/Loader';
 import CompanyPage from './components/pages/company/CompanyPage';
 import { useAppDispatch, useAppSelector } from './redux/hooks';
 import CoursePage from './components/pages/courses/CoursePage';
@@ -23,6 +22,8 @@ import EditPersonInfo from './components/pages/editPersonInfo/EditPersonInfo';
 import AdminSignUpUser from './components/pages/adminPanel/AdminSignUpUser';
 import AnswersAddPage from './components/pages/test/addTest/AnswersAddPage';
 import QuestionPage from './components/pages/test/addTest/QuestionPage';
+import { getAllCoursesThunk } from './redux/slices/allcourses/allCoursesThunk';
+import Loader from './components/hocs/Loader';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -41,6 +42,10 @@ function App(): JSX.Element {
     if (user) {
       void dispatch(getFindCockieThunk());
     }
+  }, []);
+
+  useEffect(() => {
+    void dispatch(getAllCoursesThunk());
   }, []);
 
   return (
@@ -70,7 +75,10 @@ function App(): JSX.Element {
                   path="/company/allcourses/:courseId/addQuestion/:questionId/addAnswers"
                   element={<AnswersAddPage />}
                 />
-                <Route path="/company/allcourses/:courseId/addQuestion" element={<QuestionPage />} />
+                <Route
+                  path="/company/allcourses/:courseId/addQuestion"
+                  element={<QuestionPage />}
+                />
                 <Route path="/company/allcourses/:courseId/test" element={<TestPage />} />
                 <Route path="/company/allcourses/:courseId" element={<CoursePage />} />
               </Route>

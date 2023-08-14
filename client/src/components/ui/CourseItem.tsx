@@ -29,11 +29,11 @@ export default function CourseItem({ course }: CourseItemProps): JSX.Element {
       </CardContent>
       <CardActions>
         <Button size="small" onClick={void dispath(deleteCourseThunk(course.id))}>
-          Delete
+          удалить курс
         </Button>
 
         <Link to={`/allcourses/${course.id}`}>
-          <Button size="small">CoursePage</Button>
+          <Button size="small">Страница курса</Button>
         </Link>
       </CardActions>
     </Card>

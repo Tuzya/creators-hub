@@ -43,12 +43,12 @@ app.use(express.static('public'));
 // app.use('/public', express.static(path.join(__dirname, 'public')));
 
 // app.use('/api/posts', postsRouter);
+app.use('/api/company', companyRouter);
+app.use('/api/company', questionRouter);
 app.use('/api/user', userRouter);
 app.use('/api', findCockieRouter);
 app.use('/api/profile', profileRouter);
 app.use('/api/profile', personEditRouter);
-app.use('/api/company', companyRouter);
 app.use('/api/company', coursesRouter);
-app.use('/api/company', questionRouter);
 
 app.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));
