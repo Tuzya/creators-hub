@@ -2,7 +2,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
-const { User } = require('../db/models');
+const { User, Course, CoursesUser } = require('../db/models');
 
 const router = express.Router();
 
@@ -137,6 +137,28 @@ router.get('/check', (req, res) => {
 router.get('/logout', (req, res) => {
   req.session.destroy();
   res.clearCookie('sid').sendStatus(200);
+});
+
+router.get('/findallCourse', async (req, res) => {
+  try {
+    const { id } = req.session.user;
+    console.log(id, '==============');
+    const user = await User.findByPk(id, {
+      include: {
+        model: Course,
+      },
+    });
+
+    if (user) {
+      const courses = user.Courses; // Это массив курсов, принадлежащих пользователю
+      res.json(courses);
+    } else {
+      res.status(404).json({ message: 'Пользователь не найден' });
+    }
+  } catch (error) {
+    console.error('Ошибка:', error);
+    res.status(500).json({ message: 'Ошибка сервера' });
+  }
 });
 
 module.exports = router;

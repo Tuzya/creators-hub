@@ -128,6 +128,11 @@ export default function Navbar(): JSX.Element {
           </ListItemIcon>
           <ListItemText primary="Настройки" sx={{ display: drawerOpen ? 'block' : 'none' }} />
         </ListItem>
+        <Box sx={{ position: 'absolute', bottom: 100, left: 0 }}>
+          <Link to="/admin/signup-user">
+            <KeyIcon />
+          </Link>
+        </Box>
       </Box>
     </Box>
   );
