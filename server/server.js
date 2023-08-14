@@ -1,15 +1,17 @@
+const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
-const postsRouter = require('./routes/postsRouter');
+// const postsRouter = require('./routes/postsRouter');
 const userRouter = require('./routes/userRouter');
 const companyRouter = require('./routes/companyRouter');
 const coursesRouter = require('./routes/coursesRouter');
-// const profileRuter = require('./routes/profileRouter');
 const findCockieRouter = require('./routes/findCockieRouter');
 const profileRouter = require('./routes/profileRouter');
+const questionRouter = require('./routes/questionRouter');
+const personEditRouter = require('./routes/personEditRouter');
 
 require('dotenv').config();
 
@@ -34,14 +36,16 @@ app.use(
   }),
 );
 
-app.use('/api/posts', postsRouter);
+// Serve uploaded PDF files
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// app.use('/api/posts', postsRouter);
 app.use('/api/user', userRouter);
 app.use('/api', findCockieRouter);
-// app.use('/api/companys',)
 app.use('/api/profile', profileRouter);
+app.use('/api/profile', personEditRouter);
 app.use('/api/company', companyRouter);
 app.use('/api/company', coursesRouter);
-// app.use('/api/company/:id/allcourses', coursesRouter);
-// app.use('/api/company/', profileRuter);
+app.use('/api/company', questionRouter);
 
 app.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));

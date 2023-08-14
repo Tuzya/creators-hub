@@ -13,7 +13,7 @@ export const getAllCoursesThunk = createAsyncThunk<CourseType[]>(
 );
 // для удаления курсов КОМПАНИЕЙ
 export const deleteCourseThunk = createAsyncThunk<CompanyModelType['id'], CourseType['id']>(
-  'course/deleteCourse',
+  'allcourse/deleteCourse',
   async (coursesId) => {
     await axios.delete<CourseType['id']>(`/company/allcourses/${coursesId}`);
     return coursesId;
@@ -21,7 +21,7 @@ export const deleteCourseThunk = createAsyncThunk<CompanyModelType['id'], Course
 );
 
 export const getOneCourseThunk = createAsyncThunk<CourseType, CourseType['id']>(
-  'course/getOneCourse',
+  'allcourse/getOneCourse',
   async (coursesId) => {
     const { data } = await axios<CourseType>(`/company/allcourses/${coursesId}`);
     return data;

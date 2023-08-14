@@ -6,12 +6,12 @@ module.exports = {
       [
         {
           name: 'Companya Adidasdasdas',
-          email: '1@1',
+          email: 'a@a',
           password: '1',
         },
         {
           name: 'Companya 222Adidasdasdas',
-          email: '1@1222',
+          email: 'b@b',
           password: '2',
         },
       ],
@@ -21,9 +21,46 @@ module.exports = {
       'Users',
       [
         {
+          username: 1,
+          email: '1@1',
+          password: '1',
+          company_id: 1,
+        },
+        {
           username: 2,
           email: '2@2',
-          password: '2',
+          password: '1',
+          company_id: 1,
+        },
+        {
+          username: 3,
+          email: '3@3',
+          password: '1',
+          company_id: 1,
+        },
+        {
+          username: 4,
+          email: '4@4',
+          password: '1',
+          company_id: 2,
+        },
+        {
+          username: 3,
+          email: '5@5',
+          password: '1',
+          company_id: 2,
+        },
+        {
+          username: 3,
+          email: '6@6',
+          password: '1',
+          company_id: 2,
+        },
+        {
+          username: 'admin',
+          email: 'admin@admin',
+          password: '1',
+          company_id: null,
         },
       ],
       {}
@@ -64,6 +101,64 @@ module.exports = {
       ],
       {}
     );
+    await queryInterface.bulkInsert(
+      'People',
+      [
+        {
+          city: 'Moscow',
+          birthDate: '22.12.2010',
+          phone: '+792266479644',
+          about: 'Люблю Оладушки',
+          companies: 'OOO Швабибас',
+          sex: 'Жен',
+          photo: 'Тут типо путь до фото',
+          user_id: 1,
+        },
+        {
+          city: 'Париж',
+          birthDate: '22.12.2010',
+          phone: '+792266479644',
+          about: 'Люблю Оладушки',
+          companies: 'OOO Швабибас',
+          sex: 'Жен',
+          photo: 'Тут типо путь до фото',
+          user_id: 2,
+        },
+        {
+          city: 'Берлин',
+          birthDate: '22.12.2010',
+          phone: '+792266479644',
+          about: 'Люблю Оладушки',
+          companies: 'OOO Швабибас',
+          sex: 'Жен',
+          photo: 'Тут типо путь до фото',
+          user_id: 3,
+        },
+      ],
+      {}
+    );
+
+    // await queryInterface.bulkInsert(
+    //   'Courses_Users',
+    //   [
+    //     {
+    //       user_id: 1,
+    //       courses_id: 1,
+    //       status: false,
+    //     },
+    //     {
+    //       user_id: 1,
+    //       courses_id: 3,
+    //       status: false,
+    //     },
+    //     {
+    //       user_id: 1,
+    //       courses_id: 2,
+    //       status: false,
+    //     },
+    //   ],
+    //   {}
+    // );
 
     await queryInterface.bulkInsert(
       'Questions',
@@ -110,7 +205,7 @@ module.exports = {
   async down(queryInterface, Sequelize) {
     await queryInterface.bulkDelete('Courses', null, {});
     await queryInterface.bulkDelete('Users', null, {});
-
+    await queryInterface.bulkDelete('People', null, {});
     await queryInterface.bulkDelete('Companies', null, {});
     await queryInterface.bulkDelete('Questions', null, {});
     await queryInterface.bulkDelete('Answers', null, {});

@@ -1,28 +1,68 @@
 const express = require('express');
-const { User } = require('../db/models');
+const { User, Course } = require('../db/models');
 
 const router = express.Router();
 
-router.route('/lk').get(async (req, res) => {
+// .get('/lk', async (req, res) => {
+//   const { id } = req.session.user;
+//   User.findByPk(id, {
+//     include: [
+//       {
+//         model: Course,
+//         through: { attributes: [] }, // Указываем, что не нужно возвращать атрибуты связи
+//       },
+//     ],
+//   })
+//     .then((user) => {
+//       if (user) {
+//         const userCourses = user.Courses; // Здесь будут содержаться все курсы пользователя
+//         console.log('User Courses:', userCourses);
+//         res.status(200).json(userCourses);
+//       } else {
+//         console.log('User not found');
+//       }
+//     })
+//     .catch((error) => {
+//       console.error('Error fetching user:', error);
+//     });
+//   res.sendStatus(500);
+// });
+
+router.get('/lk', async (req, res) => {
+  console.log(req.params);
+  const { id } = req.session.user;
   try {
-    console.log('sadasd', req.session.user);
-    const { id } = req.session.user;
-    const userProfile = await User.findByPk({
-      where: { id },
-    });
-    console.log('asdasd', userProfile);
-    res.json(userProfile);
-  } catch (err) {
-    console.log('Ручка, get User: ', err);
+    const user = await User.findByPk(id);
+
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      console.log('User not found');
+      res.sendStatus(404);
+    }
+  } catch (error) {
+    console.error('Error fetching user:', error);
+    res.sendStatus(500);
   }
 });
 
-router.route('/:id/profile/:profileId').get(async (req, res) => {
-  const { id, profileId } = req.params;
-  const courses = await User.findByPk({
-    where: { company_id: id, id: profileId },
-  });
-  res.status(200).json(courses);
+router.get('/lk/:profileId', async (req, res) => {
+  console.log(req.params);
+  const { profileId } = req.params;
+  console.log('Received profileId:', profileId);
+  try {
+    const user = await User.findByPk(profileId);
+
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      console.log('User not found');
+      res.sendStatus(404);
+    }
+  } catch (error) {
+    console.error('Error fetching user:', error);
+    res.sendStatus(500);
+  }
 });
 
 //   .delete('/:id', async (req, res) => {

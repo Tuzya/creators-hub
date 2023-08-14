@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-import { getAllCoursesThunk, getOneCourseThunk } from './allCoursesThunk';
+import { deleteCourseThunk, getAllCoursesThunk, getOneCourseThunk } from './allCoursesThunk';
 import type { CourseType } from '../../../types/courseType/courseType';
 
 export type CourseSliceType = {
@@ -22,10 +21,10 @@ export const allCoursesSlice = createSlice({
     });
     builder.addCase(getAllCoursesThunk.rejected, (state) => state);
 
-    // builder.addCase(deleteCourseThunk.fulfilled, (state, { payload }) => {
-    //   state.courses.filter((el) => el.id !== payload);
-    // });
-    // builder.addCase(deleteCourseThunk.rejected, (state) => state);
+    builder.addCase(deleteCourseThunk.fulfilled, (state, { payload }) => {
+      state.courses = state.courses.filter((el) => el.id !== payload);
+    });
+    builder.addCase(deleteCourseThunk.rejected, (state) => state);
 
     builder.addCase(getOneCourseThunk.fulfilled, (state, { payload }) => {
       state.onecourse = payload;
