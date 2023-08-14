@@ -35,11 +35,11 @@ function App(): JSX.Element {
     console.log(user.status);
   }, []);
 
-  useEffect(() => {
-    if (user) {
-      void dispatch(getFindCockieThunk());
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (user) {
+  //     void dispatch(getFindCockieThunk());
+  //   }
+  // }, []);
 
   return (
     <Loader isLoading={user.status === 'loading'}>
