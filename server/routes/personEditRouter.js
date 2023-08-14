@@ -21,7 +21,7 @@ router.get('/person', async (req, res) => {
   }
 });
 
-router.get('/lk/:profileId', async (req, res) => {
+router.get('/personInfo/:profileId', async (req, res) => {
   console.log(req.params);
   const { profileId } = req.params;
   console.log('Received profileId:', profileId);

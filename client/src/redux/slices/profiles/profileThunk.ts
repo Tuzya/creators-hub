@@ -20,7 +20,6 @@ export const getOnePersonProfileThunk = createAsyncThunk(
   'profile/getOnePersonProfile',
   async ({ profileId }: { profileId: string }) => {
     const { data } = await axios.get<Omit<UserModelType, 'company_id'>>(`/profile/lk/${profileId}`);
-    console.log('Thunka : ,', data);
     return data;
   },
 );
@@ -43,7 +42,8 @@ export const getPersonLoggedInfoThunk = createAsyncThunk<PersonInfoType>(
 export const getPersonInfoThunk = createAsyncThunk(
   'profile/personInfoProfile',
   async ({ profileId }: { profileId: string }) => {
-    const { data } = await axios.get<PersonInfoType>(`/profile/lk/${profileId}`);
+    const { data } = await axios.get<PersonInfoType>(`/profile/personInfo/${profileId}`);
+    console.log('thunk', data);
     return data;
   },
 );

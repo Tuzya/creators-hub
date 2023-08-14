@@ -16,7 +16,7 @@ export default function PersonLoggedInfoItem(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const person = useAppSelector((store) => store.profile.personLoggedInfo);
-
+  console.log('Рабочий', person);
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
