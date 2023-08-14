@@ -1,6 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { UserType } from '../../../types/userTypes';
-import { checkUserThunk, loginUserThunk, logoutUserThunk, signUpUserThunk } from './userThunks';
+import {
+  checkUserThunk,
+  fetchAllCourseUserThunk,
+  loginUserThunk,
+  logoutUserThunk,
+  signUpUserThunk,
+} from './userThunks';
 
 type UserSliceType = UserType;
 
@@ -18,14 +24,11 @@ const userSlice = createSlice({
     builder.addCase(checkUserThunk.pending, (state) => ({ status: 'loading' }));
     builder.addCase(checkUserThunk.rejected, (state) => ({ status: 'guest' }));
 
-
-
     builder.addCase(signUpUserThunk.fulfilled, (state, { payload }) => ({
       ...payload,
       status: 'logged',
     }));
     builder.addCase(signUpUserThunk.rejected, (state) => ({ status: 'guest' }));
-    
 
     builder.addCase(loginUserThunk.fulfilled, (state, { payload }) => ({
       ...payload,

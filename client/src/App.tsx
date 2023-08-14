@@ -13,7 +13,6 @@ import { checkUserThunk } from './redux/slices/user/userThunks';
 import { getFindCockieThunk } from './redux/slices/findCockie/findCockieThunk';
 import LoginInPage from './components/pages/LoginInPage';
 import SignUpPage from './components/pages/SignUpPage';
-import Loader from './components/hocs/Loader';
 import CompanyPage from './components/pages/company/CompanyPage';
 import CoursePage from './components/pages/courses/CoursePage';
 import ProfileLoggedPage from './components/pages/user/ProfileLoggedPage';
@@ -21,6 +20,7 @@ import EditPersonInfo from './components/pages/editPersonInfo/EditPersonInfo';
 import AdminSignUpUser from './components/pages/adminPanel/AdminSignUpUser';
 import AnswersAddPage from './components/pages/test/addTest/AnswersAddPage';
 import QuestionPage from './components/pages/test/addTest/QuestionPage';
+import Loader from './components/hocs/Loader';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -42,43 +42,48 @@ function App(): JSX.Element {
   }, []);
 
   return (
-    <>
-      <CssBaseline />
-      <Navbar />
-      <Container sx={{ marginTop: '30px' }}>
-        <Paper>
-          <Routes>
-            <Route path="/" element={<MainPage />} />
-            <Route
-              path="/admin/signup-user"
-              element={
-                <PrivateRouter isAllowed={user.status === 'logged' && user.username === 'admin'}>
-                  <AdminSignUpUser />
-                </PrivateRouter>
-              }
-            />
-            <Route element={<PrivateRouter isAllowed={user.status === 'logged'} />}>
-              <Route path="/profile/lk" element={<ProfileLoggedPage />} />
-              <Route path="/profile/lk/edit" element={<EditPersonInfo />} />
-              <Route path="/profile/lk/:profileId" element={<ProfilePage />} />
-              <Route path="/company/lk" element={<CompanyPage />} />
-              <Route path="/company/allcourses" element={<AllCoursesPage />} />
+    <Loader isLoading={user.status === 'loading'}>
+      <>
+        <CssBaseline />
+        <Navbar />
+        <Container sx={{ marginTop: '30px' }}>
+          <Paper>
+            <Routes>
+              <Route path="/" element={<MainPage />} />
               <Route
-                path="/company/allcourses/:courseId/addQuestion/:questionId/addAnswers"
-                element={<AnswersAddPage />}
+                path="/admin/signup-user"
+                element={
+                  <PrivateRouter isAllowed={user.status === 'logged' && user.username === 'admin'}>
+                    <AdminSignUpUser />
+                  </PrivateRouter>
+                }
               />
-              <Route path="/company/allcourses/:courseId/addQuestion" element={<QuestionPage />} />
-              <Route path="/company/allcourses/:courseId/test" element={<TestPage />} />
-              <Route path="/company/allcourses/:courseId" element={<CoursePage />} />
-            </Route>
-            <Route element={<PrivateRouter isAllowed={user.status === 'guest'} />}>
-              <Route path="/login" element={<LoginInPage />} />
-              <Route path="/signup" element={<SignUpPage />} />
-            </Route>
-          </Routes>
-        </Paper>
-      </Container>
-    </>
+              <Route element={<PrivateRouter isAllowed={user.status === 'logged'} />}>
+                <Route path="/profile/lk" element={<ProfileLoggedPage />} />
+                <Route path="/profile/lk/edit" element={<EditPersonInfo />} />
+                <Route path="/profile/lk/:profileId" element={<ProfilePage />} />
+                <Route path="/company/lk" element={<CompanyPage />} />
+                <Route path="/company/allcourses" element={<AllCoursesPage />} />
+                <Route
+                  path="/company/allcourses/:courseId/addQuestion/:questionId/addAnswers"
+                  element={<AnswersAddPage />}
+                />
+                <Route
+                  path="/company/allcourses/:courseId/addQuestion"
+                  element={<QuestionPage />}
+                />
+                <Route path="/company/allcourses/:courseId/test" element={<TestPage />} />
+                <Route path="/company/allcourses/:courseId" element={<CoursePage />} />
+              </Route>
+              <Route element={<PrivateRouter isAllowed={user.status === 'guest'} />}>
+                <Route path="/login" element={<LoginInPage />} />
+                <Route path="/signup" element={<SignUpPage />} />
+              </Route>
+            </Routes>
+          </Paper>
+        </Container>
+      </>
+    </Loader>
   );
 }
 
