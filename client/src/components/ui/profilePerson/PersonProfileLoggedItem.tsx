@@ -33,7 +33,7 @@ export default function PersonProfileLoggedItem(): JSX.Element {
       <CardActions>
         <Button size="small">Learn More</Button>
       </CardActions>
-      <Link to="/company/allcourses/">
+      <Link to="/profile/lk/edit">
         <EditIcon />
       </Link>
       <PersonLoggedInfoItem />

@@ -56,6 +56,12 @@ module.exports = {
           password: '1',
           company_id: 2,
         },
+        {
+          username: 'admin',
+          email: 'admin@admin',
+          password: '1',
+          company_id: null,
+        },
       ],
       {}
     );

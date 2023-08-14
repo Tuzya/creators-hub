@@ -17,7 +17,8 @@ import BusinessIcon from '@mui/icons-material/Business';
 import PersonIcon from '@mui/icons-material/Person';
 import BookIcon from '@mui/icons-material/Book';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import { Link as NavLink } from 'react-router-dom';
+import { Link, Link as NavLink } from 'react-router-dom';
+import KeyIcon from '@mui/icons-material/Key';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { logoutUserThunk } from '../../redux/slices/user/userThunks';
 
@@ -109,6 +110,7 @@ export default function Navbar(): JSX.Element {
               backgroundColor: '#2E3B55', // Установите цвет фона для кнопки
             }}
           >
+            <ExitToAppIcon />
             Logout
           </Button>
         </Toolbar>

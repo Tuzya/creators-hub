@@ -15,11 +15,12 @@ import LoginInPage from './components/pages/LoginInPage';
 import SignUpPage from './components/pages/SignUpPage';
 import Loader from './components/hocs/Loader';
 import CompanyPage from './components/pages/company/CompanyPage';
-import QuestionPage from './components/pages/QuestionPage';
-import AnswersAddPage from './components/pages/AnswersAddPage';
 import CoursePage from './components/pages/courses/CoursePage';
 import ProfileLoggedPage from './components/pages/user/ProfileLoggedPage';
-import { getOneProfileThunk } from './redux/slices/profiles/profileThunk';
+import EditPersonInfo from './components/pages/editPersonInfo/EditPersonInfo';
+import AdminSignUpUser from './components/pages/adminPanel/AdminSignUpUser';
+import AnswersAddPage from './components/pages/test/addTest/AnswersAddPage';
+import QuestionPage from './components/pages/test/addTest/QuestionPage';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -48,9 +49,17 @@ function App(): JSX.Element {
         <Paper>
           <Routes>
             <Route path="/" element={<MainPage />} />
-
+            <Route
+              path="/admin/signup-user"
+              element={
+                <PrivateRouter isAllowed={user.status === 'logged' && user.username === 'admin'}>
+                  <AdminSignUpUser />
+                </PrivateRouter>
+              }
+            />
             <Route element={<PrivateRouter isAllowed={user.status === 'logged'} />}>
               <Route path="/profile/lk" element={<ProfileLoggedPage />} />
+              <Route path="/profile/lk/edit" element={<EditPersonInfo />} />
               <Route path="/profile/lk/:profileId" element={<ProfilePage />} />
               <Route path="/company/lk" element={<CompanyPage />} />
               <Route path="/company/allcourses" element={<AllCoursesPage />} />
