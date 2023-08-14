@@ -4,7 +4,7 @@ import QuestionList from '../ui/question/QuestionList';
 
 export default function MainPage(): JSX.Element {
   return (
-    <div>s</div>
+    <div>1 eeeeeeeeeeeeq</div>
     // <TestPage />
   );
 }

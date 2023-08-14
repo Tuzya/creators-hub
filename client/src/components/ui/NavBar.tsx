@@ -43,8 +43,9 @@ export default function Navbar(): JSX.Element {
     <Box
       sx={{
         display: 'flex',
-        maxHeight: '100vh', // Ограничиваем максимальную высоту
-        overflow: 'hidden', // Прячем лишний контент
+        maxHeight: '100vh',
+        overflow: 'hidden',
+        backgroundColor: '#2E3B55', // Установите цвет фона для бокового меню и навигационной панели
       }}
     >
       <Drawer
@@ -52,11 +53,11 @@ export default function Navbar(): JSX.Element {
         open={drawerOpen}
         variant="permanent"
         sx={{
-          width: drawerOpen ? 180 : 80,
+          width: drawerOpen ? 190 : 80,
           transition: 'width 0.3s ease-in-out',
           overflowX: 'hidden',
           zIndex: 0,
-          background: '#2E3B55',
+          backgroundColor: '#2E3B55', // Установите цвет фона для бокового меню
         }}
       >
         <List>
@@ -73,24 +74,11 @@ export default function Navbar(): JSX.Element {
             </ListItem>
           ))}
         </List>
-        <Box sx={{ position: 'absolute', bottom: 0, width: '100%' }}>
-          <ListItem
-            button
-            onClick={() => {
-              // Handle settings action
-            }}
-            sx={{ display: 'flex', justifyContent: 'flex-end', pr: 1 }}
-          >
-            <ListItemIcon>
-              <SettingsIcon />
-            </ListItemIcon>
-          </ListItem>
-        </Box>
       </Drawer>
       <AppBar
         position="static"
         sx={{
-          background: '#2E3B55',
+          background: '#2E3B55', // Установите цвет фона для навигационной панели
           zIndex: 1,
         }}
       >
@@ -118,13 +106,27 @@ export default function Navbar(): JSX.Element {
               transition: 'width 0.3s ease-in-out',
               overflowX: 'hidden',
               zIndex: 0,
-              background: '#2E3B55',
+              backgroundColor: '#2E3B55', // Установите цвет фона для кнопки
             }}
           >
             Logout
           </Button>
         </Toolbar>
       </AppBar>
+      <Box sx={{ position: 'absolute', bottom: 0, left: 0 }}>
+        <ListItem
+          button
+          onClick={() => {
+            void dispatch(logoutUserThunk());
+          }}
+          sx={{ display: 'flex', alignItems: 'center', pl: 2, pr: 1 }}
+        >
+          <ListItemIcon>
+            <SettingsIcon />
+          </ListItemIcon>
+          <ListItemText primary="Настройки" sx={{ display: drawerOpen ? 'block' : 'none' }} />
+        </ListItem>
+      </Box>
     </Box>
   );
 }
