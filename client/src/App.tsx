@@ -44,43 +44,45 @@ function App(): JSX.Element {
   }, []);
 
   return (
-    <>
-      <CssBaseline />
-      <Navbar />
-      <Container sx={{ marginTop: '30px' }}>
-        <Paper>
-          <Routes>
-            <Route path="/" element={<MainPage />} />
-            <Route
-              path="/admin/signup-user"
-              element={
-                <PrivateRouter isAllowed={user.status === 'logged' && user.username === 'admin'}>
-                  <AdminSignUpUser />
-                </PrivateRouter>
-              }
-            />
-            <Route element={<PrivateRouter isAllowed={user.status === 'logged'} />}>
-              <Route path="/profile/lk" element={<ProfileLoggedPage />} />
-              <Route path="/profile/lk/edit" element={<EditPersonInfo />} />
-              <Route path="/profile/lk/:profileId" element={<ProfilePage />} />
-              <Route path="/company/lk" element={<CompanyPage />} />
-              <Route path="/company/allcourses" element={<AllCoursesPage />} />
+    <Loader isLoading={user.status === 'loading'}>
+      <>
+        <CssBaseline />
+        <Navbar />
+        <Container sx={{ marginTop: '30px' }}>
+          <Paper>
+            <Routes>
+              <Route path="/" element={<MainPage />} />
               <Route
-                path="/company/allcourses/:courseId/addQuestion/:questionId/addAnswers"
-                element={<AnswersAddPage />}
+                path="/admin/signup-user"
+                element={
+                  <PrivateRouter isAllowed={user.status === 'logged' && user.username === 'admin'}>
+                    <AdminSignUpUser />
+                  </PrivateRouter>
+                }
               />
-              <Route path="/company/allcourses/:courseId/addQuestion" element={<QuestionPage />} />
-              <Route path="/company/allcourses/:courseId/test" element={<TestPage />} />
-              <Route path="/company/allcourses/:courseId" element={<CoursePage />} />
-            </Route>
-            <Route element={<PrivateRouter isAllowed={user.status === 'guest'} />}>
-              <Route path="/login" element={<LoginInPage />} />
-              <Route path="/signup" element={<SignUpPage />} />
-            </Route>
-          </Routes>
-        </Paper>
-      </Container>
-    </>
+              <Route element={<PrivateRouter isAllowed={user.status === 'logged'} />}>
+                <Route path="/profile/lk" element={<ProfileLoggedPage />} />
+                <Route path="/profile/lk/edit" element={<EditPersonInfo />} />
+                <Route path="/profile/lk/:profileId" element={<ProfilePage />} />
+                <Route path="/company/lk" element={<CompanyPage />} />
+                <Route path="/company/allcourses" element={<AllCoursesPage />} />
+                <Route
+                  path="/company/allcourses/:courseId/addQuestion/:questionId/addAnswers"
+                  element={<AnswersAddPage />}
+                />
+                <Route path="/company/allcourses/:courseId/addQuestion" element={<QuestionPage />} />
+                <Route path="/company/allcourses/:courseId/test" element={<TestPage />} />
+                <Route path="/company/allcourses/:courseId" element={<CoursePage />} />
+              </Route>
+              <Route element={<PrivateRouter isAllowed={user.status === 'guest'} />}>
+                <Route path="/login" element={<LoginInPage />} />
+                <Route path="/signup" element={<SignUpPage />} />
+              </Route>
+            </Routes>
+          </Paper>
+        </Container>
+      </>
+    </Loader>
   );
 }
 

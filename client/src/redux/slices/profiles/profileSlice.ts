@@ -18,7 +18,7 @@ type ProfileSliceTypes = {
    profiles: YourProfileType[];
    oneProfile: Omit<UserModelType, 'company_id'> | null;
    onePersonProfile: Omit<UserModelType, 'company_id'> | null;
-   editProfile: EditProfileType | null;
+   editProfile: PersonInfoType | null;
    personLoggedInfo: PersonInfoType | null;
    personInfo: PersonInfoType | null;
 };

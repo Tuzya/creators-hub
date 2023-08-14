@@ -1,3 +1,4 @@
+// @ts-ignore
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import type { EditProfileType, PersonInfoType } from '../../../types/profileType/profileTypes';
@@ -23,11 +24,11 @@ export const getOnePersonProfileThunk = createAsyncThunk(
       return data;
    },
 );
-export const editProfileThunk = createAsyncThunk<EditProfileType, EditProfileType>(
+export const editProfileThunk = createAsyncThunk<PersonInfoType, PersonInfoType>(
    'profile/editProfile',
-   async (data) => {
-      const { data: editProfile } = await axios.patch<EditProfileType>(`/profile/edit`, data);
-      return editProfile;
+   async (input) => {
+      const { data } = await axios.post<PersonInfoType>(`/profile/edit`, input);
+      return data;
    },
 );
 

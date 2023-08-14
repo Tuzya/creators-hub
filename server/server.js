@@ -38,6 +38,9 @@ app.use(
 
 // Serve uploaded PDF files
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use(express.static('public'));
+
+// app.use('/public', express.static(path.join(__dirname, 'public')));
 
 // app.use('/api/posts', postsRouter);
 app.use('/api/user', userRouter);
