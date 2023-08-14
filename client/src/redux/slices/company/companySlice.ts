@@ -4,6 +4,7 @@ import {
   checkCompanyThunk,
   loginCompanyThunk,
   logoutCompanyThunk,
+  putCourseToUserFromCompanyThunk,
   signUpCompanyThunk,
 } from './companyThunks';
 
@@ -37,6 +38,8 @@ const companySlice = createSlice({
 
     builder.addCase(logoutCompanyThunk.fulfilled, (state) => ({ status: 'guest' }));
     builder.addCase(logoutCompanyThunk.rejected, (state) => state);
+
+    builder.addCase(putCourseToUserFromCompanyThunk.fulfilled, (state, { payload }) =>  payload);
   },
 });
 

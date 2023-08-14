@@ -1,7 +1,7 @@
-// export type YourProfileType = {
-//   id: number;
-//   username: string;
-// };
+export type YourProfileType = {
+  id: number;
+  username: string;
+};
 
 export type EditProfileType = {
   city: string;
