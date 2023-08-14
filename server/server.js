@@ -40,12 +40,12 @@ app.use(
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // app.use('/api/posts', postsRouter);
+app.use('/api/company', companyRouter);
 app.use('/api/company', questionRouter);
 app.use('/api/user', userRouter);
 app.use('/api', findCockieRouter);
 app.use('/api/profile', profileRouter);
 app.use('/api/profile', personEditRouter);
-app.use('/api/company', companyRouter);
 app.use('/api/company', coursesRouter);
 
 app.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));

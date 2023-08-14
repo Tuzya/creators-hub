@@ -15,6 +15,7 @@ export default function QuestionItem({ question }: QuestionItemProps): JSX.Eleme
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
         <Typography variant="h5" component="div">
+        
           {question.question}
         </Typography>
         <Typography variant="h5" component="div" />

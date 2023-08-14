@@ -13,7 +13,7 @@ export const addQuestionsThunk = createAsyncThunk(
   'questions/addQuestions',
   async ({ courseId, input }: { courseId: number; input: QuestionFormType }) => {
     const { data } = await axios.post<QuestionModelType>(
-      `/company/allcourses/${courseId}/addQuestion`,
+      `/company/bbbb/allcourses/${courseId}/addQuestion`,
       input,
     );
     return data;

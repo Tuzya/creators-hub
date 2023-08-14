@@ -3,7 +3,7 @@ const { Question, Answer } = require('../db/models');
 
 const router = express.Router();
 
-router.post('/allcourses/:courseId/addQuestion', async (req, res) => {
+router.post('/bbbb/allcourses/:courseId/addQuestion', async (req, res) => {
   try {
     const { courseId } = req.params;
     console.log('asdas', req.body);

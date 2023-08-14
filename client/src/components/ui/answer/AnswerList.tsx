@@ -11,6 +11,7 @@ export default function AnswerList(): JSX.Element {
  
 
   return <Box>
+    <h3>Установите правильный ответ в чекбоксе</h3>
     {answers?.map((el) => <li key={el.id}> {el.answer} 
     <Checkbox  onClick={()=> void dispatch(changeStatusAnswerThunk({courseId: Number(courseId), questionId: Number(questionId), answerId: Number(el.id)}))}/> 
       </li>)}
