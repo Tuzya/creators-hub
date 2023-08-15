@@ -1,12 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { UserType } from '../../../types/userTypes';
-import {
-  checkUserThunk,
-  fetchAllCourseUserThunk,
-  loginUserThunk,
-  logoutUserThunk,
-  signUpUserThunk,
-} from './userThunks';
+import { checkUserThunk, loginUserThunk, logoutUserThunk, signUpUserThunk } from './userThunks';
 
 type UserSliceType = UserType;
 
