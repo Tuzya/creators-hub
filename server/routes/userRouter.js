@@ -56,7 +56,7 @@ router.post('/signup', async (req, res) => {
       // Поиск или создание пользователя с хешированным паролем
       const [user, created] = await User.findOrCreate({
         where: { email },
-        company_id: req.session.user.id,
+        company_id: req.session.company.id,
         defaults: {
           username,
           password: hashedPassword,
@@ -115,7 +115,6 @@ router.post('/login', async (req, res) => {
       console.log('user', user);
       const sessionUser = JSON.parse(JSON.stringify(user));
       delete sessionUser.password;
-      delete sessionUser.company_id;
       req.session.user = sessionUser;
 
       return res.json(sessionUser);
