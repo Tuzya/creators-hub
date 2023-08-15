@@ -46,6 +46,8 @@ router.get('/personInfo/:profileId', async (req, res) => {
     res.sendStatus(500);
   }
 });
+
+// старый рабочий
 // router.post('/edit', fileUpload.single('photo'), async (req, res) => {
 //   const { id } = req.session.user;
 //   const { city, birthDate, phone, about, companies, sex } = req.body;
@@ -56,7 +58,7 @@ router.get('/personInfo/:profileId', async (req, res) => {
 //       where: { user_id: id },
 //     });
 
-//     let image = ''; // Переменная для имени изображения
+//     let image = existingPerson.photo; // Сохраняем текущее значение фото
 
 //     if (req.file) {
 //       const outputBuffer = req.file.buffer;
@@ -79,16 +81,15 @@ router.get('/personInfo/:profileId', async (req, res) => {
 //     }
 
 //     if (existingPerson) {
-//       // Если запись существует, обновляем ее
-//       await existingPerson.update({
-//         city,
-//         birthDate,
-//         phone,
-//         about,
-//         companies,
-//         sex,
-//         photo: image || existingPerson.photo, // Если image не определено,
-//       });
+//       // Если запись существует, обновляем только нужные поля
+//       existingPerson.city = city || existingPerson.city;
+//       existingPerson.birthDate = birthDate || existingPerson.birthDate;
+//       existingPerson.phone = phone || existingPerson.phone;
+//       existingPerson.about = about || existingPerson.about;
+//       existingPerson.companies = companies || existingPerson.companies;
+//       existingPerson.sex = sex || existingPerson.sex;
+//       existingPerson.photo = image || existingPerson.photo;
+//       await existingPerson.save();
 //       res.status(200).json({ message: 'Record updated successfully' });
 //     } else {
 //       // Если записи нет, создаем новую запись
@@ -120,7 +121,7 @@ router.post('/edit', fileUpload.single('photo'), async (req, res) => {
       where: { user_id: id },
     });
 
-    let image = existingPerson.photo; // Сохраняем текущее значение фото
+    let image = existingPerson ? existingPerson.photo : ''; // Сохраняем текущее значение фото
 
     if (req.file) {
       const outputBuffer = req.file.buffer;
@@ -144,24 +145,28 @@ router.post('/edit', fileUpload.single('photo'), async (req, res) => {
 
     if (existingPerson) {
       // Если запись существует, обновляем только нужные поля
-      existingPerson.city = city || existingPerson.city;
-      existingPerson.birthDate = birthDate || existingPerson.birthDate;
-      existingPerson.phone = phone || existingPerson.phone;
-      existingPerson.about = about || existingPerson.about;
-      existingPerson.companies = companies || existingPerson.companies;
-      existingPerson.sex = sex || existingPerson.sex;
+      existingPerson.city = city !== 'undefined' ? city : existingPerson.city;
+      existingPerson.birthDate =
+        birthDate !== 'undefined' ? birthDate : existingPerson.birthDate;
+      existingPerson.phone =
+        phone !== 'undefined' ? phone : existingPerson.phone;
+      existingPerson.about =
+        about !== 'undefined' ? about : existingPerson.about;
+      existingPerson.companies =
+        companies !== 'undefined' ? companies : existingPerson.companies;
+      existingPerson.sex = sex !== 'undefined' ? sex : existingPerson.sex;
       existingPerson.photo = image || existingPerson.photo;
       await existingPerson.save();
       res.status(200).json({ message: 'Record updated successfully' });
     } else {
       // Если записи нет, создаем новую запись
       await Person.create({
-        city,
-        birthDate,
-        phone,
-        about,
-        companies,
-        sex,
+        city: city !== 'undefined' ? city : '',
+        birthDate: birthDate !== 'undefined' ? birthDate : '',
+        phone: phone !== 'undefined' ? phone : '',
+        about: about !== 'undefined' ? about : '',
+        companies: companies !== 'undefined' ? companies : '',
+        sex: sex !== 'undefined' ? sex : '',
         photo: image,
         user_id: id,
       });
@@ -172,5 +177,6 @@ router.post('/edit', fileUpload.single('photo'), async (req, res) => {
     res.status(500).json({ message: 'An error occurred' });
   }
 });
+// новы если ""undefined"" записывает в бд пустую строку
 
 module.exports = router;

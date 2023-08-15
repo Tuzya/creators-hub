@@ -9,7 +9,7 @@ import { editProfileThunk } from '../../../redux/slices/profiles/profileThunk';
 export default function EditPersonInfoForm(): JSX.Element {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { editProfile } = useAppSelector((state) => state.profile);
+  const editProfile = useAppSelector((state) => state.profile.editProfile);
   const person = useAppSelector((store) => store.profile.personLoggedInfo);
   const [formData, setFormData] = useState<PersonInfoType>({
     city: person?.city || '',
@@ -23,6 +23,8 @@ export default function EditPersonInfoForm(): JSX.Element {
 
   useEffect(() => {
     if (editProfile) {
+      console.log({ editProfile });
+
       setFormData(editProfile);
     }
   }, [editProfile]);
