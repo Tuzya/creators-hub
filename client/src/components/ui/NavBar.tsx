@@ -1,34 +1,93 @@
 import React, { useState } from 'react';
-import AppBar from '@mui/material/AppBar';
+import { Link } from 'react-router-dom';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { styled, useTheme } from '@mui/material/styles';
+import MuiAppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import SettingsIcon from '@mui/icons-material/Settings';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import {
+  CssBaseline,
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Divider,
+  ListItemButton,
+} from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import BusinessIcon from '@mui/icons-material/Business';
 import PersonIcon from '@mui/icons-material/Person';
 import BookIcon from '@mui/icons-material/Book';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import { Link, Link as NavLink } from 'react-router-dom';
-import KeyIcon from '@mui/icons-material/Key';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { logoutUserThunk } from '../../redux/slices/user/userThunks';
 
-export default function Navbar(): JSX.Element {
-  const dispatch = useAppDispatch();
-  const user = useAppSelector((store) => store.user);
-  const [drawerOpen, setDrawerOpen] = useState(false);
+const drawerWidth = 240;
 
-  const toggleDrawer = () => {
-    setDrawerOpen(!drawerOpen);
+const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
+  open?: boolean;
+}>(({ theme, open }) => ({
+  flexGrow: 1,
+  padding: theme.spacing(3),
+  transition: theme.transitions.create('margin', {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  marginLeft: `-${drawerWidth}px`,
+  ...(open && {
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    marginLeft: 0,
+  }),
+}));
+
+const CustomAppBar = styled(MuiAppBar, {
+  shouldForwardProp: (prop) => prop !== 'open',
+})<{ open?: boolean }>(({ theme, open }) => ({
+  backgroundColor: 'black',
+  transition: theme.transitions.create(['margin', 'width'], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  ...(open && {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: `${drawerWidth}px`,
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  }),
+}));
+
+const DrawerHeader = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  padding: theme.spacing(0, 1),
+  ...theme.mixins.toolbar,
+  justifyContent: 'flex-end',
+}));
+
+export default function PersistentDrawerLeft() {
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
   };
 
   const links = [
@@ -36,104 +95,142 @@ export default function Navbar(): JSX.Element {
     { to: '/company/lk', name: 'Лк компании', icon: <BusinessIcon /> },
     { to: '/profile/lk', name: 'Лк Юзер', icon: <PersonIcon /> },
     { to: '/company/allcourses/', name: 'База Знаний', icon: <BookIcon /> },
-    { to: '/signup', name: 'Sign Up', icon: <BookIcon /> },
-    { to: '/login', name: 'Sign In', icon: <BookIcon /> },
   ];
 
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((store) => store.user);
+
+
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        maxHeight: '100vh',
-        overflow: 'hidden',
-        backgroundColor: '#2E3B55', // Установите цвет фона для бокового меню и навигационной панели
-      }}
-    >
-      <Drawer
-        anchor="left"
-        open={drawerOpen}
-        variant="permanent"
-        sx={{
-          width: drawerOpen ? 190 : 80,
-          transition: 'width 0.3s ease-in-out',
-          overflowX: 'hidden',
-          zIndex: 0,
-          backgroundColor: '#2E3B55', // Установите цвет фона для бокового меню
-        }}
-      >
-        <List>
-          {links.map((link) => (
-            <ListItem
-              button
-              component={NavLink}
-              to={link.to}
-              key={link.name}
-              onClick={toggleDrawer}
-            >
-              <ListItemIcon>{link.icon}</ListItemIcon>
-              <ListItemText primary={link.name} sx={{ display: drawerOpen ? 'block' : 'none' }} />
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
-      <AppBar
-        position="static"
-        sx={{
-          background: '#2E3B55', // Установите цвет фона для навигационной панели
-          zIndex: 1,
-        }}
-      >
+    <Box sx={{ display: 'flex' }}>
+      <CssBaseline />
+      <CustomAppBar position="fixed" open={open}>
         <Toolbar>
           <IconButton
-            size="large"
-            edge="start"
             color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-            onClick={toggleDrawer}
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            sx={{ mr: 2, ...(open && { display: 'none' }) }}
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            {/* Hello, {user.status === 'logged' ? user.username : 'dear student'} */}
+          <Typography variant="h6" noWrap component="div">
+            Createros Hub о боже оно двигается!
           </Typography>
-          <Button
-            color="inherit"
-            onClick={() => {
-              void dispatch(logoutUserThunk());
-            }}
+          <div style={{ marginLeft: 'auto' }}>
+            <IconButton color="inherit" onClick={() => {
+                void dispatch(logoutUserThunk());
+              }}>
+              <LogoutIcon />
+            </IconButton>
+            <IconButton color="inherit">
+              <LockOpenIcon />
+            </IconButton>
+            <IconButton color="inherit">
+              <PersonAddIcon />
+            </IconButton>
+          </div>
+        </Toolbar>
+      </CustomAppBar>
+      <Drawer
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          '& .MuiDrawer-paper': {
+            width: drawerWidth,
+            boxSizing: 'border-box',
+            backgroundColor: 'black', // Set the background color to black
+            color: 'white', // Set the text color to white
+          },
+        }}
+        variant="persistent"
+        anchor="left"
+        open={open}
+      >
+        <DrawerHeader>
+          <IconButton
+            onClick={handleDrawerClose}
             sx={{
-              width: drawerOpen ? 400 : 200,
-              transition: 'width 0.3s ease-in-out',
-              overflowX: 'hidden',
-              zIndex: 0,
-              backgroundColor: '#2E3B55', // Установите цвет фона для кнопки
+              color: 'white', // Set the icon color to white
+              '&:hover': {
+                color: '#ccc', // Light gray icon color on hover
+              },
             }}
           >
-            <ExitToAppIcon />
-            Logout
-          </Button>
-        </Toolbar>
-      </AppBar>
-      <Box sx={{ position: 'absolute', bottom: 0, left: 0 }}>
-        <ListItem
-          button
-          onClick={() => {
-            void dispatch(logoutUserThunk());
-          }}
-          sx={{ display: 'flex', alignItems: 'center', pl: 2, pr: 1 }}
-        >
-          <ListItemIcon>
-            <SettingsIcon />
-          </ListItemIcon>
-          <ListItemText primary="Настройки" sx={{ display: drawerOpen ? 'block' : 'none' }} />
-        </ListItem>
-        <Box sx={{ position: 'absolute', bottom: 100, left: 0 }}>
-          <Link to="/admin/signup-user">
-            <KeyIcon />
-          </Link>
-        </Box>
-      </Box>
+            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+          </IconButton>
+        </DrawerHeader>
+        <List>
+          {links.map((link) => (
+            <ListItem key={link.to} disablePadding>
+              <ListItemButton
+                component={Link}
+                to={link.to}
+                sx={{
+                  '&:hover': {
+                    backgroundColor: '#420', // Darker background color on hover
+                  },
+                }}
+              >
+                <ListItemIcon sx={{ color: 'inherit' }}>{link.icon}</ListItemIcon>
+                <ListItemText primary={link.name} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+        <Divider />
+        <List>
+          <ListItem disablePadding>
+            <ListItemButton
+              sx={{
+                '&:hover': {
+                  backgroundColor: '#420',
+                },
+              }}
+              onClick={() => {
+                void dispatch(logoutUserThunk());
+              }}
+            >
+              <ListItemIcon sx={{ color: 'inherit' }}>
+                <ExitToAppIcon />
+              </ListItemIcon>
+              <ListItemText primary="Logout" />
+            </ListItemButton >
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton
+              sx={{
+                '&:hover': {
+                  backgroundColor: '#420',
+                },
+              }}
+            >
+              <ListItemIcon sx={{ color: 'inherit' }}>
+                <LockOpenIcon />
+              </ListItemIcon>
+              <ListItemText primary="SignIn" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton
+              sx={{
+                '&:hover': {
+                  backgroundColor: '#420',
+                },
+              }}
+            >
+              <ListItemIcon sx={{ color: 'inherit' }}>
+                <AccountCircleIcon />
+              </ListItemIcon>
+              <ListItemText primary="SignUp" />
+            </ListItemButton>
+          </ListItem>
+        </List>
+      </Drawer>
+      <Main open={open}>
+        <DrawerHeader />
+      </Main>
     </Box>
   );
 }

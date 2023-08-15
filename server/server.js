@@ -42,7 +42,6 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
 // app.use('/api/posts', postsRouter);
-
 app.use('/api/user', userRouter);
 app.use('/api', findCockieRouter);
 app.use('/api/profile', profileRouter);
