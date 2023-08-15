@@ -5,6 +5,7 @@ import {
   changeQuestionThunk,
   changeStatusAnswerThunk,
   deleteAnswerThunk,
+  deleteQuestionThunk,
   getAllAnswerThunk,
   getAllQuestionsThunk,
   getQuestionsAnswersThunk,
@@ -68,6 +69,10 @@ export const testSlice = createSlice({
       const changeIndex = state.questions.findIndex((que) => que.id === payload.id);
       if ((changeIndex) => 0) state.questions[changeIndex] = payload;
       
+    })
+
+    builder.addCase(deleteQuestionThunk.fulfilled, (state, {payload})=> {
+      state.questions = state.questions.filter((el) => el.id !== payload);
     })
     
   }
