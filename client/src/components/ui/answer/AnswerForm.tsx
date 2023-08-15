@@ -16,7 +16,7 @@ export default function AnswerForm(): JSX.Element {
   };
   const detectKeyDown = (e) => {
     if(e.key === 'enter') {
-console.log('hello');
+console.log('Cooooool');
 
     }
       }

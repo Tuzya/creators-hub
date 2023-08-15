@@ -11,7 +11,7 @@ import { deleteAnswerThunk } from '../../../redux/slices/test/testThunk';
 import { deleteCourseThunk } from '../../../redux/slices/allcourses/allCoursesThunk';
 
 const style = {
-  position: 'absolute' as 'absolute',
+  position: 'absolute' as const,
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
@@ -46,7 +46,13 @@ export default function TransitionsModal({setOpen, open}): JSX.Element {
             <Typography id="transition-modal-title" variant="h6" component="h2">
               Удаление отменить невозможно. Вы уверены в удалении?
             </Typography>
-            <Button onClick={()=> void dispatch(deleteCourseThunk(open))}>Да</Button>
+            <Button onClick={()=> {
+             void dispatch(deleteCourseThunk(open));
+               setOpen(0)
+               }
+            }
+              
+              >Да</Button>
             <Button onClick={() => setOpen(0) }>Нет</Button>
           </Box>
         </Fade>
