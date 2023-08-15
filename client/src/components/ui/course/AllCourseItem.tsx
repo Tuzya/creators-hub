@@ -13,11 +13,8 @@ type CourseItemProps = {
 
 function AllCourseItem({ course }: CourseItemProps): JSX.Element {
   const dispath = useAppDispatch();
-<<<<<<< HEAD
   const [open, setOpen] = useState(0);
-=======
   const company = useAppSelector((store) => store.company);
->>>>>>> dev
 
   return (
     <Container>
