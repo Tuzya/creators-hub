@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { styled, useTheme } from '@mui/material/styles';
@@ -79,6 +79,9 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 export default function PersistentDrawerLeft() {
+  const company = useAppSelector((store) => store.company);
+  const user = useAppSelector((store) => store.user);
+
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -86,56 +89,95 @@ export default function PersistentDrawerLeft() {
     setOpen(true);
   };
 
+  const handleOutsideClick = (event) => {
+    if (open && !event.target.closest('#navbar-container')) {
+      setOpen(false);
+    }
+  };
+
   const handleDrawerClose = () => {
     setOpen(false);
   };
 
-  const links = [
-    { to: '/', name: 'Home', icon: <HomeIcon /> },
-    { to: '/company/lk', name: 'Лк компании', icon: <BusinessIcon /> },
-    { to: '/profile/lk', name: 'Лк Юзер', icon: <PersonIcon /> },
-    { to: '/company/allcourses/', name: 'База Знаний', icon: <BookIcon /> },
-    { to: '/signup', name: 'Sign Up', icon: <PersonAddIcon /> }, // Added Sign Up link
-    { to: '/login', name: 'Sign In', icon: <LockOpenIcon /> }, // Added Sign In link
-  ];
+  useEffect(() => {
+    document.addEventListener('click', handleOutsideClick);
+    return () => {
+      document.removeEventListener('click', handleOutsideClick);
+    };
+  }, [open]);
+
+  const links =
+    company.status === 'logged'
+      ? [
+          { to: '/', name: 'Home', icon: <HomeIcon /> },
+          { to: '/company/lk', name: 'Лк компании', icon: <BusinessIcon /> },
+          { to: '/company/allcourses/', name: 'База Знаний', icon: <BookIcon /> },
+        ]
+      : [
+          { to: '/', name: 'Home', icon: <HomeIcon /> },
+          { to: '/profile/lk', name: 'Лк Юзер', icon: <PersonIcon /> },
+          { to: '/company/allcourses/', name: 'База Знаний', icon: <BookIcon /> },
+        ];
 
   const dispatch = useAppDispatch();
-  const user = useAppSelector((store) => store.user);
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box id="navbar-container" sx={{ display: 'flex' }}>
       <CssBaseline />
       <CustomAppBar position="fixed" open={open}>
         <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{ mr: 2, ...(open && { display: 'none' }) }}
-          >
-            <MenuIcon />
-          </IconButton>
+          {company.status === 'logged' || user.status === 'logged' ? (
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              sx={{ mr: 2, ...(open && { display: 'none' }) }}
+            >
+              <MenuIcon />
+            </IconButton>
+          ) : (
+            <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
+              <IconButton color="inherit">
+                <HomeIcon /> <span style={{ fontSize: '20px' }}> Main </span>
+              </IconButton>
+            </Link>
+          )}
           <Typography variant="h6" noWrap component="div">
             Createros Hub о боже оно двигается!
           </Typography>
           <div style={{ marginLeft: 'auto' }}>
-            <IconButton
-              color="inherit"
-              onClick={() => {
-                void dispatch(logoutUserThunk());
-              }}
-            >
-              <LogoutIcon />
-            </IconButton>
+            {(company.status === 'logged' || user.status === 'logged') && (
+              <IconButton
+                color="inherit"
+                onClick={() => {
+                  void dispatch(logoutUserThunk());
+                }}
+              >
+                <LogoutIcon /> <span style={{ fontSize: '20px' }}> Logout </span>
+              </IconButton>
+            )}
             <Link to="/login" style={{ color: 'inherit', textDecoration: 'none' }}>
               <IconButton color="inherit">
-                <LockOpenIcon />
+                {!(company.status === 'logged' || user.status === 'logged') && (
+                  <>
+                    <LockOpenIcon />
+                    <span style={{ fontSize: '20px' }}> Sign In</span>
+                  </>
+                )}
               </IconButton>
             </Link>
-            <Link to="/signup" style={{ color: 'inherit', textDecoration: 'none' }}>
+            <Link
+              to="/signup"
+              style={{ color: 'inherit', textDecoration: 'none', fontSize: '12px' }}
+            >
               <IconButton color="inherit">
-                <PersonAddIcon />
+                {!(company.status === 'logged' || user.status === 'logged') && (
+                  <>
+                    <PersonAddIcon />
+                    <span style={{ fontSize: '20px' }}> Sign Up</span>
+                  </>
+                )}
               </IconButton>
             </Link>
           </div>
@@ -188,25 +230,27 @@ export default function PersistentDrawerLeft() {
           ))}
         </List>
         <Divider />
-        <List>
-          <ListItem disablePadding>
-            <ListItemButton
-              sx={{
-                '&:hover': {
-                  backgroundColor: '#420',
-                },
-              }}
-              onClick={() => {
-                void dispatch(logoutUserThunk());
-              }}
-            >
-              <ListItemIcon sx={{ color: 'inherit' }}>
-                <ExitToAppIcon />
-              </ListItemIcon>
-              <ListItemText primary="Logout" />
-            </ListItemButton>
-          </ListItem>
-        </List>
+        {(company.status === 'logged' || user.status === 'logged') && (
+          <List>
+            <ListItem disablePadding>
+              <ListItemButton
+                sx={{
+                  '&:hover': {
+                    backgroundColor: '#420',
+                  },
+                }}
+                onClick={() => {
+                  void dispatch(logoutUserThunk());
+                }}
+              >
+                <ListItemIcon sx={{ color: 'inherit' }}>
+                  <ExitToAppIcon />
+                </ListItemIcon>
+                <ListItemText primary="Logout" />
+              </ListItemButton>
+            </ListItem>
+          </List>
+        )}
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
