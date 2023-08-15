@@ -86,6 +86,7 @@ router
     return res.status(200).json(answer);
   })
   .delete(async (req, res) => {
+    console.log('========================');
     try {
       const { answerId } = req.params;
       await Answer.destroy({ where: { id: answerId } });

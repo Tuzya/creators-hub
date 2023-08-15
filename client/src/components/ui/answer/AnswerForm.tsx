@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { Box, Button, Checkbox, Grid, TextField } from '@mui/material';
 import { useAppDispatch } from '../../../redux/hooks';
@@ -14,6 +14,15 @@ export default function AnswerForm(): JSX.Element {
   const changeHandler: React.ChangeEventHandler<HTMLInputElement> = (e): void => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
+  const detectKeyDown = (e) => {
+    if(e.key === 'enter') {
+console.log('hello');
+
+    }
+      }
+  useEffect(() => {
+    document.addEventListener('keydown', detectKeyDown, true)
+  }, [])
 
 
   return (
