@@ -18,7 +18,7 @@ router.post('/allcourses/:courseId/addQuestion', async (req, res) => {
 });
 
 router
-  .route('/allcourses/:courseId/question-all-answers')
+  .route('/one-question/:courseId/question-all-answers')
   .get(async (req, res) => {
     try {
       const { courseId } = req.params;
@@ -33,20 +33,22 @@ router
     }
   });
 
-router.route('/allcourses/:courseId/allquestions').get(async (req, res) => {
-  try {
-    const { courseId } = req.params;
-    const allQuestion = await Question.findAll({
-      where: { courses_id: courseId },
-    });
-    res.json(allQuestion);
-  } catch (err) {
-    console.log('Ручка, get Достать все  вопросы: ', err);
-  }
-});
+router
+  .route('/all-course-question/:courseId/allquestions')
+  .get(async (req, res) => {
+    try {
+      const { courseId } = req.params;
+      const allQuestion = await Question.findAll({
+        where: { courses_id: courseId },
+      });
+      res.json(allQuestion);
+    } catch (err) {
+      console.log('Ручка, get Достать все  вопросы: ', err);
+    }
+  });
 
 router
-  .route('/allcourses/:courseId/allquestions/:questionId')
+  .route('/all-questions-answer/:courseId/allquestions/:questionId')
   .get(async (req, res) => {
     try {
       const { questionId } = req.params;
@@ -60,7 +62,7 @@ router
   });
 
 router
-  .route('/allcourses/:courseId/allquestions/:questionId/addAnswers')
+  .route('/add-answer/:courseId/allquestions/:questionId/addAnswers')
   .post(async (req, res) => {
     try {
       console.log('hi');
@@ -76,7 +78,7 @@ router
   });
 
 router
-  .route('/allcourses/:courseId/allquestions/:questionId/answer/:answerId')
+  .route('/putanswer/:courseId/allquestions/:questionId/answer/:answerId')
   .put(async (req, res) => {
     // console.log('=======');
     const { answerId } = req.params;

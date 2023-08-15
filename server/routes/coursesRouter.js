@@ -88,40 +88,5 @@ router.post('/addcourse', async (req, res) => {
   }
 });
 
-// router.post('/addcourse', async (req, res) => {
-//   const { userId, selectedCourses } = req.body;
 
-//   try {
-//     const user = await User.findByPk(userId);
-
-//     if (!user) {
-//       return res
-//         .status(404)
-//         .json({ error: 'Пользователь не найден' });
-//     }
-
-//     for (const courseId of selectedCourses) {
-//       const course = await Course.findOne({ where: { id: courseId } });
-
-//       if (!course) {
-//         return res
-//           .status(404)
-//           .json({ error: `Курс с ID ${courseId} не найден` });
-//       }
-
-//       await CoursesUser.create({
-//         user_id: user.id,
-//         course_id: course.id,
-//         status: true,
-//       });
-//     }
-
-//     res.status(200).json({ message: 'Курсы успешно назначены пользователю' });
-//   } catch (error) {
-//     console.error(error);
-//     res
-//       .status(500)
-//       .json({ error: 'Произошла ошибка при назначении курсов пользователю' });
-//   }
-// });
 module.exports = router;
