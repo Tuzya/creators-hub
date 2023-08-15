@@ -95,11 +95,12 @@ export default function PersistentDrawerLeft() {
     { to: '/company/lk', name: 'Лк компании', icon: <BusinessIcon /> },
     { to: '/profile/lk', name: 'Лк Юзер', icon: <PersonIcon /> },
     { to: '/company/allcourses/', name: 'База Знаний', icon: <BookIcon /> },
+    { to: '/signup', name: 'Sign Up', icon: <PersonAddIcon /> }, // Added Sign Up link
+    { to: '/login', name: 'Sign In', icon: <LockOpenIcon /> }, // Added Sign In link
   ];
 
   const dispatch = useAppDispatch();
   const user = useAppSelector((store) => store.user);
-
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -119,17 +120,24 @@ export default function PersistentDrawerLeft() {
             Createros Hub о боже оно двигается!
           </Typography>
           <div style={{ marginLeft: 'auto' }}>
-            <IconButton color="inherit" onClick={() => {
+            <IconButton
+              color="inherit"
+              onClick={() => {
                 void dispatch(logoutUserThunk());
-              }}>
+              }}
+            >
               <LogoutIcon />
             </IconButton>
-            <IconButton color="inherit">
-              <LockOpenIcon />
-            </IconButton>
-            <IconButton color="inherit">
-              <PersonAddIcon />
-            </IconButton>
+            <Link to="/login" style={{ color: 'inherit', textDecoration: 'none' }}>
+              <IconButton color="inherit">
+                <LockOpenIcon />
+              </IconButton>
+            </Link>
+            <Link to="/signup" style={{ color: 'inherit', textDecoration: 'none' }}>
+              <IconButton color="inherit">
+                <PersonAddIcon />
+              </IconButton>
+            </Link>
           </div>
         </Toolbar>
       </CustomAppBar>
@@ -140,8 +148,8 @@ export default function PersistentDrawerLeft() {
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             boxSizing: 'border-box',
-            backgroundColor: 'black', // Set the background color to black
-            color: 'white', // Set the text color to white
+            backgroundColor: 'black',
+            color: 'white',
           },
         }}
         variant="persistent"
@@ -152,9 +160,9 @@ export default function PersistentDrawerLeft() {
           <IconButton
             onClick={handleDrawerClose}
             sx={{
-              color: 'white', // Set the icon color to white
+              color: 'white',
               '&:hover': {
-                color: '#ccc', // Light gray icon color on hover
+                color: '#ccc',
               },
             }}
           >
@@ -169,7 +177,7 @@ export default function PersistentDrawerLeft() {
                 to={link.to}
                 sx={{
                   '&:hover': {
-                    backgroundColor: '#420', // Darker background color on hover
+                    backgroundColor: '#420',
                   },
                 }}
               >
@@ -196,34 +204,6 @@ export default function PersistentDrawerLeft() {
                 <ExitToAppIcon />
               </ListItemIcon>
               <ListItemText primary="Logout" />
-            </ListItemButton >
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton
-              sx={{
-                '&:hover': {
-                  backgroundColor: '#420',
-                },
-              }}
-            >
-              <ListItemIcon sx={{ color: 'inherit' }}>
-                <LockOpenIcon />
-              </ListItemIcon>
-              <ListItemText primary="SignIn" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton
-              sx={{
-                '&:hover': {
-                  backgroundColor: '#420',
-                },
-              }}
-            >
-              <ListItemIcon sx={{ color: 'inherit' }}>
-                <AccountCircleIcon />
-              </ListItemIcon>
-              <ListItemText primary="SignUp" />
             </ListItemButton>
           </ListItem>
         </List>

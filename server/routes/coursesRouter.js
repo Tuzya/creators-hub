@@ -76,7 +76,7 @@ router.post('/addcourse', async (req, res) => {
     await CoursesUser.create({
       user_id: user.id,
       courses_id: course.id,
-      status: true,
+      status: false,
     });
 
     res.status(200).json({ message: 'Курс успешно назначен пользователю' });
