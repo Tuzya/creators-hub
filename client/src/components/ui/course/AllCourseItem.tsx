@@ -38,8 +38,14 @@ function AllCourseItem({ course }: CourseItemProps): JSX.Element {
           <Button size="small" onClick={()=> {
       setOpen(course.id)}
     }>
+            Изменить курс
+          </Button>
+          <Button size="small" onClick={()=> {
+      setOpen(course.id)}
+    }>
             Удалить курс
           </Button>
+         
 
           
         </CardActions>

@@ -61,11 +61,12 @@ function App(): JSX.Element {
                   </PrivateRouter>
                 }
               />
-              <Route element={<PrivateRouter isAllowed={user.status === 'logged'} />}>
+              <Route element={<PrivateRouter isAllowed={user.status === 'logged' || company.status === 'logged'} />}>
+              <Route path="/company/allcourses" element={<AllCoursesPage />} />
+                <Route path="/company/lk" element={<CompanyPage />} />
                 <Route path="/profile/lk" element={<ProfileLoggedPage />} />
                 <Route path="/profile/lk/edit" element={<EditPersonInfo />} />
                 <Route path="/profile/lk/:profileId" element={<ProfilePage />} />
-                <Route path="/company/allcourses" element={<AllCoursesPage />} />
                 <Route
                   path="/company/allcourses/:courseId/addQuestion/:questionId/addAnswers"
                   element={<AnswersAddPage />}
@@ -77,15 +78,8 @@ function App(): JSX.Element {
                 <Route path="/company/allcourses/:courseId/test" element={<TestPage />} />
                 <Route path="/company/allcourses/:courseId" element={<CoursePage />} />
               </Route>
-              <Route
-                element={
-                  <PrivateRouter
-                    isAllowed={company.status === 'logged' && company.whoAuth === 'Company'}
-                  />
-                }
-              >
-                <Route path="/company/lk" element={<CompanyPage />} />
-              </Route>
+              
+                
               <Route element={<PrivateRouter isAllowed={user.status === 'guest'} />}>
                 <Route path="/login" element={<LoginInPage />} />
                 <Route path="/signup" element={<SignUpPage />} />

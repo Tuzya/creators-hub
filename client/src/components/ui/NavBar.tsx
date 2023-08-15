@@ -95,6 +95,8 @@ export default function PersistentDrawerLeft() {
     { to: '/company/lk', name: 'Лк компании', icon: <BusinessIcon /> },
     { to: '/profile/lk', name: 'Лк Юзер', icon: <PersonIcon /> },
     { to: '/company/allcourses/', name: 'База Знаний', icon: <BookIcon /> },
+    { to: '/login', name: 'Вход', icon: <BookIcon /> },
+    { to: '/signup', name: 'Регистрация', icon: <BookIcon /> },
   ];
 
   const dispatch = useAppDispatch();
