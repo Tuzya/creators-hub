@@ -1,21 +1,24 @@
 import type { ChangeEvent, FormEvent } from 'react';
 import React, { useState, useEffect } from 'react';
 import { Button, TextField } from '@mui/material';
+import { redirect, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import type { PersonInfoType } from '../../../types/profileType/profileTypes';
 import { editProfileThunk } from '../../../redux/slices/profiles/profileThunk';
 
 export default function EditPersonInfoForm(): JSX.Element {
   const dispatch = useAppDispatch();
-  const { editProfile } = useAppSelector(state => state.profile);
+  const navigate = useNavigate();
+  const { editProfile } = useAppSelector((state) => state.profile);
+  const person = useAppSelector((store) => store.profile.personLoggedInfo);
   const [formData, setFormData] = useState<PersonInfoType>({
-    city: '',
-    birthDate: '',
-    phone: '',
-    about: '',
-    companies: '',
-    sex: '',
-    photo: null // Изменили значение на null, так как это будет объект типа File | null
+    city: person?.city || '',
+    birthDate: person?.birthDate || '',
+    phone: person?.phone || '',
+    about: person?.about || '',
+    companies: person?.companies || '',
+    sex: person?.sex || '',
+    photo: person?.photo || '', // Изменили значение на null, так как это будет объект типа File | null
   });
 
   useEffect(() => {
@@ -26,7 +29,7 @@ export default function EditPersonInfoForm(): JSX.Element {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prevData => ({
+    setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
@@ -34,7 +37,7 @@ export default function EditPersonInfoForm(): JSX.Element {
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setFormData(prevData => ({
+      setFormData((prevData) => ({
         ...prevData,
         photo: e.target.files[0], // Устанавливаем файл в поле photo
       }));
@@ -56,6 +59,7 @@ export default function EditPersonInfoForm(): JSX.Element {
 
     try {
       await dispatch(editProfileThunk(formDataToSend));
+      navigate('/profile/lk');
     } catch (error) {
       console.error('Error editing profile:', error);
     }

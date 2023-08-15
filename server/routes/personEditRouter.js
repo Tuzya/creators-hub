@@ -1,4 +1,4 @@
-const { fs } = require('fs/promises');
+const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
 
@@ -46,30 +46,116 @@ router.get('/personInfo/:profileId', async (req, res) => {
     res.sendStatus(500);
   }
 });
+// router.post('/edit', fileUpload.single('photo'), async (req, res) => {
+//   const { id } = req.session.user;
+//   const { city, birthDate, phone, about, companies, sex } = req.body;
+
+//   try {
+//     // Проверка существования записи с заданным user_id
+//     const existingPerson = await Person.findOne({
+//       where: { user_id: id },
+//     });
+
+//     let image = ''; // Переменная для имени изображения
+
+//     if (req.file) {
+//       const outputBuffer = req.file.buffer;
+//       const imageExtension = path.extname(req.file.originalname);
+//       image = `${Date.now()}${imageExtension}`;
+
+//       if (imageExtension.toLowerCase() !== '.webp') {
+//         const convertedBuffer = await sharp(req.file.buffer).webp().toBuffer();
+//         image = `${Date.now()}.webp`;
+//         await fs.promises.writeFile(
+//           path.join(__dirname, '..', 'public', 'img', image),
+//           convertedBuffer
+//         );
+//       } else {
+//         await fs.promises.writeFile(
+//           path.join(__dirname, '..', 'public', 'img', image),
+//           outputBuffer
+//         );
+//       }
+//     }
+
+//     if (existingPerson) {
+//       // Если запись существует, обновляем ее
+//       await existingPerson.update({
+//         city,
+//         birthDate,
+//         phone,
+//         about,
+//         companies,
+//         sex,
+//         photo: image || existingPerson.photo, // Если image не определено,
+//       });
+//       res.status(200).json({ message: 'Record updated successfully' });
+//     } else {
+//       // Если записи нет, создаем новую запись
+//       await Person.create({
+//         city,
+//         birthDate,
+//         phone,
+//         about,
+//         companies,
+//         sex,
+//         photo: image,
+//         user_id: id,
+//       });
+//       res.status(200).json({ message: 'Record created successfully' });
+//     }
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: 'An error occurred' });
+//   }
+// });
+
 router.post('/edit', fileUpload.single('photo'), async (req, res) => {
   const { id } = req.session.user;
   const { city, birthDate, phone, about, companies, sex } = req.body;
-  if (req.file) {
-    const outputBuffer = req.file.buffer;
-    const imageExtension = path.extname(req.file.originalname);
-    let image = `${Date.now()}${imageExtension}`;
-    // Если изображение не в формате .webp, конвертировать
-    if (imageExtension.toLowerCase() !== '.webp') {
-      const convertedBuffer = await sharp(req.file.buffer).webp().toBuffer();
-      image = `${Date.now()}.webp`;
-      await fs.promises.writeFile(
-        path.join(__dirname, '..', 'public', 'img', image),
-        console.log(convertedBuffer)
-      );
-    } else {
-      await fs.promises.writeFile(
-        path.join(__dirname, '..', 'public', 'img', image),
-        console.log(outputBuffer)
-      );
+
+  try {
+    // Проверка существования записи с заданным user_id
+    const existingPerson = await Person.findOne({
+      where: { user_id: id },
+    });
+
+    let image = existingPerson.photo; // Сохраняем текущее значение фото
+
+    if (req.file) {
+      const outputBuffer = req.file.buffer;
+      const imageExtension = path.extname(req.file.originalname);
+      image = `${Date.now()}${imageExtension}`;
+
+      if (imageExtension.toLowerCase() !== '.webp') {
+        const convertedBuffer = await sharp(req.file.buffer).webp().toBuffer();
+        image = `${Date.now()}.webp`;
+        await fs.promises.writeFile(
+          path.join(__dirname, '..', 'public', 'img', image),
+          convertedBuffer
+        );
+      } else {
+        await fs.promises.writeFile(
+          path.join(__dirname, '..', 'public', 'img', image),
+          outputBuffer
+        );
+      }
     }
-    const [updatedRowsCount, updatedRows] = await Person.create(
-      // Объект данных для обновления/вставки
-      {
+
+    if (existingPerson) {
+      // Если запись существует, обновляем только нужные поля
+      existingPerson.city = city || existingPerson.city;
+      existingPerson.birthDate = birthDate || existingPerson.birthDate;
+      existingPerson.phone = phone || existingPerson.phone;
+      existingPerson.about = about || existingPerson.about;
+      existingPerson.companies = companies || existingPerson.companies;
+      existingPerson.sex = sex || existingPerson.sex;
+      existingPerson.photo = image || existingPerson.photo;
+      await existingPerson.save();
+      res.status(200).json({ message: 'Record updated successfully' });
+    } else {
+      // Если записи нет, создаем новую запись
+      await Person.create({
         city,
         birthDate,
         phone,
@@ -78,19 +164,12 @@ router.post('/edit', fileUpload.single('photo'), async (req, res) => {
         sex,
         photo: image,
         user_id: id,
-      },
-      // Опции
-      {
-        returning: true, // Получить обновленные данные
-      }
-    );
-
-    if (updatedRowsCount > 0) {
-      const updatedUser = updatedRows[0]; // Обновленные данные пользователя
-      res.status(200).json(updatedUser);
-    } else {
-      res.status(400).json({ message: 'Ошибка при оновления данных user.' });
+      });
+      res.status(200).json({ message: 'Record created successfully' });
     }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'An error occurred' });
   }
 });
 
