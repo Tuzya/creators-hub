@@ -23,7 +23,7 @@ export const getAllQuestionsThunk = createAsyncThunk(
   'questions/getAllQuestions',
   async ({ courseId }: { courseId: number }) => {
     const { data } = await axios<QuestionModelType[]>(
-      `/question/allcourses/${courseId}/allquestions`,
+      `/question/all-course-question/${courseId}/allquestions`,
     );
     return data;
   },
@@ -41,7 +41,7 @@ export const addAnswersThunk = createAsyncThunk(
     input: AnswerFormType;
   }) => {
     const { data } = await axios.post<AnswerModelType>(
-      `/question/allcourses/${courseId}/allquestions/${questionId}/addAnswers`,
+      `/question/add-answer/${courseId}/allquestions/${questionId}/addAnswers`,
       input,
     );
     return data;
@@ -52,7 +52,7 @@ export const getAllAnswerThunk = createAsyncThunk(
   'questions/getAllAnswer',
   async ({ courseId, questionId }: { courseId: number; questionId: number }) => {
     const { data } = await axios<AnswerModelType[]>(
-      `/question/allcourses/${courseId}/allquestions/${questionId}`,
+      `/question/all-questions-answer/${courseId}/allquestions/${questionId}`,
     );
     return data;
   },
@@ -62,7 +62,7 @@ export const getQuestionsAnswersThunk = createAsyncThunk(
   'questionsanswers/getQuestionsAnswers',
   async ({ courseId }: { courseId: number }) => {
     const { data } = await axios<QuestionAnswerType[]>(
-      `/question/allcourses/${courseId}/question-all-answers`,
+      `/question/one-question/${courseId}/question-all-answers`,
     );
     return data;
   },
@@ -80,7 +80,7 @@ export const changeStatusAnswerThunk = createAsyncThunk(
     answerId: number;
   }) => {
     const { data } = await axios.put<AnswerModelType>(
-      `/question/allcourses/${courseId}/allquestions/${questionId}/answer/${answerId}`,
+      `/question/putanswer/${courseId}/allquestions/${questionId}/answer/${answerId}`,
     );
     return data;
   },
@@ -98,7 +98,7 @@ export const deleteAnswerThunk = createAsyncThunk(
     answerId: number;
   }) => {
     await axios.delete<AnswerModelType['id']>(
-      `/question/allcourses/${courseId}/allquestions/${questionId}/answer/${answerId}`,
+      `/question/putanswer/${courseId}/allquestions/${questionId}/answer/${answerId}`,
     );
     return answerId;
   },
