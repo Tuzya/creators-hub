@@ -20,7 +20,7 @@ export default function EditPersonInfoForm(): JSX.Element {
     sex: person?.sex || '',
     photo: person?.photo || '', // Изменили значение на null, так как это будет объект типа File | null
   });
-
+  console.log('dadada');
   useEffect(() => {
     if (editProfile) {
       console.log({ editProfile });

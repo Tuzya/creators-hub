@@ -2,8 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
   addAnswersThunk,
   addQuestionsThunk,
+  changeQuestionThunk,
   changeStatusAnswerThunk,
   deleteAnswerThunk,
+  deleteQuestionThunk,
   getAllAnswerThunk,
   getAllQuestionsThunk,
   getQuestionsAnswersThunk,
@@ -63,6 +65,16 @@ export const testSlice = createSlice({
     builder.addCase(deleteAnswerThunk.fulfilled, (state,{payload}) => {
       state.answers = state.answers.filter((el) => el.id !== payload);
     })
+    builder.addCase(changeQuestionThunk.fulfilled, (state, {payload}) => {
+      const changeIndex = state.questions.findIndex((que) => que.id === payload.id);
+      if ((changeIndex) => 0) state.questions[changeIndex] = payload;
+      
+    })
+
+    builder.addCase(deleteQuestionThunk.fulfilled, (state, {payload})=> {
+      state.questions = state.questions.filter((el) => el.id !== payload);
+    })
+    
   }
   })
 

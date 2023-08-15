@@ -80,7 +80,6 @@ router
 router
   .route('/putanswer/:courseId/allquestions/:questionId/answer/:answerId')
   .put(async (req, res) => {
-    // console.log('=======');
     const { answerId } = req.params;
     const answer = await Answer.findOne({ where: { id: answerId } });
     answer.isCorrect = !answer.isCorrect;
@@ -88,10 +87,30 @@ router
     return res.status(200).json(answer);
   })
   .delete(async (req, res) => {
-    console.log('========================');
     try {
       const { answerId } = req.params;
       await Answer.destroy({ where: { id: answerId } });
+      res.sendStatus(200);
+    } catch (err) {
+      console.error(err);
+      res.sendStatus(500);
+    }
+  });
+
+// изменение вопроса
+router
+  .route('/allcourses/:courseId/addQuestion/:questionId')
+  .put(async (req, res) => {
+    const { questionId } = req.params;
+    const question = await Question.findOne({ where: { id: questionId } });
+    question.question = req.body.question;
+    await question.save();
+    return res.json(question);
+  })
+  .delete(async (req, res) => {
+    try {
+      const { questionId } = req.params;
+      await Question.destroy({ where: { id: questionId } });
       res.sendStatus(200);
     } catch (err) {
       console.error(err);
