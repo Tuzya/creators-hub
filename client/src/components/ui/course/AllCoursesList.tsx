@@ -11,7 +11,7 @@ export default function AllCoursesList(): JSX.Element {
   const allcourses = useAppSelector((store) => store.allcourses.courses);
   const searchParams = useAppSelector((store) => store.allcourses.searchParams)
 
-  const filteredCourses = allcourses.filter((cource) => cource.title.includes(searchParams.query))
+  const filteredCourses = allcourses.filter((cource) => cource.title.toLowerCase().includes(searchParams.query))
   return (
     <Paper elevation={0} sx={postListPaperStyles}>
       <Box mt={1} py={2} px={2} display="flex" flexDirection="row" flexWrap="wrap">

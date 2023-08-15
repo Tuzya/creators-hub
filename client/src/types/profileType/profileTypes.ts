@@ -14,3 +14,8 @@ export type EditProfileType = {
   user_id: number;
 };
 export type PersonInfoType = Omit<EditProfileType, 'user_id'>;
+
+export type SearchParamsProfile = {
+  query: string;
+  filterBy: string;
+};
