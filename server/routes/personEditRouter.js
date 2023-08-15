@@ -113,7 +113,9 @@ router.get('/personInfo/:profileId', async (req, res) => {
 
 router.post('/edit', fileUpload.single('photo'), async (req, res) => {
   const { id } = req.session.user;
-  const { city, birthDate, phone, about, companies, sex } = req.body;
+  const {
+    city, birthDate, phone, about, companies, sex,
+  } = req.body;
 
   try {
     // Проверка существования записи с заданным user_id
@@ -133,12 +135,12 @@ router.post('/edit', fileUpload.single('photo'), async (req, res) => {
         image = `${Date.now()}.webp`;
         await fs.promises.writeFile(
           path.join(__dirname, '..', 'public', 'img', image),
-          convertedBuffer
+          convertedBuffer,
         );
       } else {
         await fs.promises.writeFile(
           path.join(__dirname, '..', 'public', 'img', image),
-          outputBuffer
+          outputBuffer,
         );
       }
     }

@@ -52,21 +52,27 @@ function App(): JSX.Element {
         <Container sx={{ marginTop: '30px' }}>
           <Paper>
             <Routes>
+              {/* для всех */}
               <Route path="/" element={<MainPage />} />
+
+              {/* Пользователь и компания, с разным функционалом */}
               <Route
-                path="/admin/signup-user"
                 element={
-                  <PrivateRouter isAllowed={user.status === 'logged' && user.username === 'admin'}>
-                    <AdminSignUpUser />
-                  </PrivateRouter>
+                  <PrivateRouter
+                    isAllowed={user.status === 'logged' || company.status === 'logged'}
+                  />
                 }
-              />
-              <Route element={<PrivateRouter isAllowed={user.status === 'logged' || company.status === 'logged'} />}>
-              <Route path="/company/allcourses" element={<AllCoursesPage />} />
-                <Route path="/company/lk" element={<CompanyPage />} />
-                <Route path="/profile/lk" element={<ProfileLoggedPage />} />
-                <Route path="/profile/lk/edit" element={<EditPersonInfo />} />
+              >
                 <Route path="/profile/lk/:profileId" element={<ProfilePage />} />
+                <Route path="/company/allcourses" element={<AllCoursesPage />} />
+                <Route path="/company/allcourses/:courseId/test" element={<TestPage />} />
+                <Route path="/company/allcourses/:courseId" element={<CoursePage />} />
+              </Route>
+
+              {/* только для компании */}
+              <Route element={<PrivateRouter isAllowed={company.status === 'logged'} />}>
+                <Route path="/company/lk" element={<CompanyPage />} />
+                <Route path="/admin/signup-user" element={<AdminSignUpUser />} />
                 <Route
                   path="/company/allcourses/:courseId/addQuestion/:questionId/addAnswers"
                   element={<AnswersAddPage />}
@@ -75,12 +81,24 @@ function App(): JSX.Element {
                   path="/company/allcourses/:courseId/addQuestion"
                   element={<QuestionPage />}
                 />
-                <Route path="/company/allcourses/:courseId/test" element={<TestPage />} />
-                <Route path="/company/allcourses/:courseId" element={<CoursePage />} />
               </Route>
-              
-                
-              <Route element={<PrivateRouter isAllowed={user.status === 'guest'} />}>
+
+              {/* только для пользователя */}
+              <Route element={<PrivateRouter isAllowed={user.status === 'logged'} />}>
+                <Route path="/profile/lk" element={<ProfileLoggedPage />} />
+                <Route path="/profile/lk/edit" element={<EditPersonInfo />} />
+              </Route>
+
+              {/* Только для гостя */}
+              <Route
+                element={
+                  <PrivateRouter
+                    isAllowed={
+                      user && user.status === 'guest' && company && company.status === 'guest'
+                    }
+                  />
+                }
+              >
                 <Route path="/login" element={<LoginInPage />} />
                 <Route path="/signup" element={<SignUpPage />} />
               </Route>
