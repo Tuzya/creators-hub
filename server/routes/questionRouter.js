@@ -101,11 +101,20 @@ router
 router
   .route('/allcourses/:courseId/addQuestion/:questionId')
   .put(async (req, res) => {
-    console.log('serverrrrrrrrrrrr');
     const { questionId } = req.params;
     const question = await Question.findOne({ where: { id: questionId } });
     question.question = req.body.question;
     await question.save();
     return res.json(question);
+  })
+  .delete(async (req, res) => {
+    try {
+      const { questionId } = req.params;
+      await Question.destroy({ where: { id: questionId } });
+      res.sendStatus(200);
+    } catch (err) {
+      console.error(err);
+      res.sendStatus(500);
+    }
   });
 module.exports = router;
