@@ -86,6 +86,31 @@ export const changeStatusAnswerThunk = createAsyncThunk(
   },
 );
 
+export const changeQuestionThunk = createAsyncThunk(
+  'questions/changeQuestion',
+  async ({
+    courseId,
+    questionId,
+    input,
+    }: 
+    {
+    courseId: number;
+    questionId: number;
+    input: QuestionFormType
+    
+  }) => {
+    console.log('heeeeeeeeeeeereeeeeeee');
+    
+    const { data } = await axios.put<QuestionModelType>(
+      `/question/allcourses/${courseId}/addQuestion/${questionId}`,
+      input
+    );
+    console.log('cliiiiiient', input);
+    
+    return data;
+  },
+);
+
 export const deleteAnswerThunk = createAsyncThunk(
   'questions/deleteAnswer',
   async ({
