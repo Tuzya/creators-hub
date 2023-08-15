@@ -1,14 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { Box, Button, Grid, TextField } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { buttonStyle, postFormGridStyles, textFieldStyle } from '../../styles';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { addQuestionsThunk } from '../../../redux/slices/test/testThunk';
 
-export default function QuestionForm(): JSX.Element  {
+export default function QuestionForm(): JSX.Element {
   const [input, setInput] = useState({ question: '' });
   const dispatch = useAppDispatch();
-  const {courseId} = useParams<string>();
+  const company = useAppSelector((store) => store.company);
+  const { courseId } = useParams<string>();
 
   const changeHandler: React.ChangeEventHandler<HTMLInputElement> = (e): void => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -33,12 +34,12 @@ export default function QuestionForm(): JSX.Element  {
             onChange={changeHandler}
             sx={textFieldStyle}
           />
-          
+
           <Button
             variant="outlined"
             sx={buttonStyle}
             onClick={() => {
-              void dispatch(addQuestionsThunk({courseId: Number(courseId), input}));
+              void dispatch(addQuestionsThunk({ courseId: Number(courseId), input }));
               setInput({ question: '' });
             }}
           >
@@ -47,5 +48,5 @@ export default function QuestionForm(): JSX.Element  {
         </Box>
       </Grid>
     </Grid>
-  )
+  );
 }

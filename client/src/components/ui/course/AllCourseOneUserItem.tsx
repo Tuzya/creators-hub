@@ -20,7 +20,7 @@ function AllCourseOneUserItem({ course }: CourseItemProps): JSX.Element {
             Курс
           </Typography>
           <Typography variant="h5" component="div">
-            Course {course.title}...
+            Course {course.title}
           </Typography>
           {/* <Typography sx={{ mb: 1.5 }} color="text.secondary">
           {course.body}...
