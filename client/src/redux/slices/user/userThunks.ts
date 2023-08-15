@@ -6,7 +6,6 @@ import type {
 } from '../../../types/userTypes';
 import {
   checkUserService,
-  fetchAllCourseUserService,
   userLoginService,
   userLogoutService,
   userSignUpService,

@@ -9,6 +9,6 @@ export type UserSignUpFormType = Omit<UserModelType, 'id' | 'company_id'> & { pa
 export type UserLoginFormType = Omit<UserSignUpFormType, 'username'>;
 
 export type UserType =
-  | (UserModelType & { status: 'logged' })
-  | { status: 'loading' }
-  | { status: 'guest' };
+  | (UserModelType & { status: 'logged'; whoAuth: 'User' })
+  | { status: 'loading'; whoAuth: 'User' }
+  | { status: 'guest'; whoAuth: 'Guest' };

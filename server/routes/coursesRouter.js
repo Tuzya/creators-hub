@@ -6,14 +6,46 @@ const upload = require('../middleware/multerPdfMiddleware');
 const router = express.Router();
 
 router.route('/allcourses').get(async (req, res) => {
-  const { id } = req.session.user;
-  // console.log('server', id);
-  const courses = await Course.findAll({
-    where: { company_id: id },
-  });
-  //   console.log(courses);
-  res.json(courses);
+  if (req.session.company) {
+    try {
+      const { id } = req.session.company;
+      console.log('company ==========', req.session.company);
+      const courses = await Course.findAll({
+        where: { company_id: id },
+      });
+      //   console.log(courses);
+      res.json(courses);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  if (req.session.user) {
+    try {
+      const companyId = req.session.user.company_id;
+      console.log('user', req.session.user);
+      const courses = await Course.findAll({
+        where: { company_id: companyId },
+      });
+      //   console.log(courses);
+      res.json(courses);
+    } catch (err) {
+      console.log(err);
+    }
+  } else {
+    return console.log('Ничего');
+  }
 });
+
+// router.route('/allcourses/foruser').get(async (req, res) => {
+//   const companyId = req.session.user.company_id;
+//   // console.log('server', id);
+//   const courses = await Course.findAll({
+//     where: { company_id: companyId },
+//   });
+//   //   console.log(courses);
+//   res.json(courses);
+// });
+
 router.route('/allcourses/:courseId').get(async (req, res) => {
   const id = req.params.courseId;
   const oneCourses = await Course.findByPk(id);
@@ -33,7 +65,7 @@ router.delete('/allcourses/:courseId', async (req, res) => {
 router.route('/lk/alluser').get(async (req, res) => {
   try {
     console.log('сюда зашёл');
-    const { id } = req.session.user;
+    const { id } = req.session.company;
     const userProfile = await User.findAll({ where: { company_id: id } });
     console.log(userProfile);
     res.json(userProfile);
@@ -45,7 +77,7 @@ router.route('/lk/alluser').get(async (req, res) => {
 router.post('/lk', upload.single('downloadLink'), async (req, res) => {
   const { title, body } = req.body;
   const downloadLink = req.file ? req.file.filename : '';
-  const { id } = req.session.user;
+  const { id } = req.session.company;
   try {
     const course = await Course.create({
       title,
@@ -68,15 +100,24 @@ router.post('/addcourse', async (req, res) => {
     const course = await Course.findOne({ where: { id: selectedCourses } });
 
     if (!user || !course) {
-      return res
-        .status(404)
-        .json({ error: 'Пользователь или курс не найдены' });
+      return res.status(404).json({ error: 'Пользователь или курс не найдены' });
+    }
+
+    const existingAssignment = await CoursesUser.findOne({
+      where: {
+        user_id: user.id,
+        courses_id: course.id,
+      },
+    });
+
+    if (existingAssignment) {
+      return res.status(400).json({ error: 'Курс уже назначен этому пользователю' });
     }
 
     await CoursesUser.create({
       user_id: user.id,
       courses_id: course.id,
-      status: true,
+      status: false,
     });
 
     res.status(200).json({ message: 'Курс успешно назначен пользователю' });
@@ -87,6 +128,5 @@ router.post('/addcourse', async (req, res) => {
       .json({ error: 'Произошла ошибка при назначении курса пользователю' });
   }
 });
-
 
 module.exports = router;

@@ -2,7 +2,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
-const { User, Course, CoursesUser } = require('../db/models');
+const { User, Course, Company } = require('../db/models');
 
 const router = express.Router();
 
@@ -54,12 +54,15 @@ router.post('/signup', async (req, res) => {
         await generateRandomPasswordAndHash();
 
       // Поиск или создание пользователя с хешированным паролем
+      const company = await Company.findByPk(req.session.company.id);
+      // console.log(company.name);
+      // console.log(req.session);
       const [user, created] = await User.findOrCreate({
         where: { email },
-        company_id: req.session.user.id,
         defaults: {
           username,
           password: hashedPassword,
+          company_id: company.id,
         },
       });
 
@@ -115,7 +118,6 @@ router.post('/login', async (req, res) => {
       console.log('user', user);
       const sessionUser = JSON.parse(JSON.stringify(user));
       delete sessionUser.password;
-      delete sessionUser.company_id;
       req.session.user = sessionUser;
 
       return res.json(sessionUser);

@@ -4,33 +4,36 @@ import { checkUserThunk, loginUserThunk, logoutUserThunk, signUpUserThunk } from
 
 type UserSliceType = UserType;
 
-const initialState: UserSliceType = { status: 'loading' };
+const initialState: UserSliceType = { status: 'loading', whoAuth: 'Guest' };
 
 const userSlice = createSlice({
   name: 'user',
-  initialState: initialState as UserSliceType,
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(checkUserThunk.fulfilled, (state, { payload }) => ({
       ...payload,
       status: 'logged',
+      whoAuth: 'User',
     }));
-    builder.addCase(checkUserThunk.pending, (state) => ({ status: 'loading' }));
-    builder.addCase(checkUserThunk.rejected, (state) => ({ status: 'guest' }));
+    builder.addCase(checkUserThunk.pending, (state) => ({ status: 'loading', whoAuth: 'User' }));
+    builder.addCase(checkUserThunk.rejected, (state) => ({ status: 'guest', whoAuth: 'Guest' }));
 
     builder.addCase(signUpUserThunk.fulfilled, (state, { payload }) => ({
       ...payload,
       status: 'logged',
+      whoAuth: 'User',
     }));
-    builder.addCase(signUpUserThunk.rejected, (state) => ({ status: 'guest' }));
+    builder.addCase(signUpUserThunk.rejected, (state) => ({ status: 'guest', whoAuth: 'Guest' }));
 
     builder.addCase(loginUserThunk.fulfilled, (state, { payload }) => ({
       ...payload,
       status: 'logged',
+      whoAuth: 'User',
     }));
-    builder.addCase(loginUserThunk.rejected, (state) => ({ status: 'guest' }));
+    builder.addCase(loginUserThunk.rejected, (state) => ({ status: 'guest', whoAuth: 'Guest' }));
 
-    builder.addCase(logoutUserThunk.fulfilled, (state) => ({ status: 'guest' }));
+    builder.addCase(logoutUserThunk.fulfilled, (state) => ({ status: 'guest', whoAuth: 'Guest' }));
     builder.addCase(logoutUserThunk.rejected, (state) => state);
   },
 });
