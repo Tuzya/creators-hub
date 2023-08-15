@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Card, CardActions, CardContent, Typography } from '@mui/material';
 import { Link, useParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import { useAppSelector } from '../../../redux/hooks';
 import { cardStyle } from '../../styles';
 
 export default function OneCourseItem(): JSX.Element {
