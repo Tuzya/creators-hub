@@ -16,6 +16,7 @@ export default function ProfilePage(): JSX.Element {
   console.log('useParams,', profileId);
 
   useEffect(() => {
+
     void dispatch(getPersonInfoThunk({ profileId: profileId as string }));
   }, []);
 

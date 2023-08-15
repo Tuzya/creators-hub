@@ -20,9 +20,7 @@ export default function PersonLoggedInfoItem(): JSX.Element {
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
-        <Typography variant="h5" sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
-          Ваше Фото: {person?.photo}
-        </Typography>
+        {person?.photo && <img src={`/public/img/${person?.photo}`} alt="Ваше Фото " />}
         <Typography variant="h5" sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
           Ваш Город: {person?.city}
         </Typography>

@@ -1,6 +1,6 @@
 const { threadId } = require('worker_threads');
 const express = require('express');
-const { Course, User } = require('../db/models');
+const { Course, User, CoursesUser } = require('../db/models');
 const upload = require('../middleware/multerPdfMiddleware');
 
 const router = express.Router();
@@ -53,12 +53,40 @@ router.post('/lk', upload.single('downloadLink'), async (req, res) => {
       downloadLink,
       company_id: id,
     });
-
     res.status(201).json(course);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Произошла ошибка при добавлении курса!' });
   }
 });
+
+router.post('/addcourse', async (req, res) => {
+  const { userId, selectedCourses } = req.body;
+
+  try {
+    const user = await User.findByPk(userId);
+    const course = await Course.findOne({ where: { id: selectedCourses } });
+
+    if (!user || !course) {
+      return res
+        .status(404)
+        .json({ error: 'Пользователь или курс не найдены' });
+    }
+
+    await CoursesUser.create({
+      user_id: user.id,
+      courses_id: course.id,
+      status: true,
+    });
+
+    res.status(200).json({ message: 'Курс успешно назначен пользователю' });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ error: 'Произошла ошибка при назначении курса пользователю' });
+  }
+});
+
 
 module.exports = router;

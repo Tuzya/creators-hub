@@ -1,10 +1,11 @@
+// @ts-ignore
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import type { EditProfileType, PersonInfoType } from '../../../types/profileType/profileTypes';
 import type { UserModelType } from '../../../types/userTypes';
 
 export const getProfileThunk = createAsyncThunk<UserModelType[]>('profile/getProfile', async () => {
-  const { data } = await axios.get<UserModelType[]>('/company/lk/alluser');
+  const { data } = await axios.get<UserModelType[]>('/courses/lk/alluser');
   return data;
 });
 
@@ -23,18 +24,18 @@ export const getOnePersonProfileThunk = createAsyncThunk(
     return data;
   },
 );
-export const editProfileThunk = createAsyncThunk<EditProfileType, EditProfileType>(
+export const editProfileThunk = createAsyncThunk<PersonInfoType, PersonInfoType>(
   'profile/editProfile',
-  async (data) => {
-    const { data: editProfile } = await axios.patch<EditProfileType>(`/profile/edit`, data);
-    return editProfile;
+  async (input) => {
+    const { data } = await axios.post<PersonInfoType>(`/person/edit`, input);
+    return data;
   },
 );
 
 export const getPersonLoggedInfoThunk = createAsyncThunk<PersonInfoType>(
   'profile/personLoggedInfoProfile',
   async () => {
-    const { data } = await axios.get<PersonInfoType>(`/profile/person`);
+    const { data } = await axios.get<PersonInfoType>(`/person/personFindOne`);
     return data;
   },
 );
@@ -42,7 +43,7 @@ export const getPersonLoggedInfoThunk = createAsyncThunk<PersonInfoType>(
 export const getPersonInfoThunk = createAsyncThunk(
   'profile/personInfoProfile',
   async ({ profileId }: { profileId: string }) => {
-    const { data } = await axios.get<PersonInfoType>(`/profile/personInfo/${profileId}`);
+    const { data } = await axios.get<PersonInfoType>(`/person/personInfo/${profileId}`);
     console.log('thunk', data);
     return data;
   },

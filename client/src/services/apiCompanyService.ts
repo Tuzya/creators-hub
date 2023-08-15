@@ -28,3 +28,8 @@ export const companyLoginService = async (
 
 export const companyLogoutService = async (): Promise<AxiosResponse<any, any>> =>
   apiService('/company/logout');
+
+export const putCourseToUserFromCompanyService = async (inputs, userId) => {
+  const { data } = await apiService.post('/courses/addcourse', inputs, userId);
+  return data;
+};

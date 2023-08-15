@@ -1,12 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+
 import type { CompanyModelType } from '../../../types/companyTypes';
 import type { CourseType } from '../../../types/courseType/courseType';
 
 export const getAllCoursesThunk = createAsyncThunk<CourseType[]>(
   'allcourses/getAllCourses',
   async (): Promise<CourseType[]> => {
-    const { data } = await axios<CourseType[]>(`/company/allcourses`);
+    const { data } = await axios<CourseType[]>(`/courses/allcourses`);
     return data;
   },
 );
@@ -14,7 +15,7 @@ export const getAllCoursesThunk = createAsyncThunk<CourseType[]>(
 export const deleteCourseThunk = createAsyncThunk<CompanyModelType['id'], CourseType['id']>(
   'allcourse/deleteCourse',
   async (coursesId) => {
-    await axios.delete<CourseType['id']>(`/company/allcourses/${coursesId}`);
+    await axios.delete<CourseType['id']>(`/courses/allcourses/${coursesId}`);
     return coursesId;
   },
 );
@@ -22,7 +23,7 @@ export const deleteCourseThunk = createAsyncThunk<CompanyModelType['id'], Course
 export const getOneCourseThunk = createAsyncThunk<CourseType, CourseType['id']>(
   'allcourse/getOneCourse',
   async (coursesId) => {
-    const { data } = await axios<CourseType>(`/company/allcourses/${coursesId}`);
+    const { data } = await axios<CourseType>(`/courses/allcourses/${coursesId}`);
     return data;
   },
 );
