@@ -9,7 +9,7 @@ import { editProfileThunk } from '../../../redux/slices/profiles/profileThunk';
 export default function EditPersonInfoForm(): JSX.Element {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { editProfile } = useAppSelector((state) => state.profile);
+  // const { editProfile } = useAppSelector((state) => state.profile);
   const person = useAppSelector((store) => store.profile.personLoggedInfo);
   const [formData, setFormData] = useState<PersonInfoType>({
     city: person?.city || '',
@@ -21,11 +21,11 @@ export default function EditPersonInfoForm(): JSX.Element {
     photo: person?.photo || '', // Изменили значение на null, так как это будет объект типа File | null
   });
 
-  useEffect(() => {
-    if (editProfile) {
-      setFormData(editProfile);
-    }
-  }, [editProfile]);
+  // useEffect(() => {
+  //   if (editProfile) {
+  //     setFormData(editProfile);
+  //   }
+  // }, [editProfile]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

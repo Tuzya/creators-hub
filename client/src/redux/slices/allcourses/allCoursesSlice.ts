@@ -1,20 +1,29 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { deleteCourseThunk, getAllCoursesThunk, getOneCourseThunk } from './allCoursesThunk';
-import type { CourseType } from '../../../types/courseType/courseType';
+import type { CourseType, SearchParams } from '../../../types/courseType/courseType';
 
 export type CourseSliceType = {
   courses: CourseType[];
   onecourse: CourseType | null;
+  searchParams: SearchParams;
 };
+
+
+
 const initialState: CourseSliceType = {
   courses: [],
   onecourse: null,
+  searchParams: { query: '', filterBy: 'title' },
 };
 
 export const allCoursesSlice = createSlice({
   name: 'allcourses',
   initialState,
-  reducers: {},
+  reducers: {
+    setSearchParams: (state, action) => {
+      state.searchParams = action.payload
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(getAllCoursesThunk.fulfilled, (state, { payload }) => {
       state.courses = payload;
@@ -32,5 +41,7 @@ export const allCoursesSlice = createSlice({
     builder.addCase(getOneCourseThunk.rejected, (state) => state);
   },
 });
+
+export const { setSearchParams } = allCoursesSlice.actions
 
 export default allCoursesSlice.reducer;
