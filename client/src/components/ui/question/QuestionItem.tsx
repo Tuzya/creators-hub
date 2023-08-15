@@ -3,8 +3,9 @@ import { Button, Card, CardActions, CardContent, TextField, Typography } from '@
 import { Link, useParams } from 'react-router-dom';
 import { useAppDispatch } from '../../../redux/hooks';
 import type { QuestionModelType } from '../../../types/testTypes';
-import { changeQuestionThunk } from '../../../redux/slices/test/testThunk';
+import { changeQuestionThunk, deleteQuestionThunk } from '../../../redux/slices/test/testThunk';
 import { textFieldStyle } from '../../styles';
+import DeleteModal from '../deleteModal/deleteQuestionModal';
 
 type QuestionItemProps = {
   question: QuestionModelType;
@@ -17,8 +18,11 @@ export default function QuestionItem({ question }: QuestionItemProps): JSX.Eleme
   const changeHandler: React.ChangeEventHandler<HTMLInputElement> = (e): void => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
+  const [open, setOpen] = useState(0);
 
   return (
+    <>
+    <DeleteModal setOpen={setOpen} open={open}/>
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
         <Typography variant="h5" component="div">
@@ -56,16 +60,22 @@ export default function QuestionItem({ question }: QuestionItemProps): JSX.Eleme
           }
           }
             
-            >Edit</Button>
+            >Подтвердить изменения</Button>
           </>
         )
 
         }
-
+        <Button 
+        size="small"
+        onClick={() => 
+          setOpen(question.id)
+        // void dispatch(deleteQuestionThunk({courseId: Number(courseId), questionId: Number(question.id)}))
+      }>Удалить вопрос</Button>
         <Link to={`/company/allcourses/${Number(courseId)}/addQuestion/${question.id}/addAnswers`}>
-          <Button size="small">Добавить/Изменить Ответы</Button>
+          <Button size="small">Ответы: добавление/удаление</Button>
         </Link>
       </CardActions>
     </Card>
+    </>
   );
 }
