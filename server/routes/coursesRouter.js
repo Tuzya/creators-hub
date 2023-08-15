@@ -68,9 +68,18 @@ router.post('/addcourse', async (req, res) => {
     const course = await Course.findOne({ where: { id: selectedCourses } });
 
     if (!user || !course) {
-      return res
-        .status(404)
-        .json({ error: 'Пользователь или курс не найдены' });
+      return res.status(404).json({ error: 'Пользователь или курс не найдены' });
+    }
+
+    const existingAssignment = await CoursesUser.findOne({
+      where: {
+        user_id: user.id,
+        courses_id: course.id,
+      },
+    });
+
+    if (existingAssignment) {
+      return res.status(400).json({ error: 'Курс уже назначен этому пользователю' });
     }
 
     await CoursesUser.create({
