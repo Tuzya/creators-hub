@@ -6,7 +6,7 @@ const upload = require('../middleware/multerPdfMiddleware');
 const router = express.Router();
 
 router.route('/allcourses').get(async (req, res) => {
-  const { id } = req.session.user;
+  const { id } = req.session.company;
   // console.log('server', id);
   const courses = await Course.findAll({
     where: { company_id: id },
@@ -33,7 +33,7 @@ router.delete('/allcourses/:courseId', async (req, res) => {
 router.route('/lk/alluser').get(async (req, res) => {
   try {
     console.log('сюда зашёл');
-    const { id } = req.session.user;
+    const { id } = req.session.company;
     const userProfile = await User.findAll({ where: { company_id: id } });
     console.log(userProfile);
     res.json(userProfile);
@@ -45,7 +45,7 @@ router.route('/lk/alluser').get(async (req, res) => {
 router.post('/lk', upload.single('downloadLink'), async (req, res) => {
   const { title, body } = req.body;
   const downloadLink = req.file ? req.file.filename : '';
-  const { id } = req.session.user;
+  const { id } = req.session.company;
   try {
     const course = await Course.create({
       title,
@@ -87,6 +87,5 @@ router.post('/addcourse', async (req, res) => {
       .json({ error: 'Произошла ошибка при назначении курса пользователю' });
   }
 });
-
 
 module.exports = router;

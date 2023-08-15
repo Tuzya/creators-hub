@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Card, CardActions, CardContent, Container, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { useAppDispatch } from '../../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import type { CourseType } from '../../../types/courseType/courseType';
 import { cardStyle } from '../../styles';
 import { deleteCourseThunk } from '../../../redux/slices/allcourses/allCoursesThunk';
@@ -13,7 +13,11 @@ type CourseItemProps = {
 
 function AllCourseItem({ course }: CourseItemProps): JSX.Element {
   const dispath = useAppDispatch();
+<<<<<<< HEAD
   const [open, setOpen] = useState(0);
+=======
+  const company = useAppSelector((store) => store.company);
+>>>>>>> dev
 
   return (
     <Container>

@@ -6,8 +6,6 @@ import ProfilePage from './components/pages/user/ProfilePage';
 import AllCoursesPage from './components/pages/courses/AllCoursesPage';
 import TestPage from './components/pages/test/TestPage';
 import Navbar from './components/ui/NavBar';
-// import CompanyPage from './components/pages/company/CompanyPage';
-
 import { checkCompanyThunk } from './redux/slices/company/companyThunks';
 import PrivateRouter from './components/hocs/PrivateRouter';
 import { checkUserThunk } from './redux/slices/user/userThunks';
@@ -22,15 +20,17 @@ import EditPersonInfo from './components/pages/editPersonInfo/EditPersonInfo';
 import AdminSignUpUser from './components/pages/adminPanel/AdminSignUpUser';
 import AnswersAddPage from './components/pages/test/addTest/AnswersAddPage';
 import QuestionPage from './components/pages/test/addTest/QuestionPage';
-import { getAllCoursesThunk } from './redux/slices/allcourses/allCoursesThunk';
+
 import Loader from './components/hocs/Loader';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
   const user = useAppSelector((store) => store.user);
+  const company = useAppSelector((store) => store.company);
 
   useEffect(() => {
     void dispatch(checkCompanyThunk());
+    console.log(company.status);
   }, []);
 
   useEffect(() => {
@@ -45,7 +45,7 @@ function App(): JSX.Element {
   }, []);
 
   return (
-    <Loader isLoading={user.status === 'loading'}>
+    <Loader isLoading={user.status === 'loading' || company.status === 'loading'}>
       <>
         <CssBaseline />
         <Navbar />
@@ -65,7 +65,6 @@ function App(): JSX.Element {
                 <Route path="/profile/lk" element={<ProfileLoggedPage />} />
                 <Route path="/profile/lk/edit" element={<EditPersonInfo />} />
                 <Route path="/profile/lk/:profileId" element={<ProfilePage />} />
-                <Route path="/company/lk" element={<CompanyPage />} />
                 <Route path="/company/allcourses" element={<AllCoursesPage />} />
                 <Route
                   path="/company/allcourses/:courseId/addQuestion/:questionId/addAnswers"
@@ -77,6 +76,15 @@ function App(): JSX.Element {
                 />
                 <Route path="/company/allcourses/:courseId/test" element={<TestPage />} />
                 <Route path="/company/allcourses/:courseId" element={<CoursePage />} />
+              </Route>
+              <Route
+                element={
+                  <PrivateRouter
+                    isAllowed={company.status === 'logged' && company.whoAuth === 'Company'}
+                  />
+                }
+              >
+                <Route path="/company/lk" element={<CompanyPage />} />
               </Route>
               <Route element={<PrivateRouter isAllowed={user.status === 'guest'} />}>
                 <Route path="/login" element={<LoginInPage />} />
