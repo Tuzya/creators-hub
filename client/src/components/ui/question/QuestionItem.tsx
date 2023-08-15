@@ -13,7 +13,7 @@ export default function QuestionItem({ question }: QuestionItemProps): JSX.Eleme
   const dispatch = useAppDispatch();
   const { courseId } = useParams();
   const [edit, setEdit] = useState(false);
-  const [input, setInput] = useState({ question: '' });
+  const [input, setInput] = useState({ question: question.question || '' });
   const changeHandler: React.ChangeEventHandler<HTMLInputElement> = (e): void => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -32,7 +32,7 @@ export default function QuestionItem({ question }: QuestionItemProps): JSX.Eleme
         size="small"
         onClick={() => 
           setEdit(true)
-        // 
+         
       }
         >Изменить вопрос</Button>
         <br />
@@ -42,7 +42,7 @@ export default function QuestionItem({ question }: QuestionItemProps): JSX.Eleme
             size="small"
             variant="outlined"
             name="question"
-            label="question"
+            label="new question"
             value={input.question}
             onChange={changeHandler}
             sx={textFieldStyle}
