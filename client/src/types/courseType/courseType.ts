@@ -6,3 +6,9 @@ export type CourseType = {
     company_id: number;
 }
 
+
+
+export type SearchParams = {
+    query: string;
+    filterBy: string;
+};
