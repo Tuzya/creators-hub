@@ -11,7 +11,7 @@ const storage = multer.diskStorage({
   },
 });
 const fileUpload = multer({
-  storage,
+  storage: multer.memoryStorage(),
   limits: { fileSize: 10 * 1024 * 1024 }, // Максимальный размер файла
   fileFilter: (req, file, cb) => {
     if (file.mimetype.includes('image')) {

@@ -1,4 +1,4 @@
-const { fs } = require('fs/promises');
+const fs = require('fs').promises;
 const path = require('path');
 const sharp = require('sharp');
 
@@ -48,26 +48,39 @@ router.get('/personInfo/:profileId', async (req, res) => {
 });
 router.post('/edit', fileUpload.single('photo'), async (req, res) => {
   const { id } = req.session.user;
-  const { city, birthDate, phone, about, companies, sex } = req.body;
+  const {
+    city, birthDate, phone, about, companies, sex,
+  } = req.body;
   if (req.file) {
     const outputBuffer = req.file.buffer;
     const imageExtension = path.extname(req.file.originalname);
     let image = `${Date.now()}${imageExtension}`;
     // Если изображение не в формате .webp, конвертировать
     if (imageExtension.toLowerCase() !== '.webp') {
-      const convertedBuffer = await sharp(req.file.buffer).webp().toBuffer();
-      image = `${Date.now()}.webp`;
-      await fs.promises.writeFile(
-        path.join(__dirname, '..', 'public', 'img', image),
-        console.log(convertedBuffer)
-      );
+      try {
+        const convertedBuffer = await sharp(req.file.buffer).webp().toBuffer();
+        image = `${Date.now()}.webp`;
+        console.log('-------------------', convertedBuffer);
+        await fs.promises.writeFile(
+          path.join(__dirname, '..', 'public', 'img', image),
+          convertedBuffer,
+        );
+      } catch (conversionError) {
+        console.error('Error converting image to .webp:', conversionError);
+      }
     } else {
-      await fs.promises.writeFile(
-        path.join(__dirname, '..', 'public', 'img', image),
-        console.log(outputBuffer)
-      );
+      try {
+        console.log(outputBuffer);
+        await fs.promises.writeFile(
+          path.join(__dirname, '..', 'public', 'img', image),
+          outputBuffer,
+        );
+      } catch (writeError) {
+        console.error('Error writing image to file:', writeError);
+      }
     }
-    const [updatedRowsCount, updatedRows] = await Person.create(
+
+    const [updatedRowsCount, updatedRows] = await Person.upsert(
       // Объект данных для обновления/вставки
       {
         city,
@@ -82,7 +95,7 @@ router.post('/edit', fileUpload.single('photo'), async (req, res) => {
       // Опции
       {
         returning: true, // Получить обновленные данные
-      }
+      },
     );
 
     if (updatedRowsCount > 0) {
