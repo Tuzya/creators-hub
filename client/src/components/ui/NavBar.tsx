@@ -79,7 +79,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-export default function PersistentDrawerLeft() {
+export default function PersistentDrawerLeft(): JSX.Element {
   const company = useAppSelector((store) => store.company);
   const user = useAppSelector((store) => store.user);
   const person = useAppSelector((store) => store.profile.personLoggedInfo);
@@ -157,6 +157,7 @@ export default function PersistentDrawerLeft() {
                 color="inherit"
                 onClick={() => {
                   void dispatch(logoutUserThunk());
+                  window.location = '/';
                 }}
               >
                 <LogoutIcon /> <span style={{ fontSize: '20px' }}> Logout </span>
@@ -256,6 +257,7 @@ export default function PersistentDrawerLeft() {
                 }}
                 onClick={() => {
                   void dispatch(logoutUserThunk());
+                  window.location = '/';
                 }}
               >
                 <ListItemIcon sx={{ color: 'inherit' }}>
