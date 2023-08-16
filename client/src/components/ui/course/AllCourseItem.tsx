@@ -35,9 +35,7 @@ function AllCourseItem({ course }: CourseItemProps): JSX.Element {
         <Link to={`/company/allcourses/${course.id}`}>
             <Button size="small">Страница курса</Button>
           </Link>
-          <Button size="small" onClick={()=> {
-      setOpen(course.id)}
-    }>
+          <Button size="small" >
             Изменить курс
           </Button>
           <Button size="small" onClick={()=> {
@@ -46,8 +44,6 @@ function AllCourseItem({ course }: CourseItemProps): JSX.Element {
             Удалить курс
           </Button>
          
-
-          
         </CardActions>
       </Card>
     </Container>
