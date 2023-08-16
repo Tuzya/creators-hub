@@ -1,24 +1,25 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Checkbox, Container } from '@mui/material';
-import { useAppSelector } from '../../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 
 
 export default function TestListItem(): JSX.Element {
   const questions = useAppSelector((store) => store.questionsAnswers.questionsAnswers);
   const course = useAppSelector((store) => store.allcourses.onecourse);
-
-  //   if (questions.length > 0) {
-  //     console.log('консоль');
-  //   } else {
-  //     console.log('нету');
-  //   }
-
+  const dispatch = useAppDispatch();
   const [showFinalRez, setShowFinalRez] = useState(false);
   const [score, setScore] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(0);
+
+  // useEffect(() => {
+  //   if(showFinalRez && (score/questions.length)*100 > 74) {
+  //     updateCourseStatus()
+  //   }
+    
+  // })
 
   const elClicked = (isCorrect: boolean): void => {
     if (isCorrect) {
@@ -30,6 +31,7 @@ export default function TestListItem(): JSX.Element {
       setShowFinalRez(true);
     }
   };
+
 
   return (
     <Container>
@@ -81,29 +83,3 @@ export default function TestListItem(): JSX.Element {
   );
 }
 
-// const questions = [
-//   {
-//     question: 'Wwwwwwwwwwwwwwwwwwww',
-//     answers: [
-//       { id: 0, answer: 'Aaaaaaaaaaaaa', isCorrect: true },
-//       { id: 1, answer: 'Bbbbbbbbbbbbb', isCorrect: false },
-//       { id: 2, answer: 'Ccccccccccccc', isCorrect: false },
-//     ],
-//   },
-//   {
-//     question: '111111111111',
-//     answers: [
-//       { id: 0, answer: '222222222222', isCorrect: false },
-//       { id: 1, answer: '333333333333', isCorrect: true },
-//       { id: 2, answer: '4444444444444', isCorrect: false },
-//     ],
-//   },
-//   {
-//     question: 'Eeeeeeeeeeeeeeeeeeeeeee',
-//     answers: [
-//       { id: 0, answer: 'Vvvvvvvvvvvvv', isCorrect: true },
-//       { id: 1, answer: 'Nnnnnnnnnnnnn', isCorrect: false },
-//       { id: 2, answer: 'Ooooooooooooo', isCorrect: false },
-//     ],
-//   },
-// ];

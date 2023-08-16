@@ -95,8 +95,8 @@ export default function PersistentDrawerLeft() {
     { to: '/company/lk', name: 'Лк компании', icon: <BusinessIcon /> },
     { to: '/profile/lk', name: 'Лк Юзер', icon: <PersonIcon /> },
     { to: '/company/allcourses/', name: 'База Знаний', icon: <BookIcon /> },
-    { to: '/signup', name: 'Sign Up', icon: <PersonAddIcon /> }, // Added Sign Up link
-    { to: '/login', name: 'Sign In', icon: <LockOpenIcon /> }, // Added Sign In link
+    { to: '/signup', name: 'Sign Up', icon: <PersonAddIcon /> }, 
+    { to: '/login', name: 'Sign In', icon: <LockOpenIcon /> }, 
   ];
 
   const dispatch = useAppDispatch();
@@ -177,7 +177,7 @@ export default function PersistentDrawerLeft() {
                 to={link.to}
                 sx={{
                   '&:hover': {
-                    backgroundColor: '#420',
+                    backgroundColor: '#ff6800',
                   },
                 }}
               >
@@ -193,7 +193,7 @@ export default function PersistentDrawerLeft() {
             <ListItemButton
               sx={{
                 '&:hover': {
-                  backgroundColor: '#420',
+                  backgroundColor: '#ff6800',
                 },
               }}
               onClick={() => {
