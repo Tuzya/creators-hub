@@ -13,8 +13,9 @@ type PostItemProps = {
 export default function PostItem({ post }: PostItemProps): JSX.Element {
    console.log('post:', post);
    console.log('post.img:', post?.img);
-
+   console.log(post.img)
    return (
+
       <Card sx={cardStyle}>
          <CardContent>
             <Typography variant="h5" component="div">
@@ -24,9 +25,8 @@ export default function PostItem({ post }: PostItemProps): JSX.Element {
                {post?.body}
             </Typography>
             {post?.img && (
-
                <img
-                  src={`http://localhost:3001/public/post/${post?.img}`}
+                  src={`http://localhost:3001/public${post?.img}`}
                   alt="Ваше Фото"
                   style={{ width: '150px', height: '150px' }}
                />

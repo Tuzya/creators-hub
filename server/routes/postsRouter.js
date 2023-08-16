@@ -94,12 +94,9 @@ router.post('/add', uploadPost.single('img'), async (req, res) => {
     }
     const names = `${Date.now()}.webp`;
     const outputBuffer = await sharp(req.file.buffer).webp().toBuffer();
-    await fs.promises.writeFile(
-      path.join(__dirname, '..', 'public', 'img', names),
-      outputBuffer,
-    );
+    await fs.promises.writeFile(`./public/img/${names}`, outputBuffer);
     const imgPath = `/img/${names}`;
-    const { title, body } = req.body;
+    const { title, body, img } = req.body;
     const tee = await Post.create({
       title,
       body,

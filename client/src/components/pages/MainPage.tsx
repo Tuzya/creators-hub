@@ -8,16 +8,14 @@ import { getPostThunk } from '../../redux/slices/posts/postThunk';
 
 export default function MainPage(): JSX.Element {
   const dispatch = useAppDispatch()
-  // useEffect(() => {
-  //   void dispatch(getPostThunk());
-  // }, []);
+  useEffect(() => {
+    void dispatch(getPostThunk());
+  }, []);
 
   return (
     <Container>
-
-
       <div>1 eeeeeeeeeeeeq</div>
-      {/* <PostList /> */}
+      <PostList />
     </Container>
   );
 }
