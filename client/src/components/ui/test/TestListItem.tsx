@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Button, Checkbox, Container } from '@mui/material';
-import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+// import React, { useEffect, useState } from 'react';
+// import { Link } from 'react-router-dom';
+// import { Button, Checkbox, Container } from '@mui/material';
+// import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 // /* eslint-disable jsx-a11y/click-events-have-key-events */
 // /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 // import React, { useState } from 'react';
@@ -117,7 +117,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Container } from '@mui/material';
 import { RadioButtonUnchecked, RadioButtonChecked } from '@mui/icons-material';
-import { useAppSelector } from '../../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 
 export default function TestListItem(): JSX.Element {
   const questions = useAppSelector((store) => store.questionsAnswers.questionsAnswers);
