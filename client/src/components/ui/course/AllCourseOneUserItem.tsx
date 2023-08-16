@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Card, CardActions, CardContent, Container, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { useAppDispatch } from '../../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import type { CourseType } from '../../../types/courseType/courseType';
 import { cardStyle } from '../../styles';
 
@@ -10,7 +10,11 @@ type CourseItemProps = {
 };
 
 function AllCourseOneUserItem({ course }: CourseItemProps): JSX.Element {
-  const dispath = useAppDispatch();
+  const dispatch = useAppDispatch();
+  const coursesStatus = useAppSelector((store) => store.coursesStatus.updateSuccess);
+
+  
+
 
   return (
     <Container>
@@ -22,10 +26,17 @@ function AllCourseOneUserItem({ course }: CourseItemProps): JSX.Element {
           <Typography variant="h5" component="div">
             Course {course.title}
           </Typography>
-          {/* <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          {course.body}...
-        </Typography> */}
         </CardContent>
+        <div
+          style={{
+            position: 'absolute',
+            top: 10,
+            right: 10,
+            color: coursesStatus.status ? 'green' : 'red',
+          }}
+        >
+          {coursesStatus.status ? 'Выполнено' : 'К прохождению'}
+        </div>
         <CardActions>
           <Link to={`/company/allcourses/${course.id}`}>
             <Button size="small">CoursePage</Button>

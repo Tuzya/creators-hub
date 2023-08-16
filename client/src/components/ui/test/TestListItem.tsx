@@ -1,3 +1,9 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+// import React, { useEffect, useState } from 'react';
+// import { Link } from 'react-router-dom';
+// import { Button, Checkbox, Container } from '@mui/material';
+// import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 // /* eslint-disable jsx-a11y/click-events-have-key-events */
 // /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 // import React, { useState } from 'react';
@@ -111,12 +117,12 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Container } from '@mui/material';
 import { RadioButtonUnchecked, RadioButtonChecked } from '@mui/icons-material';
-import { useAppSelector } from '../../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 
 export default function TestListItem(): JSX.Element {
   const questions = useAppSelector((store) => store.questionsAnswers.questionsAnswers);
   const course = useAppSelector((store) => store.allcourses.onecourse);
-
+  const dispatch = useAppDispatch();
   const [showFinalRez, setShowFinalRez] = useState(false);
   const [score, setScore] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -125,6 +131,13 @@ export default function TestListItem(): JSX.Element {
   const answerClicked = (index: number): void => {
     setSelectedAnswer(index);
   };
+
+  // useEffect(() => {
+  //   if(showFinalRez && (score/questions.length)*100 > 74) {
+  //     updateCourseStatus()
+  //   }
+    
+  // })
 
   const elClicked = (isCorrect: boolean): void => {
     if (isCorrect) {
@@ -137,6 +150,7 @@ export default function TestListItem(): JSX.Element {
       setShowFinalRez(true);
     }
   };
+
 
   return (
     <Container>
