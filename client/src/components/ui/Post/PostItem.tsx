@@ -39,6 +39,8 @@ export default function PostItem({ post }: PostItemProps): JSX.Element {
    );
 }
 
+"console.log(rabota"
+
 {/* <CardContent>
    {person?.photo && (
       <img
