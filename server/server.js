@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
-// const postsRouter = require('./routes/postsRouter');
+const postsRouter = require('./routes/postsRouter');
 const userRouter = require('./routes/userRouter');
 const companyRouter = require('./routes/companyRouter');
 const coursesRouter = require('./routes/coursesRouter');
@@ -41,7 +41,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
-// app.use('/api/posts', postsRouter);
+app.use('/api/posts', postsRouter);
 app.use('/api/user', userRouter);
 app.use('/api', findCockieRouter);
 app.use('/api/profile', profileRouter);
