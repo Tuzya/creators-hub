@@ -114,10 +114,11 @@
 // // ];
 
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Button, Container } from '@mui/material';
 import { RadioButtonUnchecked, RadioButtonChecked } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import { updateStatusThunk } from '../../../redux/slices/checkTestStatus/checkTestStatusThunk';
 
 export default function TestListItem(): JSX.Element {
   const questions = useAppSelector((store) => store.questionsAnswers.questionsAnswers);
@@ -127,6 +128,8 @@ export default function TestListItem(): JSX.Element {
   const [score, setScore] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+  const { courseId } = useParams();
+  console.log(courseId);
 
   const answerClicked = (index: number): void => {
     setSelectedAnswer(index);
@@ -136,7 +139,7 @@ export default function TestListItem(): JSX.Element {
   //   if(showFinalRez && (score/questions.length)*100 > 74) {
   //     updateCourseStatus()
   //   }
-    
+
   // })
 
   const elClicked = (isCorrect: boolean): void => {
@@ -151,7 +154,6 @@ export default function TestListItem(): JSX.Element {
     }
   };
 
-
   return (
     <Container>
       <div className="test">
@@ -163,23 +165,33 @@ export default function TestListItem(): JSX.Element {
             <h3>
               {score} из {questions.length} ({Math.floor((score / questions.length) * 100)}%)
               {(score / questions.length) * 100 > 60 ? (
-                <span>Вы прошли!</span>
+                <>
+                  <span>Вы прошли!</span>
+                  <Link to="/profile/lk">
+                    <Button
+                      className="test-button"
+                      onClick={() => void dispatch(updateStatusThunk(courseId))}
+                    >
+                      Закрыть
+                    </Button>
+                  </Link>
+                </>
               ) : (
-                <span>Вы не прошли!</span>
+                <>
+                  <span>Вы не прошли!</span>
+                  <Link to="/profile/lk">
+                    <Button className="test-button"> Закрыть </Button>
+                  </Link>
+                </>
               )}
             </h3>
-            <Link to="/profile/lk">
-              <Button className="test-button"> Закрыть </Button>
-            </Link>
           </div>
         ) : (
           <div className="question-card">
             <h2>
               Вопрос {currentQuestion + 1} из {questions.length}
             </h2>
-
             {questions.length > 0 && <h3>{questions[currentQuestion].question}</h3>}
-
             <ul>
               <div className="li-question">
                 {questions.length > 0 &&

@@ -28,16 +28,23 @@ function App(): JSX.Element {
   const dispatch = useAppDispatch();
   const user = useAppSelector((store) => store.user);
   const company = useAppSelector((store) => store.company);
+  // useEffect(() => {
+  //   console.log('компания', company);
+  //   console.log('user', user);
+  // }, []);
 
   useEffect(() => {
-    void dispatch(checkCompanyThunk());
-    console.log(company.status);
+    if (user) {
+      void dispatch(checkUserThunk());
+    }
+    if (company) {
+      void dispatch(checkCompanyThunk());
+    }
   }, []);
 
-  useEffect(() => {
-    void dispatch(checkUserThunk());
-    console.log(user.status);
-  }, []);
+  // useEffect(() => {
+
+  // }, []);
 
   useEffect(() => {
     if (user) {

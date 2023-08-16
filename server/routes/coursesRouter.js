@@ -46,14 +46,13 @@ router.route('/allcourses').get(async (req, res) => {
 //   res.json(courses);
 // });
 
-router.route('/allcourses/:courseId').get(async (req, res) => {
-  const id = req.params.courseId;
-  const oneCourses = await Course.findByPk(id);
-  res.json(oneCourses);
-});
-
 router
-  .router('/allcourses/:courseId')
+  .route('/allcourses/:courseId')
+  .get(async (req, res) => {
+    const id = req.params.courseId;
+    const oneCourses = await Course.findByPk(id);
+    res.json(oneCourses);
+  })
   .delete(async (req, res) => {
     try {
       await Course.destroy({ where: { id: req.params.courseId } });
@@ -63,7 +62,7 @@ router
       res.sendStatus(500);
     }
   })
-  .put((async (req, res) => {
+  .put(async (req, res) => {
     console.log('serveeeeeeeeer');
     const { courseId } = req.params;
     const course = await Course.findOne({ where: { id: courseId } });
@@ -76,9 +75,10 @@ router
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'Произошла ошибка при добавлении курса!' });
-    } await course.save();
+    }
+    await course.save();
     return res.json(course);
-  }));
+  });
 
 router.route('/lk/alluser').get(async (req, res) => {
   try {
@@ -118,7 +118,9 @@ router.post('/addcourse', async (req, res) => {
     const course = await Course.findOne({ where: { id: selectedCourses } });
 
     if (!user || !course) {
-      return res.status(404).json({ error: 'Пользователь или курс не найдены' });
+      return res
+        .status(404)
+        .json({ error: 'Пользователь или курс не найдены' });
     }
 
     const existingAssignment = await CoursesUser.findOne({
@@ -129,7 +131,9 @@ router.post('/addcourse', async (req, res) => {
     });
 
     if (existingAssignment) {
-      return res.status(400).json({ error: 'Курс уже назначен этому пользователю' });
+      return res
+        .status(400)
+        .json({ error: 'Курс уже назначен этому пользователю' });
     }
 
     await CoursesUser.create({

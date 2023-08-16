@@ -11,10 +11,7 @@ type CourseItemProps = {
 
 function AllCourseOneUserItem({ course }: CourseItemProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const coursesStatus = useAppSelector((store) => store.coursesStatus.updateSuccess);
-
-  
-
+  const coursesStatus = useAppSelector((store) => store.coursesStatus.status);
 
   return (
     <Container>
@@ -32,10 +29,10 @@ function AllCourseOneUserItem({ course }: CourseItemProps): JSX.Element {
             position: 'absolute',
             top: 10,
             right: 10,
-            color: coursesStatus.status ? 'green' : 'red',
+            color: coursesStatus ? 'green' : 'red',
           }}
         >
-          {coursesStatus.status ? 'Выполнено' : 'К прохождению'}
+          {coursesStatus ? 'Выполнено' : 'К прохождению'}
         </div>
         <CardActions>
           <Link to={`/company/allcourses/${course.id}`}>

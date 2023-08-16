@@ -18,7 +18,6 @@ const userSlice = createSlice({
     }));
     builder.addCase(checkUserThunk.pending, (state) => ({ status: 'loading', whoAuth: 'User' }));
     builder.addCase(checkUserThunk.rejected, (state) => ({ status: 'guest', whoAuth: 'Guest' }));
-
     builder.addCase(signUpUserThunk.fulfilled, (state, { payload }) => ({
       ...payload,
       status: 'logged',
