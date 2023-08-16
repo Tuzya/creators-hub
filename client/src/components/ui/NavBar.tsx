@@ -112,6 +112,7 @@ export default function PersistentDrawerLeft() {
           { to: '/', name: 'Home', icon: <HomeIcon /> },
           { to: '/company/lk', name: 'Лк компании', icon: <BusinessIcon /> },
           { to: '/company/allcourses/', name: 'База Знаний', icon: <BookIcon /> },
+          { to: '/admin/signup-user', name: 'Панель Управления', icon: <LogoutIcon /> },
         ]
       : [
           { to: '/', name: 'Home', icon: <HomeIcon /> },

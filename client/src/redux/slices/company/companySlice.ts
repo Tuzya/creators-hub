@@ -52,7 +52,11 @@ const companySlice = createSlice({
     }));
     builder.addCase(logoutCompanyThunk.rejected, (state) => state);
 
-    builder.addCase(putCourseToUserFromCompanyThunk.fulfilled, (state, { payload }) => payload);
+    // builder.addCase(putCourseToUserFromCompanyThunk.fulfilled, (state, { payload }) => payload);
+    builder.addCase(putCourseToUserFromCompanyThunk.fulfilled, (state, { payload }) => ({
+      ...state, // Сначала сохраняем текущее состояние
+      ...payload, // Затем применяем данные из payload
+    }));
   },
 });
 
