@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import type {
    EditProfileType,
    PersonInfoType,
+   SearchParamsProfile,
    YourProfileType,
 } from '../../../types/profileType/profileTypes';
 import {
@@ -21,6 +22,7 @@ type ProfileSliceTypes = {
    editProfile: PersonInfoType | null;
    personLoggedInfo: PersonInfoType | null;
    personInfo: PersonInfoType | null;
+   searchParamsProfile: SearchParamsProfile
 };
 
 const initialState: ProfileSliceTypes = {
@@ -30,12 +32,19 @@ const initialState: ProfileSliceTypes = {
    editProfile: null,
    personLoggedInfo: null,
    personInfo: null,
+   searchParamsProfile: { query: '', filterBy: 'username' }
+
 };
 
 export const profileSlice = createSlice({
    name: 'profile',
    initialState,
-   reducers: {},
+   reducers: {
+      setSearchParamsProfile: (state, action) => {
+         state.searchParamsProfile = action.payload
+      }
+
+   },
    extraReducers: (builder) => {
       // map всех юзеров одной компании
       builder.addCase(getProfileThunk.fulfilled, (state, action) => ({
@@ -73,4 +82,6 @@ export const profileSlice = createSlice({
       builder.addCase(getPersonInfoThunk.rejected, (state) => state);
    },
 });
+export const { setSearchParamsProfile } = profileSlice.actions
+
 export default profileSlice.reducer;
