@@ -118,7 +118,11 @@ import { Link, useParams } from 'react-router-dom';
 import { Button, Container } from '@mui/material';
 import { RadioButtonUnchecked, RadioButtonChecked } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+<<<<<<< HEAD
 import { updateStatusThunk } from '../../../redux/slices/checkTestStatus/checkTestStatusThunk';
+=======
+import './TestListItem.css'
+>>>>>>> 5930570e33389d38de534fec8f6bde3493ee55f2
 
 export default function TestListItem(): JSX.Element {
   const questions = useAppSelector((store) => store.questionsAnswers.questionsAnswers);
@@ -157,12 +161,12 @@ export default function TestListItem(): JSX.Element {
   return (
     <Container>
       <div className="test">
-        <h1>{course?.title}</h1>
+        <h1 className='course-title'>{course?.title}</h1>
 
         {showFinalRez ? (
           <div className="final-rez">
             <h2>Ваш результат {score}</h2>
-            <h3>
+            <h3 className='h3-final-rez'>
               {score} из {questions.length} ({Math.floor((score / questions.length) * 100)}%)
               {(score / questions.length) * 100 > 60 ? (
                 <>
@@ -188,18 +192,21 @@ export default function TestListItem(): JSX.Element {
           </div>
         ) : (
           <div className="question-card">
-            <h2>
-              Вопрос {currentQuestion + 1} из {questions.length}
-            </h2>
-            {questions.length > 0 && <h3>{questions[currentQuestion].question}</h3>}
+            
+            <h3>
+              {currentQuestion + 1}/{questions.length}
+            </h3>
+
+            {questions.length > 0 && <h2>{questions[currentQuestion].question}</h2>}
+
             <ul>
               <div className="li-question">
                 {questions.length > 0 &&
                   questions[currentQuestion].Answers.map((el, index) => (
-                    <li
+                    <li className='li-question-li'
                       onClick={() => answerClicked(index)}
                       key={el.id}
-                      style={{ background: 'grey', display: 'flex', alignItems: 'center' }}
+                      
                     >
                       {selectedAnswer === index ? <RadioButtonChecked /> : <RadioButtonUnchecked />}
                       <span style={{ marginLeft: '10px' }}>{el.answer}</span>

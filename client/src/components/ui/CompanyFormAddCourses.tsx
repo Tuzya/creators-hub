@@ -86,6 +86,7 @@
 
 import React, { useState } from 'react';
 import { TextField, Button } from '@mui/material';
+
 import { addCompanyThunk } from '../../redux/slices/coursesOne/coursesThunk';
 import type { CoursesOneFormType } from '../../types/coursesOneType';
 import { useAppDispatch } from '../../redux/hooks';

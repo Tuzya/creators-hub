@@ -46,14 +46,12 @@ router.route('/allcourses').get(async (req, res) => {
 //   res.json(courses);
 // });
 
-router
-  .route('/allcourses/:courseId')
-  .get(async (req, res) => {
-    const id = req.params.courseId;
-    const oneCourses = await Course.findByPk(id);
-    res.json(oneCourses);
-  })
-  .delete(async (req, res) => {
+router.route('/allcourses/:courseId').get(async (req, res) => {
+  const id = req.params.courseId;
+  const oneCourses = await Course.findByPk(id);
+  res.json(oneCourses);
+
+}).delete(async (req, res) => {
     try {
       await Course.destroy({ where: { id: req.params.courseId } });
       res.sendStatus(200);
@@ -62,8 +60,7 @@ router
       res.sendStatus(500);
     }
   })
-  .put(async (req, res) => {
-    console.log('serveeeeeeeeer');
+  .put((async (req, res) => {
     const { courseId } = req.params;
     const course = await Course.findOne({ where: { id: courseId } });
     const downloadLink = req.file ? req.file.filename : '';

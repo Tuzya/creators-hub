@@ -36,7 +36,7 @@ app.use(
       maxAge: 1000 * 60 * 60 * 12,
       httpOnly: true,
     },
-  })
+  }),
 );
 
 // Serve uploaded PDF files

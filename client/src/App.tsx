@@ -64,6 +64,8 @@ function App(): JSX.Element {
     }
   }, [user.status]);
 
+
+
   return (
     <Loader isLoading={user.status === 'loading' || company.status === 'loading'}>
       <>
