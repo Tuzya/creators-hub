@@ -22,6 +22,7 @@ import AnswersAddPage from './components/pages/test/addTest/AnswersAddPage';
 import QuestionPage from './components/pages/test/addTest/QuestionPage';
 
 import Loader from './components/hocs/Loader';
+import { getOneProfileThunk, getPersonLoggedInfoThunk } from './redux/slices/profiles/profileThunk';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -43,6 +44,18 @@ function App(): JSX.Element {
       void dispatch(getFindCockieThunk());
     }
   }, []);
+
+  useEffect(() => {
+    if (user.status === 'logged') {
+      void dispatch(getOneProfileThunk());
+    }
+  }, []);
+
+  useEffect(() => {
+    if (user.status === 'logged') {
+      void dispatch(getPersonLoggedInfoThunk());
+    }
+  }, [user.status]);
 
   return (
     <Loader isLoading={user.status === 'loading' || company.status === 'loading'}>

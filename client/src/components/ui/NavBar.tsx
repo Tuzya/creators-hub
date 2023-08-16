@@ -30,6 +30,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { logoutUserThunk } from '../../redux/slices/user/userThunks';
+import { getPersonLoggedInfoThunk } from '../../redux/slices/profiles/profileThunk';
 
 const drawerWidth = 240;
 
@@ -81,6 +82,9 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function PersistentDrawerLeft() {
   const company = useAppSelector((store) => store.company);
   const user = useAppSelector((store) => store.user);
+  const person = useAppSelector((store) => store.profile.personLoggedInfo);
+  const profile = useAppSelector((store) => store.profile.oneProfile);
+  console.log('=======', profile);
 
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -212,6 +216,16 @@ export default function PersistentDrawerLeft() {
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </DrawerHeader>
+        {person?.photo && (
+          <img
+            src={`http://localhost:3001/public/img/${person?.photo}`}
+            alt="Ваше Фото"
+            style={{ width: '150px', height: '150px', borderRadius: '100px' }}
+          />
+        )}
+        <p style={{ fontSize: 14 }} color="text.secondary">
+          Привет! {profile?.username}
+        </p>
         <List>
           {links.map((link) => (
             <ListItem key={link.to} disablePadding>
