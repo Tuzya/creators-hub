@@ -52,15 +52,33 @@ router.route('/allcourses/:courseId').get(async (req, res) => {
   res.json(oneCourses);
 });
 
-router.delete('/allcourses/:courseId', async (req, res) => {
-  try {
-    await Course.destroy({ where: { id: req.params.courseId } });
-    res.sendStatus(200);
-  } catch (err) {
-    console.error(err);
-    res.sendStatus(500);
-  }
-});
+router
+  .router('/allcourses/:courseId')
+  .delete(async (req, res) => {
+    try {
+      await Course.destroy({ where: { id: req.params.courseId } });
+      res.sendStatus(200);
+    } catch (err) {
+      console.error(err);
+      res.sendStatus(500);
+    }
+  })
+  .put((async (req, res) => {
+    console.log('serveeeeeeeeer');
+    const { courseId } = req.params;
+    const course = await Course.findOne({ where: { id: courseId } });
+    const downloadLink = req.file ? req.file.filename : '';
+    const { title, body } = req.body;
+    try {
+      course.title = title;
+      course.body = body;
+      course.downloadLink = downloadLink;
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Произошла ошибка при добавлении курса!' });
+    } await course.save();
+    return res.json(course);
+  }));
 
 router.route('/lk/alluser').get(async (req, res) => {
   try {
