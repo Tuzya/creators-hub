@@ -139,6 +139,28 @@ module.exports = {
     );
 
     await queryInterface.bulkInsert(
+      'CoursesUsers',
+      [
+        {
+          user_id: 1,
+          courses_id: 1,
+          status: false,
+        },
+        {
+          user_id: 1,
+          courses_id: 3,
+          status: false,
+        },
+        {
+          user_id: 1,
+          courses_id: 2,
+          status: false,
+        },
+      ],
+      {}
+    );
+
+    await queryInterface.bulkInsert(
       'Questions',
       [
         {
@@ -146,11 +168,15 @@ module.exports = {
           courses_id: 1,
         },
         {
-          question: 'John 2Doe',
+          question: 'John Doe',
           courses_id: 1,
         },
         {
-          question: 'John2 Do2e',
+          question: 'John Doe',
+          courses_id: 1,
+        },
+        {
+          question: 'John Doe',
           courses_id: 1,
         },
       ],
@@ -160,49 +186,64 @@ module.exports = {
       'Answers',
       [
         {
-          answer: 'John 2Doe',
+          answer: 'John',
           isCorrect: false,
           question_id: 1,
         },
         {
-          answer: 'John2 ',
+          answer: 'Do2e',
           isCorrect: false,
           question_id: 1,
         },
         {
-          answer: ' Doe2',
+          answer: 'John2 Doe2',
           isCorrect: true,
           question_id: 1,
         },
         {
-          answer: 'John 2Doe',
+          answer: 'John',
           isCorrect: false,
           question_id: 2,
         },
         {
-          answer: 'John2 ',
+          answer: 'Do2e',
           isCorrect: false,
           question_id: 2,
         },
         {
-          answer: ' Doe2',
+          answer: 'John2 Doe2',
           isCorrect: true,
           question_id: 2,
         },
         {
-          answer: 'John 2Doe',
+          answer: 'John',
           isCorrect: false,
           question_id: 3,
         },
         {
-          answer: 'John2 ',
+          answer: 'Do2e',
           isCorrect: false,
           question_id: 3,
         },
         {
-          answer: ' Doe2',
+          answer: 'John2 Doe2',
           isCorrect: true,
           question_id: 3,
+        },
+        {
+          answer: 'John',
+          isCorrect: false,
+          question_id: 4,
+        },
+        {
+          answer: 'Do2e',
+          isCorrect: false,
+          question_id: 4,
+        },
+        {
+          answer: 'John2 Doe2',
+          isCorrect: true,
+          question_id: 4,
         },
       ],
       {}

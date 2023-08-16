@@ -234,7 +234,7 @@ export default function PersistentDrawerLeft() {
                 to={link.to}
                 sx={{
                   '&:hover': {
-                    backgroundColor: '#420',
+                    backgroundColor: '#ff6800',
                   },
                 }}
               >

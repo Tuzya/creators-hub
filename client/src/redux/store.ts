@@ -7,6 +7,7 @@ import coursesReducer from './slices/coursesOne/coursesSlice';
 import findCockieReducer from './slices/findCockie/findCockieSlice';
 import questionsAnswersReducer from './slices/test/testSlice';
 import allCourseUserReducer from './slices/allCourseOneUser/allCourseOneUserSlice';
+import coursesStatusReducer from './slices/checkTestStatus/checkTestStatusSlice';
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ export const store = configureStore({
     findCockie: findCockieReducer,
     questionsAnswers: questionsAnswersReducer,
     allCourseOneUser: allCourseUserReducer,
+    coursesStatus: coursesStatusReducer,
   },
 });
 
