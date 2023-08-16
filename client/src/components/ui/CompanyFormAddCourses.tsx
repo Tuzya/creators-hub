@@ -86,12 +86,13 @@
 
 import React, { useState } from 'react';
 import { TextField, Button } from '@mui/material';
-import { useDispatch } from 'react-redux';
+
 import { addCompanyThunk } from '../../redux/slices/coursesOne/coursesThunk';
 import type { CoursesOneFormType } from '../../types/coursesOneType';
+import { useAppDispatch } from '../../redux/hooks';
 
 export default function CompanyFormAddCourses(): JSX.Element {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [courseData, setCourseData] = useState<CoursesOneFormType>({
     title: '',

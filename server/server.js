@@ -12,6 +12,7 @@ const findCockieRouter = require('./routes/findCockieRouter');
 const profileRouter = require('./routes/profileRouter');
 const questionRouter = require('./routes/questionRouter');
 const personEditRouter = require('./routes/personEditRouter');
+const postsRouter = require('./routes/postsRouter');
 
 require('dotenv').config();
 
@@ -33,7 +34,7 @@ app.use(
       maxAge: 1000 * 60 * 60 * 12,
       httpOnly: true,
     },
-  })
+  }),
 );
 
 // Serve uploaded PDF files
@@ -41,7 +42,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
-// app.use('/api/posts', postsRouter);
+app.use('/api/posts', postsRouter);
 app.use('/api/user', userRouter);
 app.use('/api', findCockieRouter);
 app.use('/api/profile', profileRouter);

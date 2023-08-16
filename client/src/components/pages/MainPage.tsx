@@ -1,10 +1,15 @@
 import React from 'react';
-import TestPage from './test/TestPage';
-import QuestionList from '../ui/question/QuestionList';
+import { Container } from '@mui/material';
+
+import PostList from '../ui/Post/PostList';
+
 
 export default function MainPage(): JSX.Element {
   return (
-    <div>1 eeeeeeeeeeeeq</div>
-    // <TestPage />
+    <Container>
+
+      <div>1 eeeeeeeeeeeeq</div>
+      <PostList />
+    </Container>
   );
 }
