@@ -3,21 +3,22 @@ import { TextField } from '@mui/material'
 
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
 import type { RootState } from '../../../redux/store'
-import type { SearchParams } from '../../../types/courseType/courseType'
+import type { SearchParamsProfile } from '../../../types/profileType/profileTypes'
+
 
 type SearchBarProps = {
-   setSearchParams: (params: SearchParams) => void
+   setSearchParamsProfile: (params: SearchParamsProfile) => void
 }
 
-function SearchBar({ setSearchParams }: SearchBarProps): JSX.Element {
+function SearchBarProfile({ setSearchParamsProfile }: SearchBarProps): JSX.Element {
    const dispatch = useAppDispatch()
-   const searchParams = useAppSelector((state: RootState) => state.allcourses.searchParams)
+   const searchParams = useAppSelector((state: RootState) => state.profile.searchParamsProfile)
    const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
       const newSearchParams = {
          ...searchParams,
          query: event.target.value.toLowerCase(),
       }
-      dispatch(setSearchParams(newSearchParams))
+      dispatch(setSearchParamsProfile(newSearchParams))
 
    }
 
@@ -31,4 +32,4 @@ function SearchBar({ setSearchParams }: SearchBarProps): JSX.Element {
    );
 }
 
-export default SearchBar;
+export default SearchBarProfile;
