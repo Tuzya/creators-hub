@@ -3,14 +3,14 @@ const multer = require('multer');
 
 const storage = multer.diskStorage({
    destination(req, file, cb) {
-      cb(null, path.join(__dirname, '..', 'public', 'img')); // Use path.join to create a relative path
+      cb(null, path.join(__dirname, '..', 'public', 'post')); // Use path.join to create a relative path
    },
    filename(req, file, cb) {
       const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
       cb(null, `${file.fieldname}-${uniqueSuffix}`);
    },
 });
-const CarouselUpload = multer({
+const uploadPost = multer({
    storage: multer.memoryStorage(),
    limits: { fileSize: 10 * 1024 * 1024 }, // Максимальный размер файла
    fileFilter: (req, file, cb) => {
@@ -22,4 +22,4 @@ const CarouselUpload = multer({
    },
 });
 
-module.exports = CarouselUpload;
+module.exports = uploadPost;

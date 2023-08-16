@@ -4,7 +4,7 @@ import type { PostType } from "../../../types/postType/postType";
 
 
 export const getPostThunk = createAsyncThunk<PostType[]>('post/getPosts', async () => {
-   const data = await axios.get<PostType[]>('/posts/')
+   const data = await axios.get<PostType[]>('/posts/posts')
    return data
 })
 

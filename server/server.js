@@ -13,7 +13,6 @@ const findCockieRouter = require('./routes/findCockieRouter');
 const profileRouter = require('./routes/profileRouter');
 const questionRouter = require('./routes/questionRouter');
 const personEditRouter = require('./routes/personEditRouter');
-const postsRouter = require('./routes/postsRouter');
 const checkTestStatusRouter = require('./routes/checkTestStatusRouter');
 
 require('dotenv').config();

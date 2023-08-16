@@ -1,11 +1,12 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import { useAppSelector } from '../../../redux/hooks';
+import PostItem from './PostItem';
 
-import PostItem from './PostItem'; // Импортируйте ваш компонент PostItem
 
 export default function PostList(): JSX.Element {
    const posts = useAppSelector((state) => state.posts.posts);
+   console.log(posts)
 
    return (
       <Box mt={1} py={2} px={2} display="flex" flexDirection="row" flexWrap="wrap">
