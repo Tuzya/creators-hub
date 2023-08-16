@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { styled, useTheme } from '@mui/material/styles';
@@ -30,6 +30,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { logoutUserThunk } from '../../redux/slices/user/userThunks';
+import { getPersonLoggedInfoThunk } from '../../redux/slices/profiles/profileThunk';
 
 const drawerWidth = 240;
 
@@ -79,6 +80,12 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 export default function PersistentDrawerLeft() {
+  const company = useAppSelector((store) => store.company);
+  const user = useAppSelector((store) => store.user);
+  const person = useAppSelector((store) => store.profile.personLoggedInfo);
+  const profile = useAppSelector((store) => store.profile.oneProfile);
+  console.log('=======', profile);
+
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -86,56 +93,96 @@ export default function PersistentDrawerLeft() {
     setOpen(true);
   };
 
+  const handleOutsideClick = (event) => {
+    if (open && !event.target.closest('#navbar-container')) {
+      setOpen(false);
+    }
+  };
+
   const handleDrawerClose = () => {
     setOpen(false);
   };
 
-  const links = [
-    { to: '/', name: 'Home', icon: <HomeIcon /> },
-    { to: '/company/lk', name: 'Лк компании', icon: <BusinessIcon /> },
-    { to: '/profile/lk', name: 'Лк Юзер', icon: <PersonIcon /> },
-    { to: '/company/allcourses/', name: 'База Знаний', icon: <BookIcon /> },
-    { to: '/signup', name: 'Sign Up', icon: <PersonAddIcon /> }, 
-    { to: '/login', name: 'Sign In', icon: <LockOpenIcon /> }, 
-  ];
+  useEffect(() => {
+    document.addEventListener('click', handleOutsideClick);
+    return () => {
+      document.removeEventListener('click', handleOutsideClick);
+    };
+  }, [open]);
+
+  const links =
+    company.status === 'logged'
+      ? [
+          { to: '/', name: 'Home', icon: <HomeIcon /> },
+          { to: '/company/lk', name: 'Лк компании', icon: <BusinessIcon /> },
+          { to: '/company/allcourses/', name: 'База Знаний', icon: <BookIcon /> },
+          { to: '/admin/signup-user', name: 'Панель Управления', icon: <LogoutIcon /> },
+        ]
+      : [
+          { to: '/', name: 'Home', icon: <HomeIcon /> },
+          { to: '/profile/lk', name: 'Лк Юзер', icon: <PersonIcon /> },
+          { to: '/company/allcourses/', name: 'База Знаний', icon: <BookIcon /> },
+        ];
 
   const dispatch = useAppDispatch();
-  const user = useAppSelector((store) => store.user);
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box id="navbar-container" sx={{ display: 'flex' }}>
       <CssBaseline />
       <CustomAppBar position="fixed" open={open}>
         <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{ mr: 2, ...(open && { display: 'none' }) }}
-          >
-            <MenuIcon />
-          </IconButton>
+          {company.status === 'logged' || user.status === 'logged' ? (
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              sx={{ mr: 2, ...(open && { display: 'none' }) }}
+            >
+              <MenuIcon />
+            </IconButton>
+          ) : (
+            <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
+              <IconButton color="inherit">
+                <HomeIcon /> <span style={{ fontSize: '20px' }}> Main </span>
+              </IconButton>
+            </Link>
+          )}
           <Typography variant="h6" noWrap component="div">
             Createros Hub о боже оно двигается!
           </Typography>
           <div style={{ marginLeft: 'auto' }}>
-            <IconButton
-              color="inherit"
-              onClick={() => {
-                void dispatch(logoutUserThunk());
-              }}
-            >
-              <LogoutIcon />
-            </IconButton>
+            {(company.status === 'logged' || user.status === 'logged') && (
+              <IconButton
+                color="inherit"
+                onClick={() => {
+                  void dispatch(logoutUserThunk());
+                }}
+              >
+                <LogoutIcon /> <span style={{ fontSize: '20px' }}> Logout </span>
+              </IconButton>
+            )}
             <Link to="/login" style={{ color: 'inherit', textDecoration: 'none' }}>
               <IconButton color="inherit">
-                <LockOpenIcon />
+                {!(company.status === 'logged' || user.status === 'logged') && (
+                  <>
+                    <LockOpenIcon />
+                    <span style={{ fontSize: '20px' }}> Sign In</span>
+                  </>
+                )}
               </IconButton>
             </Link>
-            <Link to="/signup" style={{ color: 'inherit', textDecoration: 'none' }}>
+            <Link
+              to="/signup"
+              style={{ color: 'inherit', textDecoration: 'none', fontSize: '12px' }}
+            >
               <IconButton color="inherit">
-                <PersonAddIcon />
+                {!(company.status === 'logged' || user.status === 'logged') && (
+                  <>
+                    <PersonAddIcon />
+                    <span style={{ fontSize: '20px' }}> Sign Up</span>
+                  </>
+                )}
               </IconButton>
             </Link>
           </div>
@@ -169,6 +216,16 @@ export default function PersistentDrawerLeft() {
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </DrawerHeader>
+        {person?.photo && (
+          <img
+            src={`http://localhost:3001/public/img/${person?.photo}`}
+            alt="Ваше Фото"
+            style={{ width: '150px', height: '150px', borderRadius: '100px' }}
+          />
+        )}
+        <p style={{ fontSize: 14 }} color="text.secondary">
+          Привет! {profile?.username}
+        </p>
         <List>
           {links.map((link) => (
             <ListItem key={link.to} disablePadding>
@@ -188,25 +245,27 @@ export default function PersistentDrawerLeft() {
           ))}
         </List>
         <Divider />
-        <List>
-          <ListItem disablePadding>
-            <ListItemButton
-              sx={{
-                '&:hover': {
-                  backgroundColor: '#ff6800',
-                },
-              }}
-              onClick={() => {
-                void dispatch(logoutUserThunk());
-              }}
-            >
-              <ListItemIcon sx={{ color: 'inherit' }}>
-                <ExitToAppIcon />
-              </ListItemIcon>
-              <ListItemText primary="Logout" />
-            </ListItemButton>
-          </ListItem>
-        </List>
+        {(company.status === 'logged' || user.status === 'logged') && (
+          <List>
+            <ListItem disablePadding>
+              <ListItemButton
+                sx={{
+                  '&:hover': {
+                    backgroundColor: '#420',
+                  },
+                }}
+                onClick={() => {
+                  void dispatch(logoutUserThunk());
+                }}
+              >
+                <ListItemIcon sx={{ color: 'inherit' }}>
+                  <ExitToAppIcon />
+                </ListItemIcon>
+                <ListItemText primary="Logout" />
+              </ListItemButton>
+            </ListItem>
+          </List>
+        )}
       </Drawer>
       <Main open={open}>
         <DrawerHeader />

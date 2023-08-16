@@ -30,10 +30,11 @@ export default function ProfileItemCard({ profile }: ProfileItemCardProps): JSX.
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Profile Details
         </Typography>
-        <Link to={`/profile/lk/${profile.id}`}>
-          <Button size="small"> {profile?.username} </Button>
-        </Link>
-
+        {profile?.id && (
+          <Link to={`/profile/lk/${profile.id}`}>
+            <Button size="small"> {profile?.username} </Button>
+          </Link>
+        )}
         <Typography variant="h5" component="div">
           {profile?.username}
         </Typography>
@@ -42,6 +43,7 @@ export default function ProfileItemCard({ profile }: ProfileItemCardProps): JSX.
       </CardContent>
       {/* Кнопки для редактирования, удаления и т.д. */}
       <Button
+        type="button"
         variant="outlined"
         color="secondary"
         size="small"
@@ -55,4 +57,4 @@ export default function ProfileItemCard({ profile }: ProfileItemCardProps): JSX.
   );
 }
 
-// onClick={() => void dispatch()(profile.id)}
+// // onClick={() => void dispatch()(profile.id)}

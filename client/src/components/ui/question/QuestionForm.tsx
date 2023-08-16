@@ -14,6 +14,12 @@ export default function QuestionForm(): JSX.Element {
   const changeHandler: React.ChangeEventHandler<HTMLInputElement> = (e): void => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
+  const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e): void => {
+    if (e.key === 'Enter') {
+      void dispatch(addQuestionsThunk({ courseId: Number(courseId), input }));
+      setInput({ question: '' });
+    }
+  };
   return (
     <Grid container direction="row" sx={postFormGridStyles}>
       <Grid item xs={3} />
@@ -31,6 +37,7 @@ export default function QuestionForm(): JSX.Element {
             name="question"
             label="question"
             value={input.question}
+            onKeyDown={handleKeyDown}
             onChange={changeHandler}
             sx={textFieldStyle}
           />

@@ -82,7 +82,7 @@ router.post('/signup', async (req, res) => {
         from: 'projectClockers@gmail.com',
         to: email,
         subject: 'Добро пожаловать на ваше приложение',
-        text: `Ваши учетные данные:\nИмя пользователя: ${username}\nПароль: ${password}`,
+        text: `Ваши учетные данные:\nИмя пользователя: ${username}\nВаша Почта: ${email}\nПароль: ${password}`,
       };
 
       transporter.sendMail(mailOptions, (error, info) => {

@@ -6,6 +6,7 @@ import { cardStyle } from '../../styles';
 
 export default function OneCourseItem(): JSX.Element {
   const onecourse = useAppSelector((store) => store.allcourses.onecourse);
+  const company = useAppSelector((store) => store.company);
   const { courseId } = useParams();
 
   const handleDownload = (): void => {
@@ -35,7 +36,7 @@ export default function OneCourseItem(): JSX.Element {
         )}
       </CardContent>
       <CardActions>
-        {courseId && (
+        {courseId && company.status === 'logged' && (
           <Link to={`/company/allcourses/${courseId}/addQuestion`}>
             <Button size="small">Добавить тест</Button>
           </Link>

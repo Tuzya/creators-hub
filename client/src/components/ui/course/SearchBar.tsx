@@ -15,7 +15,7 @@ function SearchBar({ setSearchParams }: SearchBarProps): JSX.Element {
    const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
       const newSearchParams = {
          ...searchParams,
-         query: event.target.value,
+         query: event.target.value.toLowerCase(),
       }
       dispatch(setSearchParams(newSearchParams))
 

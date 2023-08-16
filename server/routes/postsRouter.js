@@ -13,7 +13,6 @@ router
     const newPost = await Post.create(req.body);
     res.json(newPost);
   });
-
 router.delete('/:id', async (req, res) => {
   try {
     await Post.destroy({ where: { id: req.params.id } });

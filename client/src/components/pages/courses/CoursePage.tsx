@@ -4,7 +4,7 @@ import { Button, Container } from '@mui/material';
 import OneCourseItem from '../../ui/course/OneCourseItem';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { getOneCourseThunk } from '../../../redux/slices/allcourses/allCoursesThunk';
-import QuestionList from '../../ui/question/QuestionList';
+// import QuestionList from '../../ui/question/QuestionList';
 
 export default function CoursePage(): JSX.Element {
   const dispatch = useAppDispatch();
