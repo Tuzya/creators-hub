@@ -1,0 +1,84 @@
+.test {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+  .course-title {
+
+  }
+  
+  .final-rez {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    
+  }
+  
+  .question-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+  }
+  
+  .li-question {
+    margin-top: 20px;
+    
+  }
+  
+  .li-question-li {
+    cursor: pointer;
+    margin-bottom: 10px;
+    /* background: grey; */
+    display: flex; 
+    align-items: center;
+    border: 1px solid black;
+    padding: 20px;
+    border-radius: 15px;
+    font-size: 20px;
+    
+  }
+  
+  .li-question-li:hover {
+    background-color: lightgrey;
+    
+  }
+  
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  h3 {
+    font-size: 18px;
+    margin-top: 20px;
+  }
+  
+  span {
+    margin-left: 10px;
+    
+  }
+  
+  .Button {
+    margin-top: 20px;
+  }
+.h3-final-rez {
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+  .rez-word {
+    display: flex; 
+    align-items: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin: 10px;
+    color: blue;
+
+  } 
