@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Button, Checkbox, Grid, TextField } from '@mui/material';
 import { useAppDispatch } from '../../../redux/hooks';
@@ -8,22 +8,21 @@ import { addAnswersThunk } from '../../../redux/slices/test/testThunk';
 export default function AnswerForm(): JSX.Element {
   const [input, setInput] = useState({ answer: '', isCorrect: false });
   const dispatch = useAppDispatch();
-  const {courseId} = useParams<string>();
-  const {questionId} = useParams<string>();
+  const { courseId } = useParams<string>();
+  const { questionId } = useParams<string>();
 
   const changeHandler: React.ChangeEventHandler<HTMLInputElement> = (e): void => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
-  const detectKeyDown = (e) => {
-    if(e.key === 'enter') {
-console.log('Cooooool');
 
+  const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e): void => {
+    if (e.key === 'Enter') {
+      void dispatch(
+        addAnswersThunk({ courseId: Number(courseId), questionId: Number(questionId), input }),
+      );
+      setInput({ answer: '', isCorrect: false });
     }
-      }
-  useEffect(() => {
-    document.addEventListener('keydown', detectKeyDown, true)
-  }, [])
-
+  };
 
   return (
     <Grid container direction="row" sx={postFormGridStyles}>
@@ -42,16 +41,22 @@ console.log('Cooooool');
             name="answer"
             label="answer"
             value={input.answer}
+            onKeyDown={handleKeyDown}
             onChange={changeHandler}
             sx={textFieldStyle}
           />
-          
-                  
+
           <Button
             variant="outlined"
             sx={buttonStyle}
             onClick={() => {
-              void dispatch(addAnswersThunk({courseId: Number(courseId), questionId:Number(questionId), input}));
+              void dispatch(
+                addAnswersThunk({
+                  courseId: Number(courseId),
+                  questionId: Number(questionId),
+                  input,
+                }),
+              );
               setInput({ answer: '', isCorrect: false });
             }}
           >
@@ -60,5 +65,5 @@ console.log('Cooooool');
         </Box>
       </Grid>
     </Grid>
-  )
+  );
 }

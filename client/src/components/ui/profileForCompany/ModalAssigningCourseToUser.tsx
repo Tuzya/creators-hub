@@ -14,8 +14,7 @@ import { putCourseToUserFromCompanyThunk } from '../../../redux/slices/company/c
 
 export default function ModalAssigningCourseToUser({ open, setOpen, profile }: any) {
   const allCourses = useAppSelector((store) => store.allcourses.courses);
-  const dispatch = useAppDispatch()
-
+  const dispatch = useAppDispatch();
 
   const [selectedCourses, setSelectedCourses] = useState([]);
 
@@ -26,7 +25,6 @@ export default function ModalAssigningCourseToUser({ open, setOpen, profile }: a
   const handleCourseSelect = (event) => {
     setSelectedCourses(event.target.value);
   };
-
 
   return (
     <div>
@@ -40,10 +38,12 @@ export default function ModalAssigningCourseToUser({ open, setOpen, profile }: a
               value={selectedCourses}
               onChange={handleCourseSelect}
               renderValue={(selected) =>
-                selected.map((courseId) => {
-                  const course = allCourses.find((c) => c.id === courseId);
-                  return course ? course.title : '';
-                }).join(', ')
+                selected
+                  .map((courseId) => {
+                    const course = allCourses.find((c) => c.id === courseId);
+                    return course ? course.title : '';
+                  })
+                  .join(', ')
               }
             >
               {allCourses.map((course) => (
@@ -56,10 +56,15 @@ export default function ModalAssigningCourseToUser({ open, setOpen, profile }: a
           </FormControl>
         </DialogContent>
         <DialogActions>
-          <Button   onClick={() => {
-    void dispatch(putCourseToUserFromCompanyThunk({ userId: profile.id, selectedCourses }));
-    handleClose(); 
-  }} color="success">
+          <Button
+            onClick={() => {
+              void dispatch(
+                putCourseToUserFromCompanyThunk({ userId: profile.id, selectedCourses }),
+              );
+              handleClose();
+            }}
+            color="success"
+          >
             Назначить
           </Button>
           <Button onClick={handleClose} color="error">
