@@ -118,11 +118,8 @@ import { Link, useParams } from 'react-router-dom';
 import { Button, Container } from '@mui/material';
 import { RadioButtonUnchecked, RadioButtonChecked } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
-<<<<<<< HEAD
 import { updateStatusThunk } from '../../../redux/slices/checkTestStatus/checkTestStatusThunk';
-=======
-import './TestListItem.css'
->>>>>>> 5930570e33389d38de534fec8f6bde3493ee55f2
+import './TestListItem.css';
 
 export default function TestListItem(): JSX.Element {
   const questions = useAppSelector((store) => store.questionsAnswers.questionsAnswers);
@@ -161,12 +158,12 @@ export default function TestListItem(): JSX.Element {
   return (
     <Container>
       <div className="test">
-        <h1 className='course-title'>{course?.title}</h1>
+        <h1 className="course-title">{course?.title}</h1>
 
         {showFinalRez ? (
           <div className="final-rez">
             <h2>Ваш результат {score}</h2>
-            <h3 className='h3-final-rez'>
+            <h3 className="h3-final-rez">
               {score} из {questions.length} ({Math.floor((score / questions.length) * 100)}%)
               {(score / questions.length) * 100 > 60 ? (
                 <>
@@ -192,7 +189,6 @@ export default function TestListItem(): JSX.Element {
           </div>
         ) : (
           <div className="question-card">
-            
             <h3>
               {currentQuestion + 1}/{questions.length}
             </h3>
@@ -203,11 +199,7 @@ export default function TestListItem(): JSX.Element {
               <div className="li-question">
                 {questions.length > 0 &&
                   questions[currentQuestion].Answers.map((el, index) => (
-                    <li className='li-question-li'
-                      onClick={() => answerClicked(index)}
-                      key={el.id}
-                      
-                    >
+                    <li className="li-question-li" onClick={() => answerClicked(index)} key={el.id}>
                       {selectedAnswer === index ? <RadioButtonChecked /> : <RadioButtonUnchecked />}
                       <span style={{ marginLeft: '10px' }}>{el.answer}</span>
                     </li>
