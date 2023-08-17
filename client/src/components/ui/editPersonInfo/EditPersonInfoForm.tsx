@@ -5,6 +5,9 @@ import { redirect, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import type { PersonInfoType } from '../../../types/profileType/profileTypes';
 import { editProfileThunk } from '../../../redux/slices/profiles/profileThunk';
+import './editPerson.css'
+import { DatePicker, LocalizationProvider } from '@mui/lab';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
 
 export default function EditPersonInfoForm(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -66,62 +69,73 @@ export default function EditPersonInfoForm(): JSX.Element {
       console.error('Error editing profile:', error);
     }
   };
-
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <input
-          type="file"
-          name="photo"
-          accept="image/*" // Позволяет выбирать только изображения
-          onChange={handleFileChange}
-        />
-        <TextField
-          variant="outlined"
-          name="city"
-          label="City"
-          value={formData.city}
-          onChange={handleChange}
-        />
-        <TextField
-          variant="outlined"
-          name="birthDate"
-          label="Birth Date"
-          value={formData.birthDate}
-          onChange={handleChange}
-        />
-        <TextField
-          variant="outlined"
-          name="phone"
-          label="Phone"
-          value={formData.phone}
-          onChange={handleChange}
-        />
-        <TextField
-          variant="outlined"
-          name="about"
-          label="About"
-          value={formData.about}
-          onChange={handleChange}
-        />
-        <TextField
-          variant="outlined"
-          name="companies"
-          label="Companies"
-          value={formData.companies}
-          onChange={handleChange}
-        />
-        <TextField
-          variant="outlined"
-          name="sex"
-          label="Sex"
-          value={formData.sex}
-          onChange={handleChange}
-        />
-      </div>
-      <Button type="submit" variant="contained" color="primary">
+    <form className="edit-person-form" onSubmit={handleSubmit}>
+      <input
+        className="edit-person-file-input"
+        type="file"
+        name="photo"
+        accept="image/*"
+        onChange={handleFileChange}
+      />
+      <TextField
+        className="edit-person-input"
+        variant="outlined"
+        name="city"
+        label="City"
+        value={formData.city}
+        onChange={handleChange}
+      />
+      <TextField
+        className="edit-person-input"
+        variant="outlined"
+        name="birthDate"
+        label="Birth Date"
+        value={formData.birthDate}
+        onChange={handleChange}
+      />
+      <TextField
+        className="edit-person-input"
+        variant="outlined"
+        name="phone"
+        label="Phone"
+        value={formData.phone}
+        onChange={handleChange}
+      />
+      <TextField
+        className="edit-person-input"
+        variant="outlined"
+        name="about"
+        label="About"
+        value={formData.about}
+        onChange={handleChange}
+      />
+      <TextField
+        className="edit-person-input"
+        variant="outlined"
+        name="companies"
+        label="Companies"
+        value={formData.companies}
+        onChange={handleChange}
+      />
+      <TextField
+        className="edit-person-input"
+        variant="outlined"
+        name="sex"
+        label="Sex"
+        value={formData.sex}
+        onChange={handleChange}
+      />
+      <button
+
+        className='question-button'
+        type="submit"
+
+
+      >
         Edit Profile
-      </Button>
+      </button>
     </form>
   );
 }
+

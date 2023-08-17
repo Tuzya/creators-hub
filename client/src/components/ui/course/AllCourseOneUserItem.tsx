@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import type { CourseType } from '../../../types/courseType/courseType';
 import { cardStyle } from '../../styles';
+import './course.css'
 
 type CourseItemProps = {
   course: CourseType;
@@ -14,29 +15,22 @@ function AllCourseOneUserItem({ course }: CourseItemProps): JSX.Element {
   const coursesStatus = useAppSelector((store) => store.coursesStatus.status);
 
   return (
-    <Container>
-      <Card sx={cardStyle}>
-        <CardContent>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+    <Container className='body0'>
+      <Card className="course-card"> {/* Используем класс стилей */}
+        <CardContent className='body1'>
+          <Typography className="course-title" color="text.secondary" gutterBottom>
             Курс
           </Typography>
           <Typography variant="h5" component="div">
             Course {course.title}
           </Typography>
         </CardContent>
-        <div
-          style={{
-            position: 'absolute',
-            top: 10,
-            right: 10,
-            color: coursesStatus ? 'green' : 'red',
-          }}
-        >
+        <div className={`course-status ${coursesStatus ? 'complete' : 'incomplete'}`}> {/* Используем классы стилей */}
           {coursesStatus ? 'Выполнено' : 'К прохождению'}
         </div>
         <CardActions>
           <Link to={`/company/allcourses/${course.id}`}>
-            <Button size="small">CoursePage</Button>
+            <Button className="course-button" size="small">Страница курса</Button> {/* Используем класс стиля для кнопки */}
           </Link>
         </CardActions>
       </Card>

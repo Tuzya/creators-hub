@@ -1,0 +1,30 @@
+/* edit-person-info-form.css */
+
+.edit-person-form {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   /* background-color: #000000; */
+   height: 100vh;
+   padding: 10px;
+}
+
+.edit-person-file-input {
+   margin: 20px;
+   padding: 10px;
+}
+
+.edit-person-input {
+   margin: 20px;
+   background-color: #e5e5e5;
+   border: black;
+   padding: 10px;
+}
+
+s .edit-person-submit-button {
+   background-color: #fca311;
+   /* ваш цвет */
+   color: #000000;
+   /* ваш цвет */
+}
