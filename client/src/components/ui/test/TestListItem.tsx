@@ -118,8 +118,8 @@ import { Link, useParams } from 'react-router-dom';
 import { Button, Container } from '@mui/material';
 import { RadioButtonUnchecked, RadioButtonChecked } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
-import { updateStatusThunk } from '../../../redux/slices/checkTestStatus/checkTestStatusThunk';
 import './TestListItem.css';
+import { updateStatusThunk } from '../../../redux/slices/checkTestStatus/checkTestStatusThunk';
 
 export default function TestListItem(): JSX.Element {
   const questions = useAppSelector((store) => store.questionsAnswers.questionsAnswers);
@@ -168,21 +168,24 @@ export default function TestListItem(): JSX.Element {
               {(score / questions.length) * 100 > 60 ? (
                 <>
                   <span>Вы прошли!</span>
+                    
                   <Link to="/profile/lk">
-                    <Button
-                      className="test-button"
+              <button
+              type='button'
                       onClick={() => void dispatch(updateStatusThunk(courseId))}
-                    >
-                      Закрыть
-                    </Button>
-                  </Link>
+                      className="test-button-close"  > Закрыть </button>
+            </Link>
                 </>
               ) : (
                 <>
                   <span>Вы не прошли!</span>
-                  <Link to="/profile/lk">
-                    <Button className="test-button"> Закрыть </Button>
-                  </Link>
+                  
+                    
+            <Link to="/profile/lk">
+              <button
+              type='button'
+              className="test-button-close"> Закрыть </button>
+            </Link>
                 </>
               )}
             </h3>
@@ -190,7 +193,7 @@ export default function TestListItem(): JSX.Element {
         ) : (
           <div className="question-card">
             <h3>
-              {currentQuestion + 1}/{questions.length}
+            <span className='question-from-allquestions'> {currentQuestion + 1}/{questions.length}</span>
             </h3>
 
             {questions.length > 0 && <h2>{questions[currentQuestion].question}</h2>}
@@ -207,8 +210,9 @@ export default function TestListItem(): JSX.Element {
               </div>
             </ul>
 
-            <Button
-              variant="contained"
+            <button
+            type='button'
+              className='test-button-next'
               onClick={() =>
                 elClicked(
                   selectedAnswer !== null &&
@@ -217,7 +221,7 @@ export default function TestListItem(): JSX.Element {
               }
             >
               Далее
-            </Button>
+            </button>
           </div>
         )}
       </div>
