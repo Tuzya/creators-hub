@@ -118,8 +118,8 @@ import { Link, useParams } from 'react-router-dom';
 import { Button, Container } from '@mui/material';
 import { RadioButtonUnchecked, RadioButtonChecked } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
-import { updateStatusThunk } from '../../../redux/slices/checkTestStatus/checkTestStatusThunk';
 import './TestListItem.css';
+import { updateStatusThunk } from '../../../redux/slices/checkTestStatus/checkTestStatusThunk';
 
 export default function TestListItem(): JSX.Element {
   const questions = useAppSelector((store) => store.questionsAnswers.questionsAnswers);
@@ -168,29 +168,27 @@ export default function TestListItem(): JSX.Element {
               {(score / questions.length) * 100 > 60 ? (
                 <>
                   <span>Вы прошли!</span>
+                    
                   <Link to="/profile/lk">
-                    <Button
-                      className="test-button"
+              <button
+              type='button'
                       onClick={() => void dispatch(updateStatusThunk(courseId))}
-                    >
-                      Закрыть
-                    </Button>
-                  </Link>
+                      className="test-button-close"  > Закрыть </button>
+            </Link>
                 </>
               ) : (
                 <>
                   <span>Вы не прошли!</span>
-                  <Link to="/profile/lk">
-                    <Button className="test-button"> Закрыть </Button>
-                  </Link>
-                </>
-              )}
-            </h3>
+                  
+                    
             <Link to="/profile/lk">
               <button
               type='button'
               className="test-button-close"> Закрыть </button>
             </Link>
+                </>
+              )}
+            </h3>
           </div>
         ) : (
           <div className="question-card">
