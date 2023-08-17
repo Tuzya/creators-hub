@@ -150,7 +150,7 @@ export default function PersistentDrawerLeft(): JSX.Element {
             </Link>
           )}
           <Typography variant="h6" noWrap component="div">
-            Createros Hub о боже оно двигается!
+            Createros Hub
           </Typography>
           <div style={{ marginLeft: 'auto' }}>
             {(company.status === 'logged' || user.status === 'logged') && (
@@ -161,15 +161,25 @@ export default function PersistentDrawerLeft(): JSX.Element {
                   window.location = '/';
                 }}
               >
-                <LogoutIcon /> <span style={{ fontSize: '20px' }}> Logout </span>
+                <LogoutIcon /> <span style={{ fontSize: '20px' }}> Выход </span>
               </IconButton>
             )}
-            <Link to="/login" style={{ color: 'inherit', textDecoration: 'none' }}>
+            <Link to="/logincompany" style={{ color: 'inherit', textDecoration: 'none' }}>
+              <IconButton color="inherit">
+                {!( company.status === 'logged' || user.status === 'logged') && (
+                  <>
+                    <LockOpenIcon />
+                    <span style={{ fontSize: '20px' }}> Компания</span>
+                  </>
+                )}
+              </IconButton>
+            </Link>
+            <Link to="/loginstaff" style={{ color: 'inherit', textDecoration: 'none' }}>
               <IconButton color="inherit">
                 {!(company.status === 'logged' || user.status === 'logged') && (
                   <>
                     <LockOpenIcon />
-                    <span style={{ fontSize: '20px' }}> Sign In</span>
+                    <span style={{ fontSize: '20px' }}> Персонал</span>
                   </>
                 )}
               </IconButton>
@@ -182,7 +192,7 @@ export default function PersistentDrawerLeft(): JSX.Element {
                 {!(company.status === 'logged' || user.status === 'logged') && (
                   <>
                     <PersonAddIcon />
-                    <span style={{ fontSize: '20px' }}> Sign Up</span>
+                    <span style={{ fontSize: '20px' }}> Регестрация </span>
                   </>
                 )}
               </IconButton>
