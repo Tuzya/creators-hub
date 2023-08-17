@@ -7,6 +7,7 @@ import { cardStyle } from '../../styles';
 import { deleteCourseThunk } from '../../../redux/slices/allcourses/allCoursesThunk';
 import DeleteModal from '../deleteModal/deleteCourseModal';
 
+
 type CourseItemProps = {
   course: CourseType;
 };
@@ -17,10 +18,10 @@ function AllCourseItem({ course }: CourseItemProps): JSX.Element {
   const company = useAppSelector((store) => store.company);
 
   return (
-    <Container>
+    <Container >
       <DeleteModal setOpen={setOpen} open={open} />
       <Card sx={cardStyle}>
-        <CardContent>
+        <CardContent >
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             Курс
           </Typography>
