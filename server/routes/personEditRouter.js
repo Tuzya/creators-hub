@@ -9,16 +9,19 @@ const fileUpload = require('../middleware/multerWebMiddleware');
 const router = express.Router();
 
 router.get('/personFindOne', async (req, res) => {
-  const { id } = req.session.user;
   try {
-    const user = await Person.findOne({
-      where: { user_id: id },
-    });
-    if (user) {
-      res.status(200).json(user);
-    } else {
-      console.log('User not found');
-      res.sendStatus(404);
+    if (req.session.user) {
+      const { id } = req.session.user;
+      const user = await Person.findOne({
+        where: { user_id: id },
+      });
+
+      if (user) {
+        res.status(200).json(user);
+      } else {
+        console.log('User not found');
+        res.sendStatus(404);
+      }
     }
   } catch (error) {
     console.error('Error fetching user:', error);
@@ -27,9 +30,7 @@ router.get('/personFindOne', async (req, res) => {
 });
 
 router.get('/personInfo/:profileId', async (req, res) => {
-  console.log(req.params);
   const { profileId } = req.params;
-  console.log('Received profileId:', profileId);
   try {
     const user = await Person.findOne({
       where: { user_id: profileId },
@@ -82,10 +83,14 @@ router.post('/edit', fileUpload.single('photo'), async (req, res) => {
     if (existingPerson) {
       // Если запись существует, обновляем только нужные поля
       existingPerson.city = city !== 'undefined' ? city : existingPerson.city;
-      existingPerson.birthDate = birthDate !== 'undefined' ? birthDate : existingPerson.birthDate;
-      existingPerson.phone = phone !== 'undefined' ? phone : existingPerson.phone;
-      existingPerson.about = about !== 'undefined' ? about : existingPerson.about;
-      existingPerson.companies = companies !== 'undefined' ? companies : existingPerson.companies;
+      existingPerson.birthDate =
+        birthDate !== 'undefined' ? birthDate : existingPerson.birthDate;
+      existingPerson.phone =
+        phone !== 'undefined' ? phone : existingPerson.phone;
+      existingPerson.about =
+        about !== 'undefined' ? about : existingPerson.about;
+      existingPerson.companies =
+        companies !== 'undefined' ? companies : existingPerson.companies;
       existingPerson.sex = sex !== 'undefined' ? sex : existingPerson.sex;
       existingPerson.photo = image || existingPerson.photo;
       await existingPerson.save();

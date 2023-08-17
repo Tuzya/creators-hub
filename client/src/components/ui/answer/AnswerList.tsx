@@ -5,6 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { changeStatusAnswerThunk, deleteAnswerThunk } from '../../../redux/slices/test/testThunk';
 import DeleteModal from '../deleteModal/deleteAnswerModal';
+import './AnswerStyle.css'
 
 
 export default function AnswerList(): JSX.Element {
@@ -17,12 +18,12 @@ export default function AnswerList(): JSX.Element {
   return (
     <>
     <DeleteModal setOpen={setOpen} open={open}/>
-    <Box>
+    <Box className='answer-box'>
       
     <h3>Установите правильный ответ в чекбоксе</h3>
-    {answers?.map((el) => <li key={el.id}> {el.answer} 
+    {answers?.map((el) => <li className='li-answer' key={el.id}> {el.answer} 
     <Checkbox  
-    // onKeyDown={}
+    className='answer-checkbox'
     onClick={()=> 
     void dispatch(changeStatusAnswerThunk({courseId: Number(courseId), questionId: Number(questionId), answerId: Number(el.id)}))}
     />
@@ -33,10 +34,12 @@ export default function AnswerList(): JSX.Element {
     }/>
       </li>)}
       
-    <Link to='/company/allcourses/:courseId/addQuestion'>
-    <Button>
+    <Link to={`/company/allcourses/${Number(courseId)}/addQuestion`}>
+    <button
+          type='button'
+          className='question-button'>
      Перейти на страницу вопросов
-    </Button>
+    </button>
     </Link>
    
     </Box>

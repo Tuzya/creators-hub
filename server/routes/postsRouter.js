@@ -7,18 +7,16 @@ const uploadPost = require('../middleware/multerCarouselMiddleware');
 
 const router = express.Router();
 
-router.route('/posts')
-  .get(async (req, res) => {
-    try {
-      console.log('Getting posts...'); // Добавьте этот лог
-      const posts = await Post.findAll();
+router.route('/posts').get(async (req, res) => {
+  try {
+    const posts = await Post.findAll();
 
-      res.json(posts);
-    } catch (error) {
-      console.error('Ошибка выполнения запроса:', error);
-      res.status(500).json({ error: 'Произошла ошибка' });
-    }
-  });
+    res.json(posts);
+  } catch (error) {
+    console.error('Ошибка выполнения запроса:', error);
+    res.status(500).json({ error: 'Произошла ошибка' });
+  }
+});
 
 // router.post('/add', CarouselUpload.single('img'), async (req, res) => {
 //   const postId = req.session.user.id;

@@ -19,6 +19,7 @@ import {
   ListItemText,
   Divider,
   ListItemButton,
+  Container,
 } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import BusinessIcon from '@mui/icons-material/Business';
@@ -79,15 +80,15 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-export default function PersistentDrawerLeft() {
+export default function PersistentDrawerLeft(): JSX.Element {
   const company = useAppSelector((store) => store.company);
   const user = useAppSelector((store) => store.user);
   const person = useAppSelector((store) => store.profile.personLoggedInfo);
   const profile = useAppSelector((store) => store.profile.oneProfile);
-  console.log('=======', profile);
 
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [privet, setPrivet] = useState(person);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -149,7 +150,7 @@ export default function PersistentDrawerLeft() {
             </Link>
           )}
           <Typography variant="h6" noWrap component="div">
-            Createros Hub о боже оно двигается!
+            Createros Hub
           </Typography>
           <div style={{ marginLeft: 'auto' }}>
             {(company.status === 'logged' || user.status === 'logged') && (
@@ -157,17 +158,28 @@ export default function PersistentDrawerLeft() {
                 color="inherit"
                 onClick={() => {
                   void dispatch(logoutUserThunk());
+                  window.location = '/';
                 }}
               >
-                <LogoutIcon /> <span style={{ fontSize: '20px' }}> Logout </span>
+                <LogoutIcon /> <span style={{ fontSize: '20px' }}> Выход </span>
               </IconButton>
             )}
-            <Link to="/login" style={{ color: 'inherit', textDecoration: 'none' }}>
+            <Link to="/logincompany" style={{ color: 'inherit', textDecoration: 'none' }}>
+              <IconButton color="inherit">
+                {!( company.status === 'logged' || user.status === 'logged') && (
+                  <>
+                    <LockOpenIcon />
+                    <span style={{ fontSize: '20px' }}> Компания</span>
+                  </>
+                )}
+              </IconButton>
+            </Link>
+            <Link to="/loginstaff" style={{ color: 'inherit', textDecoration: 'none' }}>
               <IconButton color="inherit">
                 {!(company.status === 'logged' || user.status === 'logged') && (
                   <>
                     <LockOpenIcon />
-                    <span style={{ fontSize: '20px' }}> Sign In</span>
+                    <span style={{ fontSize: '20px' }}> Персонал</span>
                   </>
                 )}
               </IconButton>
@@ -180,7 +192,7 @@ export default function PersistentDrawerLeft() {
                 {!(company.status === 'logged' || user.status === 'logged') && (
                   <>
                     <PersonAddIcon />
-                    <span style={{ fontSize: '20px' }}> Sign Up</span>
+                    <span style={{ fontSize: '20px' }}> Регестрация </span>
                   </>
                 )}
               </IconButton>
@@ -216,16 +228,30 @@ export default function PersistentDrawerLeft() {
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </DrawerHeader>
-        {person?.photo && (
+        <Box>
           <img
-            src={`http://localhost:3001/public/img/${person?.photo}`}
+            src="http://localhost:3001/public/logo.png"
             alt="Ваше Фото"
-            style={{ width: '150px', height: '150px', borderRadius: '100px' }}
+            style={{ width: '90%' }}
           />
-        )}
-        <p style={{ fontSize: 14 }} color="text.secondary">
-          Привет! {profile?.username}
-        </p>
+        </Box>
+        <Container>
+          {user.status === 'logged' && person?.photo && (
+            <>
+              <a href="/profile/lk">
+                <img
+                  src={`http://localhost:3001/public/img/${person?.photo}`}
+                  alt="Ваше Фото"
+                  style={{ width: '150px', height: '150px', borderRadius: '100px' }}
+                />
+              </a>
+              <Typography variant="h5" paddingLeft="20px" component="h2">
+                Привет! {profile?.username}
+              </Typography>
+            </>
+          )}
+        </Container>
+
         <List>
           {links.map((link) => (
             <ListItem key={link.to} disablePadding>
@@ -256,6 +282,7 @@ export default function PersistentDrawerLeft() {
                 }}
                 onClick={() => {
                   void dispatch(logoutUserThunk());
+                  window.location = '/';
                 }}
               >
                 <ListItemIcon sx={{ color: 'inherit' }}>
