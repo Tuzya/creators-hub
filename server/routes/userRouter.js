@@ -54,15 +54,13 @@ router.post('/signup', async (req, res) => {
         await generateRandomPasswordAndHash();
 
       // Поиск или создание пользователя с хешированным паролем
-      const company = await Company.findByPk(req.session.company.id);
-      // console.log(company.name);
-      // console.log(req.session);
+      // const company = await Company.findByPk(req.session.company.id);
       const [user, created] = await User.findOrCreate({
         where: { email },
         defaults: {
           username,
           password: hashedPassword,
-          company_id: company.id,
+          company_id: req.session.company.id,
         },
       });
 
@@ -115,7 +113,7 @@ router.post('/login', async (req, res) => {
       //   console.log('asd', user);
       //   return res.status(401).json({ message: 'Не прошёл проверку пароля' });
       // }
-      console.log('user', user);
+      // console.log('user', user);
       const sessionUser = JSON.parse(JSON.stringify(user));
       delete sessionUser.password;
       req.session.user = sessionUser;
@@ -144,7 +142,6 @@ router.get('/logout', (req, res) => {
 router.get('/findallCourse', async (req, res) => {
   try {
     const { id } = req.session.user;
-    console.log(id, '==============');
     const user = await User.findByPk(id, {
       include: {
         model: Course,

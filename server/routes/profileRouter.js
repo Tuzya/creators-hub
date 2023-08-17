@@ -29,16 +29,17 @@ const router = express.Router();
 // });
 
 router.get('/lk', async (req, res) => {
-  console.log(req.params);
-  const { id } = req.session.user;
   try {
-    const user = await User.findByPk(id);
+    if (req.session.user) {
+      const { id } = req.session.user;
+      const user = await User.findByPk(id);
 
-    if (user) {
-      res.status(200).json(user);
-    } else {
-      console.log('User not found');
-      res.sendStatus(404);
+      if (user) {
+        res.status(200).json(user);
+      } else {
+        console.log('User not found');
+        res.sendStatus(404);
+      }
     }
   } catch (error) {
     console.error('Error fetching user:', error);

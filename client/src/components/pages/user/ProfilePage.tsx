@@ -16,13 +16,10 @@ export default function ProfilePage(): JSX.Element {
   console.log('useParams,', profileId);
 
   useEffect(() => {
-
     void dispatch(getPersonInfoThunk({ profileId: profileId as string }));
-  }, []);
-
-  useEffect(() => {
     void dispatch(getOnePersonProfileThunk({ profileId: profileId as string }));
   }, []);
+
   return (
     <Container>
       <PersonProfileItem />

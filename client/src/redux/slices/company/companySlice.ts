@@ -10,7 +10,9 @@ import {
 
 type CompanySliceType = CompanyType;
 
-const initialState: CompanySliceType = { status: 'loading' };
+const initialState: CompanySliceType = {
+  status: 'loading',
+};
 
 const companySlice = createSlice({
   name: 'company',
@@ -59,5 +61,4 @@ const companySlice = createSlice({
     }));
   },
 });
-
 export default companySlice.reducer;

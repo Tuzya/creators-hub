@@ -14,7 +14,6 @@ export default function LoginInPage(): JSX.Element {
     e.preventDefault();
 
     const formData = Object.fromEntries(new FormData(e.currentTarget));
-    console.log(formData);
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
 
     void dispatch(loginUserThunk(formData as UserLoginFormType));

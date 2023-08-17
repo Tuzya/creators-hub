@@ -111,7 +111,7 @@ module.exports = {
           about: 'Люблю Оладушки',
           companies: 'OOO Швабибас',
           sex: 'Жен',
-          photo: 'Тут типо путь до фото',
+          photo: '1692275508938.webp',
           user_id: 1,
         },
         {
@@ -121,7 +121,7 @@ module.exports = {
           about: 'Люблю Оладушки',
           companies: 'OOO Швабибас',
           sex: 'Жен',
-          photo: 'Тут типо путь до фото',
+          photo: '1692275508938.webp',
           user_id: 2,
         },
         {
@@ -131,7 +131,7 @@ module.exports = {
           about: 'Люблю Оладушки',
           companies: 'OOO Швабибас',
           sex: 'Жен',
-          photo: 'Тут типо путь до фото',
+          photo: '1692275508938.webp',
           user_id: 3,
         },
       ],

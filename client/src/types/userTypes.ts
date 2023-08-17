@@ -3,6 +3,19 @@ export type UserModelType = {
   username: string;
   email: string;
   company_id: number;
+  People: PersonModelType[];
+};
+
+export type PersonModelType = {
+  id: number;
+  city: string;
+  birthDate: string;
+  phone: string;
+  about: string;
+  companies: string;
+  sex: string;
+  photo: string;
+  user_id: number;
 };
 
 export type UserSignUpFormType = Omit<UserModelType, 'id' | 'company_id'> & { password: string };

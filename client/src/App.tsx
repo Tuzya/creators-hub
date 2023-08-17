@@ -30,18 +30,11 @@ function App(): JSX.Element {
   const company = useAppSelector((store) => store.company);
 
   useEffect(() => {
-    void dispatch(checkCompanyThunk());
-    console.log(company.status);
-  }, []);
-
-  useEffect(() => {
-    void dispatch(checkUserThunk());
-    console.log(user.status);
-  }, []);
-
-  useEffect(() => {
     if (user) {
-      void dispatch(getFindCockieThunk());
+      void dispatch(checkUserThunk());
+    }
+    if (company) {
+      void dispatch(checkCompanyThunk());
     }
   }, []);
 
@@ -49,16 +42,13 @@ function App(): JSX.Element {
     if (user.status === 'logged') {
       void dispatch(getOneProfileThunk());
     }
-  }, []);
+  }, [user.status]);
 
   useEffect(() => {
     if (user.status === 'logged') {
       void dispatch(getPersonLoggedInfoThunk());
     }
   }, [user.status]);
-
-
-
   return (
     <Loader isLoading={user.status === 'loading' || company.status === 'loading'}>
       <>
