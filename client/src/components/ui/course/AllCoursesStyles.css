@@ -1,0 +1,26 @@
+.all-courses-container{
+    margin: 100px;
+    padding: 20px;
+    background-color: aqua;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.all-course-list {
+    font-family: Source Sans Pro;
+}
+
+.allcourses-button {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 12px;
+    border: #FCA311;
+    font-size: 15px;
+    color: #FFFFFF;
+    background-color: #FCA311;
+    }
+    .allcourses-button:hover {
+        background-color: #c0c4cc;
+      border-color: #c0c4cc;
+    }

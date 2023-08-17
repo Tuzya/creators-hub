@@ -47,7 +47,7 @@ export const authTextFieldStyle = {
 };
 export const cardStyle = {
   minWidth: 263,
-  maxWidth: 355,
+  maxWidth: 455,
   minHeight: 280,
   display: 'flex',
   flexDirection: 'column',

@@ -4,7 +4,8 @@ import { Link, useParams } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import { useAppSelector } from '../../../redux/hooks';
 import { cardStyle } from '../../styles';
-import EditModal from '../editModal/editCourseModal'
+import EditModal from '../editModal/editCourseModal';
+import './AllCoursesStyles.css'
 
 export default function OneCourseItem(): JSX.Element {
   const onecourse = useAppSelector((store) => store.allcourses.onecourse);
@@ -28,15 +29,19 @@ export default function OneCourseItem(): JSX.Element {
           Курс
         </Typography>
         <Typography variant="h5" component="div">
-          {onecourse?.title}
+         <h3>{onecourse?.title}</h3> 
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
           {onecourse?.body}
         </Typography>
         {onecourse?.downloadLink && (
-          <Button size="small" onClick={handleDownload}>
+          <button
+          type='button'
+          className="allcourses-button"
+          
+          onClick={handleDownload}>
             Скачать PDF
-          </Button>
+          </button>
           
         )}
         
@@ -45,15 +50,21 @@ export default function OneCourseItem(): JSX.Element {
         {courseId && company.status === 'logged' && (
           <>
           <Link to={`/company/allcourses/${courseId}/addQuestion`}>
-            <Button size="small">Добавить тест</Button>
+            <button
+          type='button'
+          className="allcourses-button"
+            >Добавить тест</button>
           </Link>
-          <EditIcon onClick={() => 
-            setOpen(onecourse?.id)}/>
+          {/* <EditIcon onClick={() => 
+            setOpen(onecourse?.id)}/> */}
             </>
         )}
         {courseId && (
           <Link to={`/company/allcourses/${courseId}/test`}>
-            <Button size="small">Пройти тест</Button>
+            <button
+          type='button'
+          className="allcourses-button"
+            >Пройти тест</button>
           </Link>
         )}
       </CardActions>
