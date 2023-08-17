@@ -21,7 +21,8 @@ export const textFieldStyle = {
 };
 export const linkStyle = { color: 'white', mr: 2, textDecoration: 'none' };
 export const postListPaperStyles = {
-  backgroundColor: '#2E3B55',
+  // backgroundColor: '#2E3B55',
+
   minHeight: '80vh',
   borderRadius: 5,
 };
