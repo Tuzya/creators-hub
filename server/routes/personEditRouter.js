@@ -30,9 +30,7 @@ router.get('/personFindOne', async (req, res) => {
 });
 
 router.get('/personInfo/:profileId', async (req, res) => {
-  console.log(req.params);
   const { profileId } = req.params;
-  console.log('Received profileId:', profileId);
   try {
     const user = await Person.findOne({
       where: { user_id: profileId },

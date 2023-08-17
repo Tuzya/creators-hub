@@ -6,7 +6,6 @@ const router = express.Router();
 router.post('/allcourses/:courseId/addQuestion', async (req, res) => {
   try {
     const { courseId } = req.params;
-    console.log('asdas', req.body);
     const courses = await Question.create({
       ...req.body,
       courses_id: courseId,
@@ -65,7 +64,6 @@ router
   .route('/add-answer/:courseId/allquestions/:questionId/addAnswers')
   .post(async (req, res) => {
     try {
-      console.log('hi');
       const { questionId } = req.params;
       const allQuestion = await Answer.create({
         ...req.body,

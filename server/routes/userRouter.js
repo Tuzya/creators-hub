@@ -142,7 +142,6 @@ router.get('/logout', (req, res) => {
 router.get('/findallCourse', async (req, res) => {
   try {
     const { id } = req.session.user;
-    console.log(id, '==============');
     const user = await User.findByPk(id, {
       include: {
         model: Course,

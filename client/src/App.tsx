@@ -28,10 +28,6 @@ function App(): JSX.Element {
   const dispatch = useAppDispatch();
   const user = useAppSelector((store) => store.user);
   const company = useAppSelector((store) => store.company);
-  // useEffect(() => {
-  //   console.log('компания', company);
-  //   console.log('user', user);
-  // }, []);
 
   useEffect(() => {
     if (user) {
@@ -42,30 +38,17 @@ function App(): JSX.Element {
     }
   }, []);
 
-  // useEffect(() => {
-
-  // }, []);
-
-  useEffect(() => {
-    if (user) {
-      void dispatch(getFindCockieThunk());
-    }
-  }, []);
-
   useEffect(() => {
     if (user.status === 'logged') {
       void dispatch(getOneProfileThunk());
     }
-  }, []);
+  }, [user.status]);
 
   useEffect(() => {
     if (user.status === 'logged') {
       void dispatch(getPersonLoggedInfoThunk());
     }
   }, [user.status]);
-
-
-
   return (
     <Loader isLoading={user.status === 'loading' || company.status === 'loading'}>
       <>

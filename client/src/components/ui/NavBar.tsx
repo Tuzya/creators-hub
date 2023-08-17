@@ -19,6 +19,7 @@ import {
   ListItemText,
   Divider,
   ListItemButton,
+  Container,
 } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import BusinessIcon from '@mui/icons-material/Business';
@@ -84,10 +85,10 @@ export default function PersistentDrawerLeft(): JSX.Element {
   const user = useAppSelector((store) => store.user);
   const person = useAppSelector((store) => store.profile.personLoggedInfo);
   const profile = useAppSelector((store) => store.profile.oneProfile);
-  console.log('=======', profile);
 
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [privet, setPrivet] = useState(person);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -217,16 +218,30 @@ export default function PersistentDrawerLeft(): JSX.Element {
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </DrawerHeader>
-        {person?.photo && (
+        <Box>
           <img
-            src={`http://localhost:3001/public/img/${person?.photo}`}
+            src="http://localhost:3001/public/logo.png"
             alt="Ваше Фото"
-            style={{ width: '150px', height: '150px', borderRadius: '100px' }}
+            style={{ width: '90%' }}
           />
-        )}
-        <p style={{ fontSize: 14 }} color="text.secondary">
-          Привет! {profile?.username}
-        </p>
+        </Box>
+        <Container>
+          {user.status === 'logged' && person?.photo && (
+            <>
+              <a href="/profile/lk">
+                <img
+                  src={`http://localhost:3001/public/img/${person?.photo}`}
+                  alt="Ваше Фото"
+                  style={{ width: '150px', height: '150px', borderRadius: '100px' }}
+                />
+              </a>
+              <Typography variant="h5" paddingLeft="20px" component="h2">
+                Привет! {profile?.username}
+              </Typography>
+            </>
+          )}
+        </Container>
+
         <List>
           {links.map((link) => (
             <ListItem key={link.to} disablePadding>
