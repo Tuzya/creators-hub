@@ -16,7 +16,6 @@ export default function PersonInfoItem(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const person = useAppSelector((store) => store.profile.personInfo);
-  console.log('PersonProfile,: ', person);
 
   return (
     <Card sx={{ minWidth: 275 }}>

@@ -12,7 +12,6 @@ export default function LoginInCompany(): JSX.Element {
     e.preventDefault();
 
     const formData = Object.fromEntries(new FormData(e.currentTarget));
-    console.log(formData);
 
     void dispatch(loginCompanyThunk(formData as CompanyLoginFormType));
   };

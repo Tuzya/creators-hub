@@ -114,11 +114,12 @@
 // // ];
 
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Button, Container } from '@mui/material';
 import { RadioButtonUnchecked, RadioButtonChecked } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
-import './TestListItem.css'
+import { updateStatusThunk } from '../../../redux/slices/checkTestStatus/checkTestStatusThunk';
+import './TestListItem.css';
 
 export default function TestListItem(): JSX.Element {
   const questions = useAppSelector((store) => store.questionsAnswers.questionsAnswers);
@@ -128,6 +129,8 @@ export default function TestListItem(): JSX.Element {
   const [score, setScore] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+  const { courseId } = useParams();
+  console.log(courseId);
 
   const answerClicked = (index: number): void => {
     setSelectedAnswer(index);
@@ -137,7 +140,7 @@ export default function TestListItem(): JSX.Element {
   //   if(showFinalRez && (score/questions.length)*100 > 74) {
   //     updateCourseStatus()
   //   }
-    
+
   // })
 
   const elClicked = (isCorrect: boolean): void => {
@@ -152,21 +155,35 @@ export default function TestListItem(): JSX.Element {
     }
   };
 
-
   return (
     <Container>
       <div className="test">
-        <h1 className='course-title'>{course?.title}</h1>
+        <h1 className="course-title">{course?.title}</h1>
 
         {showFinalRez ? (
           <div className="final-rez">
             <h2>Ваш результат {score}</h2>
-            <h3 className='h3-final-rez'>
+            <h3 className="h3-final-rez">
               {score} из {questions.length} ({Math.floor((score / questions.length) * 100)}%)
               {(score / questions.length) * 100 > 60 ? (
-                <div className='rez-word'>Вы прошли!</div>
+                <>
+                  <span>Вы прошли!</span>
+                  <Link to="/profile/lk">
+                    <Button
+                      className="test-button"
+                      onClick={() => void dispatch(updateStatusThunk(courseId))}
+                    >
+                      Закрыть
+                    </Button>
+                  </Link>
+                </>
               ) : (
-                <div className='rez-word'>Вы не прошли!</div>
+                <>
+                  <span>Вы не прошли!</span>
+                  <Link to="/profile/lk">
+                    <Button className="test-button"> Закрыть </Button>
+                  </Link>
+                </>
               )}
             </h3>
             <Link to="/profile/lk">
@@ -177,7 +194,6 @@ export default function TestListItem(): JSX.Element {
           </div>
         ) : (
           <div className="question-card">
-            
             <h3>
             <span className='question-from-allquestions'> {currentQuestion + 1}/{questions.length}</span>
             </h3>
@@ -188,11 +204,7 @@ export default function TestListItem(): JSX.Element {
               <div className="li-question">
                 {questions.length > 0 &&
                   questions[currentQuestion].Answers.map((el, index) => (
-                    <li className='li-question-li'
-                      onClick={() => answerClicked(index)}
-                      key={el.id}
-                      
-                    >
+                    <li className="li-question-li" onClick={() => answerClicked(index)} key={el.id}>
                       {selectedAnswer === index ? <RadioButtonChecked /> : <RadioButtonUnchecked />}
                       <span style={{ marginLeft: '10px' }}>{el.answer}</span>
                     </li>

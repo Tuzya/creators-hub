@@ -23,53 +23,51 @@ const style = {
   p: 4,
 };
 
-export default function TransitionsModal({setOpen, open}): JSX.Element {
-    const dispatch = useAppDispatch();
-    const onecourse = useAppSelector((store) => store.allcourses.onecourse);
-    const { courseId } = useParams<string>();
-    const [courseData, setCourseData] = useState<CoursesOneFormType>({
-      title: onecourse?.title || '',
-      body: onecourse?.body ||'',
-    });
-    const [file, setFile] = useState<File | null>(null);
-  
-    const changeHandler: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-      setCourseData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    };
-  
-    const handleFileChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-      if (e.currentTarget.files && e.currentTarget.files.length > 0) {
-        setFile(e.currentTarget.files[0]);
-      }
-    };
-  
-    const handleSubmit = async (): Promise<void> => {
-  
-      const formData = new FormData();
-      formData.append('title', courseData.title);
-      formData.append('body', courseData.body);
-  
-      if (file !== null) {
-        formData.append('downloadLink', file);
-      }
-  
-      try {
-        await dispatch(changeCourseThunk({coursesId: Number(courseId), formData}));
-        setCourseData({
-          title: '',
-          body: '',
-        });
-        setFile(null);
-        setOpen(0); 
-      } catch (error) {
-        console.error('An error occurred while adding the course:', error);
-      }
-    };
- 
+export default function TransitionsModal({ setOpen, open }): JSX.Element {
+  const dispatch = useAppDispatch();
+  const onecourse = useAppSelector((store) => store.allcourses.onecourse);
+  const { courseId } = useParams<string>();
+  const [courseData, setCourseData] = useState<CoursesOneFormType>({
+    title: onecourse?.title || '',
+    body: onecourse?.body || '',
+  });
+  const [file, setFile] = useState<File | null>(null);
+
+  const changeHandler: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    setCourseData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleFileChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    if (e.currentTarget.files && e.currentTarget.files.length > 0) {
+      setFile(e.currentTarget.files[0]);
+    }
+  };
+
+  const handleSubmit = async (): Promise<void> => {
+    const formData = new FormData();
+    formData.append('title', courseData.title);
+    formData.append('body', courseData.body);
+
+    if (file !== null) {
+      formData.append('downloadLink', file);
+    }
+
+    try {
+      await dispatch(changeCourseThunk({ coursesId: Number(courseId), formData }));
+      setCourseData({
+        title: '',
+        body: '',
+      });
+      setFile(null);
+      setOpen(0);
+    } catch (error) {
+      console.error('An error occurred while adding the course:', error);
+    }
+  };
 
   return (
     <div>
-        <Modal
+      <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         open={!!open}
@@ -82,35 +80,36 @@ export default function TransitionsModal({setOpen, open}): JSX.Element {
           },
         }}
       >
-        <Fade in={!! open}>
+        <Fade in={!!open}>
           <Box sx={style}>
             <Typography id="transition-modal-title" variant="h6" component="h2">
-            <form >
-      <TextField
-        variant="outlined"
-        name="title"
-        label="Title"
-        value={courseData.title}
-        onChange={changeHandler}
-      />
-      <TextField
-        variant="outlined"
-        name="body"
-        label="Body"
-        value={courseData.body}
-        onChange={changeHandler}
-      />
-      <input type="file" accept=".pdf" onChange={handleFileChange} />
-      
-    </form>
+              <form>
+                <TextField
+                  variant="outlined"
+                  name="title"
+                  label="Title"
+                  value={courseData.title}
+                  onChange={changeHandler}
+                />
+                <TextField
+                  variant="outlined"
+                  name="body"
+                  label="Body"
+                  value={courseData.body}
+                  onChange={changeHandler}
+                />
+                <input type="file" accept=".pdf" onChange={handleFileChange} />
+              </form>
             </Typography>
-            <Button type="submit"
-            onClick={()=> {
-              handleSubmit()
-               }
-            }
-              >Подтвердить изменение</Button>
-            <Button onClick={() => setOpen(0) }>X</Button>
+            <Button
+              type="submit"
+              onClick={() => {
+                handleSubmit();
+              }}
+            >
+              Подтвердить изменение
+            </Button>
+            <Button onClick={() => setOpen(0)}>X</Button>
           </Box>
         </Fade>
       </Modal>

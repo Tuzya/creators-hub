@@ -30,14 +30,10 @@ export const getOneCourseThunk = createAsyncThunk<CourseType, CourseType['id']>(
 );
 
 export const changeCourseThunk = createAsyncThunk(
-  
   'allcourse/ changeCourse',
-  
-  async ({coursesId, formData} : {coursesId: number, formData: CoursesOneFormType}) => {
-    console.log('thuuuunk1111111111',formData);
-    
+
+  async ({ coursesId, formData }: { coursesId: number; formData: CoursesOneFormType }) => {
     const { data } = await axios.put<CourseType>(`/courses/allcourses/${coursesId}`, formData);
-    console.log('thuuuunk2222222',coursesId);
     return data;
   },
 );

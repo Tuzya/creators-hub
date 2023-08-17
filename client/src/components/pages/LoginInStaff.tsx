@@ -11,7 +11,6 @@ export default function LoginInStaff(): JSX.Element {
     e.preventDefault();
 
     const formData = Object.fromEntries(new FormData(e.currentTarget));
-    console.log(formData);
 
     void dispatch(loginUserThunk(formData as UserLoginFormType));
   };
