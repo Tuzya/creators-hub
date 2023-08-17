@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import type { CourseType } from '../../../types/courseType/courseType';
 import { cardStyle } from '../../styles';
+
 import './course.css'
 
 type CourseItemProps = {
@@ -30,7 +31,9 @@ function AllCourseOneUserItem({ course }: CourseItemProps): JSX.Element {
         </div>
         <CardActions>
           <Link to={`/company/allcourses/${course.id}`}>
-            <Button className="course-button" size="small">Страница курса</Button> {/* Используем класс стиля для кнопки */}
+            <button className="question-button" type='button' >
+              Страница курса
+            </button>
           </Link>
         </CardActions>
       </Card>
