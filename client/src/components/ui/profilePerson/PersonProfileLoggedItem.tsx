@@ -81,18 +81,18 @@ export default function PersonProfileLoggedItem(): JSX.Element {
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           {profile?.username} Привет!
         </Typography>
-        <Typography variant="h5" component="div">
+        {/* <Typography variant="h5" component="div">
           be{bull}nev{bull}o{bull}lent
-        </Typography>
+        </Typography> */}
         <Box mt={2}>
           <Typography variant="subtitle1">Прогресс выполнения:</Typography>
           <CircularProgress variant="determinate" value={completionPercentage} />
           <Typography>{completionPercentage.toFixed(2)}%</Typography>
         </Box>
       </CardContent>
-      <CardActions>
+      {/* <CardActions>
         <Button size="small">Learn More</Button>
-      </CardActions>
+      </CardActions> */}
       <Link to="/profile/lk/edit">
         <EditIcon />
       </Link>

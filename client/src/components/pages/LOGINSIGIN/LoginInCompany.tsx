@@ -3,7 +3,7 @@ import gsap, { Expo, Power2, Quad } from 'gsap';
 import { useAppDispatch } from '../../../redux/hooks';
 import { loginCompanyThunk } from '../../../redux/slices/company/companyThunks';
 import type { CompanyLoginFormType } from '../../../types/companyTypes';
-import './LoginInCompany.module.css';
+// import './LoginInCompany.module.css';
 
 export default function LoginInCompany(): JSX.Element {
   const dispatch = useAppDispatch();
