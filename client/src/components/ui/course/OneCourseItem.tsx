@@ -21,20 +21,22 @@ export default function OneCourseItem(): JSX.Element {
   };
 
   return (
-    <>
+    
+    <div className='onecourse-container'>
     <EditModal setOpen={setOpen} open={open}/>
-    <Card sx={cardStyle}>
-      <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Курс
+          
+        <Typography >
+        <h2 className='course-title'>Курс</h2>
         </Typography>
         <Typography variant="h5" component="div">
-         <h3>{onecourse?.title}</h3> 
+         <h2>{onecourse?.title}</h2> 
         </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          {onecourse?.body}
+
+        <Typography sx={{ mb: 15 }} color="text.secondary">
+          <h3>{onecourse?.body}</h3>
         </Typography>
-        {onecourse?.downloadLink && (
+        
+      {onecourse?.downloadLink && (
           <button
           type='button'
           className="allcourses-button"
@@ -44,9 +46,14 @@ export default function OneCourseItem(): JSX.Element {
           </button>
           
         )}
-        
-      </CardContent>
-      <CardActions>
+         {courseId && (
+          <Link to={`/company/allcourses/${courseId}/test`}>
+            <button
+          type='button'
+          className="allcourses-button"
+            >Пройти тест</button>
+          </Link>
+        )}
         {courseId && company.status === 'logged' && (
           <>
           <Link to={`/company/allcourses/${courseId}/addQuestion`}>
@@ -59,16 +66,9 @@ export default function OneCourseItem(): JSX.Element {
             setOpen(onecourse?.id)}/> */}
             </>
         )}
-        {courseId && (
-          <Link to={`/company/allcourses/${courseId}/test`}>
-            <button
-          type='button'
-          className="allcourses-button"
-            >Пройти тест</button>
-          </Link>
-        )}
-      </CardActions>
-    </Card>
-    </>
+       
+     
+      </div>
+    
   );
 }

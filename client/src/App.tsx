@@ -55,7 +55,7 @@ function App(): JSX.Element {
         <CssBaseline />
         <Navbar />
         <Container sx={{ marginTop: '30px' }}>
-          <Paper>
+          {/* <Paper> */}
             <Routes>
               {/* для всех */}
               <Route path="/" element={<MainPage />} />
@@ -108,7 +108,7 @@ function App(): JSX.Element {
                 <Route path="/signup" element={<SignUpPage />} />
               </Route>
             </Routes>
-          </Paper>
+          {/* </Paper> */}
         </Container>
       </>
     </Loader>
