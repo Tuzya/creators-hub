@@ -20,13 +20,13 @@ function AllCourseItem({ course }: CourseItemProps): JSX.Element {
   return (
     <Container >
       <DeleteModal setOpen={setOpen} open={open} />
-      <Card sx={cardStyle}>
-        <CardContent >
+      <Card >
+        <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             Курс
           </Typography>
-          <Typography variant="h5" component="div">
-            {course.title}
+          <Typography >
+            <h3>{course.title}</h3>
           </Typography>
           {/* <Typography sx={{ mb: 1.5 }} color="text.secondary">
           {course.body}...
@@ -34,17 +34,22 @@ function AllCourseItem({ course }: CourseItemProps): JSX.Element {
         </CardContent>
         <CardActions>
           <Link to={`/company/allcourses/${course.id}`}>
-            <Button size="small">Страница курса</Button>
+            <button
+            type='button'
+            className="allcourses-button"
+             >
+              Страница курса</button>
           </Link>
           {company.status === 'logged' && (
-            <Button
-              size="small"
+            <button
+            type='button'
+            className="allcourses-button"
               onClick={() => {
                 setOpen(course.id);
               }}
             >
               Удалить курс
-            </Button>
+            </button>
           )}
         </CardActions>
       </Card>
