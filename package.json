@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "gsap": "^3.12.2",
-    "mini-css-extract-plugin": "^2.7.6"
-  }
-}

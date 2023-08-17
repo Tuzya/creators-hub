@@ -25,30 +25,26 @@ export default function AnswerForm(): JSX.Element {
   };
 
   return (
-    <Grid container direction="row" sx={postFormGridStyles}>
+    <Grid container direction="row">
       <Grid item xs={3} />
       <Grid item xs={6}>
         <Box
-          py={5}
-          display="flex"
-          flexDirection="row"
-          alignItems="center"
-          justifyContent="space-around"
-        >
+        className='answer-box'
+          >
           <TextField
             size="small"
-            variant="outlined"
+            className='question-text'
             name="answer"
-            label="answer"
+            label="введите ответ"
             value={input.answer}
             onKeyDown={handleKeyDown}
             onChange={changeHandler}
             sx={textFieldStyle}
           />
 
-          <Button
-            variant="outlined"
-            sx={buttonStyle}
+          <button
+            type='button'
+            className='question-button'
             onClick={() => {
               void dispatch(
                 addAnswersThunk({
@@ -61,7 +57,7 @@ export default function AnswerForm(): JSX.Element {
             }}
           >
             Добавить ответ
-          </Button>
+          </button>
         </Box>
       </Grid>
     </Grid>

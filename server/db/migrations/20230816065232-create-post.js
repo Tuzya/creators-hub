@@ -10,12 +10,18 @@ module.exports = {
       },
       title: {
         type: Sequelize.TEXT,
+        allowNull: false,
+
       },
       body: {
         type: Sequelize.TEXT,
+        allowNull: false,
+
       },
       img: {
         type: Sequelize.TEXT,
+        allowNull: false,
+
       },
       company_id: {
         type: Sequelize.INTEGER,

@@ -44,7 +44,6 @@ export const getPersonInfoThunk = createAsyncThunk(
   'profile/personInfoProfile',
   async ({ profileId }: { profileId: string }) => {
     const { data } = await axios.get<PersonInfoType>(`/person/personInfo/${profileId}`);
-    console.log('thunk', data);
     return data;
   },
 );

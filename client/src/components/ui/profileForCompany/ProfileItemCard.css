@@ -1,0 +1,12 @@
+.photoStaff {
+  transition: transform 0.3s ease-in-out; /* Плавная анимация при hover */
+  cursor: pointer;
+  width: 300px;
+  height: 300px;
+  border-radius: 10px;
+}
+
+.photoStaff:hover {
+  transform: translate(0px, -5px);
+  /* Сдвигаем на 5px вправо при наведении */
+}

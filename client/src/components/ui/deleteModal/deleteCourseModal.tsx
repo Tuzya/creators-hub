@@ -17,7 +17,6 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 400,
   bgcolor: 'background.paper',
-  border: '2px solid #000',
   boxShadow: 24,
   p: 4,
 };
@@ -46,14 +45,22 @@ export default function TransitionsModal({setOpen, open}): JSX.Element {
             <Typography id="transition-modal-title" variant="h6" component="h2">
               Удаление отменить невозможно. Вы уверены в удалении?
             </Typography>
-            <Button onClick={()=> {
+            <div className='modal-buttons'>
+            <button
+          type='button'
+          className='question-button' 
+            onClick={()=> {
              void dispatch(deleteCourseThunk(open));
                setOpen(0)
                }
             }
               
-              >Да</Button>
-            <Button onClick={() => setOpen(0) }>Нет</Button>
+              >Да</button>
+            <button 
+            type='button'
+            className='question-button' 
+            onClick={() => setOpen(0) }>Нет</button>
+            </div>
           </Box>
         </Fade>
       </Modal>
