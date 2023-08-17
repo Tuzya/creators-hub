@@ -580,18 +580,20 @@ export default function LoginInStaff(): JSX.Element {
 
         <div className="inputGroup inputGroup1">
           <label htmlFor="email1">Email</label>
-          <input type="text" id="email" className="email" name='email' maxLength={256} />
+          <input type="text" id="email" className="email" name="email" maxLength={256} />
 
           <span className="indicator" />
         </div>
 
         <div className="inputGroup inputGroup2">
-          <label htmlFor="password" >Password</label>
+          <label htmlFor="password">Password</label>
           <input type="password" id="password" name="password" className="password" />
         </div>
 
         <div className="inputGroup inputGroup3">
-          <button id="login" type='submit'>Log in</button>
+          <button id="login" type="submit">
+            Log in
+          </button>
         </div>
       </form>
     </div>
