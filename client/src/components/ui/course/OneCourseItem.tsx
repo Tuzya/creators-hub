@@ -4,7 +4,8 @@ import { Link, useParams } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import { useAppSelector } from '../../../redux/hooks';
 import { cardStyle } from '../../styles';
-import EditModal from '../editModal/editCourseModal'
+import EditModal from '../editModal/editCourseModal';
+import './AllCoursesStyles.css'
 
 export default function OneCourseItem(): JSX.Element {
   const onecourse = useAppSelector((store) => store.allcourses.onecourse);
@@ -20,44 +21,54 @@ export default function OneCourseItem(): JSX.Element {
   };
 
   return (
-    <>
+    
+    <div className='onecourse-container'>
     <EditModal setOpen={setOpen} open={open}/>
-    <Card sx={cardStyle}>
-      <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Курс
+          
+        <Typography >
+        <h2 className='course-title'>Курс</h2>
         </Typography>
         <Typography variant="h5" component="div">
-          {onecourse?.title}
+         <h2>{onecourse?.title}</h2> 
         </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          {onecourse?.body}
+
+        <Typography sx={{ mb: 15 }} color="text.secondary">
+          <h3>{onecourse?.body}</h3>
         </Typography>
-        {onecourse?.downloadLink && (
-          <Button size="small" onClick={handleDownload}>
+        
+      {onecourse?.downloadLink && (
+          <button
+          type='button'
+          className="allcourses-button"
+          
+          onClick={handleDownload}>
             Скачать PDF
-          </Button>
+          </button>
           
         )}
-        
-      </CardContent>
-      <CardActions>
+         {courseId && (
+          <Link to={`/company/allcourses/${courseId}/test`}>
+            <button
+          type='button'
+          className="allcourses-button"
+            >Пройти тест</button>
+          </Link>
+        )}
         {courseId && company.status === 'logged' && (
           <>
           <Link to={`/company/allcourses/${courseId}/addQuestion`}>
-            <Button size="small">Добавить тест</Button>
+            <button
+          type='button'
+          className="allcourses-button"
+            >Добавить тест</button>
           </Link>
-          <EditIcon onClick={() => 
-            setOpen(onecourse?.id)}/>
+          {/* <EditIcon onClick={() => 
+            setOpen(onecourse?.id)}/> */}
             </>
         )}
-        {courseId && (
-          <Link to={`/company/allcourses/${courseId}/test`}>
-            <Button size="small">Пройти тест</Button>
-          </Link>
-        )}
-      </CardActions>
-    </Card>
-    </>
+       
+     
+      </div>
+    
   );
 }
