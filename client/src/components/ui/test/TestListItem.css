@@ -4,10 +4,14 @@
     align-items: center;
     justify-content: center;
     margin-top: 50px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: Source Sans Pro;
+    height: 800px;
   }
   .course-title {
-
+    color: #FCA311
+  }
+  .question-from-allquestions {
+    color: #a8a5a5;
   }
   
   .final-rez {
@@ -21,7 +25,7 @@
   
   .question-card {
     display: flex;
-    flex-direction: column;
+    flex-direction:column;
     align-items: center;
     justify-content: center;
     margin-top: 50px;
@@ -35,10 +39,9 @@
   .li-question-li {
     cursor: pointer;
     margin-bottom: 10px;
-    /* background: grey; */
     display: flex; 
     align-items: center;
-    border: 1px solid black;
+    border: 1px solid #FCA311;
     padding: 20px;
     border-radius: 15px;
     font-size: 20px;
@@ -46,27 +49,19 @@
   }
   
   .li-question-li:hover {
-    background-color: lightgrey;
+    background-color: #FCA311;
     
   }
   
-  h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
   
-  h3 {
-    font-size: 18px;
+  .test-button-next, .test-button-close {
     margin-top: 20px;
-  }
-  
-  span {
-    margin-left: 10px;
-    
-  }
-  
-  .Button {
-    margin-top: 20px;
+    padding: 20px;
+    border-radius: 12px;
+    border: #FCA311;
+    font-size: 15px;
+    color: #FFFFFF;
+    background-color: #FCA311;
   }
 .h3-final-rez {
     display: flex; 
@@ -79,6 +74,5 @@
     align-items: center;
     font-family: Georgia, 'Times New Roman', Times, serif;
     margin: 10px;
-    color: blue;
-
+    color: #FCA311;
   } 

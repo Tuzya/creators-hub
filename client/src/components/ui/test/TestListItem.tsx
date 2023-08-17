@@ -170,14 +170,16 @@ export default function TestListItem(): JSX.Element {
               )}
             </h3>
             <Link to="/profile/lk">
-              <Button className="test-button"> Закрыть </Button>
+              <button
+              type='button'
+              className="test-button-close"> Закрыть </button>
             </Link>
           </div>
         ) : (
           <div className="question-card">
             
             <h3>
-              {currentQuestion + 1}/{questions.length}
+            <span className='question-from-allquestions'> {currentQuestion + 1}/{questions.length}</span>
             </h3>
 
             {questions.length > 0 && <h2>{questions[currentQuestion].question}</h2>}
@@ -198,8 +200,9 @@ export default function TestListItem(): JSX.Element {
               </div>
             </ul>
 
-            <Button
-              variant="contained"
+            <button
+            type='button'
+              className='test-button-next'
               onClick={() =>
                 elClicked(
                   selectedAnswer !== null &&
@@ -208,7 +211,7 @@ export default function TestListItem(): JSX.Element {
               }
             >
               Далее
-            </Button>
+            </button>
           </div>
         )}
       </div>
