@@ -15,6 +15,7 @@
     "@emotion/styled": "^11.11.0",
     "@material-tailwind/react": "^2.1.0",
     "@mui/icons-material": "^5.14.3",
+    "@mui/lab": "^5.0.0-alpha.140",
     "@mui/material": "^5.14.4",
     "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.4.0",

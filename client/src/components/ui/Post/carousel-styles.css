@@ -1,28 +1,49 @@
-carousel-styles.css */ body,
-html {
-  margin: 0;
-  padding: 0;
+.carousel-slide {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  /* overflow: hidden; */
+}
+
+.carousel-image {
   width: 100%;
   height: 100%;
-  /* overflow: hidden; */
+  object-fit: cover;
+  /* position: fixed; */
+  top: 0;
+  left: 0;
+}
+
+.carousel-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: black;
 }
 
 .carousel-container {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: black;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  /* background-color: black; */
 }
 
-.carousel-slide {
-  width: 100%;
-  height: 100%;
+.text-center {
+  background-color: #e5e5e5;
+  border-radius: 15px;
+  opacity: 70%;
+  width: 40%;
+  text-align: center;
+  font-family: Source Sans Pro;
 }
 
-.carousel-slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+/* Добавьте свои стили для заголовка и текста здесь */
