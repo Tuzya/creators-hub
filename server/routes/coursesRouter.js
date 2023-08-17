@@ -50,11 +50,8 @@ router.route('/allcourses/:courseId').get(async (req, res) => {
   const id = req.params.courseId;
   const oneCourses = await Course.findByPk(id);
   res.json(oneCourses);
-});
 
-router
-  .route('/allcourses/:courseId')
-  .delete(async (req, res) => {
+}).delete(async (req, res) => {
     try {
       await Course.destroy({ where: { id: req.params.courseId } });
       res.sendStatus(200);
