@@ -1,21 +1,27 @@
 import React, { useEffect } from 'react';
-import { Container } from '@mui/material';
+import { Box } from '@mui/material'; // Импортируем Box вместо Container
 
 import PostList from '../ui/Post/PostList';
 import { useAppDispatch } from '../../redux/hooks';
 import { getPostThunk } from '../../redux/slices/posts/postThunk';
 
-
 export default function MainPage(): JSX.Element {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
     void dispatch(getPostThunk());
   }, []);
 
   return (
-    <Container>
-      <div>1 eeeeeeeeeeeeq</div>
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      minHeight="100vh"
+
+    >
       <PostList />
-    </Container>
+    </Box>
   );
 }
