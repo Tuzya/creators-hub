@@ -10,7 +10,7 @@ import { checkCompanyThunk } from './redux/slices/company/companyThunks';
 import PrivateRouter from './components/hocs/PrivateRouter';
 import { checkUserThunk } from './redux/slices/user/userThunks';
 import { getFindCockieThunk } from './redux/slices/findCockie/findCockieThunk';
-import LoginInPage from './components/pages/LoginInPage';
+import LoginInPage from './components/pages/LOGINSIGIN/LoginInPage';
 import SignUpPage from './components/pages/SignUpPage';
 import CompanyPage from './components/pages/company/CompanyPage';
 import { useAppDispatch, useAppSelector } from './redux/hooks';
@@ -23,6 +23,8 @@ import QuestionPage from './components/pages/test/addTest/QuestionPage';
 
 import Loader from './components/hocs/Loader';
 import { getOneProfileThunk, getPersonLoggedInfoThunk } from './redux/slices/profiles/profileThunk';
+import LoginInCompany from './components/pages/LOGINSIGIN/LoginInPage';
+import LoginInStaff from './components/pages/LOGINSIGIN/LoginInStaff';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -112,7 +114,8 @@ function App(): JSX.Element {
                   />
                 }
               >
-                <Route path="/login" element={<LoginInPage />} />
+                <Route path="/logincompany" element={<LoginInCompany />} />
+                <Route path="/loginstaff" element={<LoginInStaff />} />
                 <Route path="/signup" element={<SignUpPage />} />
               </Route>
             </Routes>
