@@ -6,6 +6,7 @@ import type { QuestionModelType } from '../../../types/testTypes';
 import { changeQuestionThunk, deleteQuestionThunk } from '../../../redux/slices/test/testThunk';
 import { textFieldStyle } from '../../styles';
 import DeleteModal from '../deleteModal/deleteQuestionModal';
+import './QuestionStyles.css'
 
 type QuestionItemProps = {
   question: QuestionModelType;
@@ -23,8 +24,9 @@ export default function QuestionItem({ question }: QuestionItemProps): JSX.Eleme
   return (
     <>
     <DeleteModal setOpen={setOpen} open={open}/>
-    <Card sx={{ minWidth: 275 }}>
-      <CardContent>
+    <Card  sx={{ minWidth: 275 }}>
+      <div className='question-one'>
+      <CardContent >
         <Typography variant="h5" component="div">
         
           {question.question}
@@ -32,26 +34,31 @@ export default function QuestionItem({ question }: QuestionItemProps): JSX.Eleme
         <Typography variant="h5" component="div" />
       </CardContent>
       <CardActions>
-        <Button 
+        <button
+        className='question-item-button'
+        type='button'
         size="small"
         onClick={() => 
           setEdit(true)
          
       }
-        >Изменить вопрос</Button>
+        >Изменить вопрос</button>
         <br />
         {edit && (
           <>
           <TextField
+            className='edit-question-form'
             size="small"
             variant="outlined"
             name="question"
-            label="new question"
+            label="новый вопрос"
             value={input.question}
             onChange={changeHandler}
-            sx={textFieldStyle}
+            
           />
-          <Button
+          <button
+          className='question-item-button'
+          type='button'
           size="small"
           onClick={() => {
             void dispatch(changeQuestionThunk({courseId: Number(courseId), questionId: Number(question.id), input}));
@@ -60,21 +67,28 @@ export default function QuestionItem({ question }: QuestionItemProps): JSX.Eleme
           }
           }
             
-            >Подтвердить изменения</Button>
+            >Подтвердить изменения</button>
           </>
         )
 
         }
-        <Button 
+        <button
+        className='question-item-button'
+        type='button'
         size="small"
         onClick={() => 
           setOpen(question.id)
         // void dispatch(deleteQuestionThunk({courseId: Number(courseId), questionId: Number(question.id)}))
-      }>Удалить вопрос</Button>
+      }>Удалить вопрос</button>
         <Link to={`/company/allcourses/${Number(courseId)}/addQuestion/${question.id}/addAnswers`}>
-          <Button size="small">Ответы: добавление/удаление</Button>
+          <button 
+          className='question-item-button' id='question-item-button-answers'
+          type='button'
+          size="small">Ответы: добавление/удаление</button>
         </Link>
       </CardActions>
+      
+        </div>
     </Card>
     </>
   );

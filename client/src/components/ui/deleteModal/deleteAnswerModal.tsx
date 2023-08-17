@@ -3,7 +3,6 @@ import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch } from '../../../redux/hooks';
@@ -16,17 +15,17 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 400,
   bgcolor: 'background.paper',
-  border: '2px solid #000',
   boxShadow: 24,
   p: 4,
-};
+  color: 'black'
+ };
 
 export default function TransitionsModal({setOpen, open}): JSX.Element {
   const dispatch = useAppDispatch();
   const {courseId, questionId} = useParams()
 
   return (
-    <div>
+    <div className='modal-div'>
         <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -45,13 +44,21 @@ export default function TransitionsModal({setOpen, open}): JSX.Element {
             <Typography id="transition-modal-title" variant="h6" component="h2">
               Удаление отменить невозможно. Вы уверены в удалении?
             </Typography>
-            <Button onClick={()=> {
+            <div className='modal-buttons'>
+            <button 
+            type='button'
+            className='question-item-button'
+            onClick={()=> {
              void dispatch(deleteAnswerThunk
              ({courseId: Number(courseId), questionId: Number(questionId), answerId: Number(open)}));
               setOpen(0)
             }}
-      >Да</Button>
-            <Button onClick={() => setOpen(0) }>Нет</Button>
+      >Да</button>
+            <button 
+            type='button'
+            className='question-item-button'
+            onClick={() => setOpen(0) }>Нет</button>
+            </div>
           </Box>
         </Fade>
       </Modal>

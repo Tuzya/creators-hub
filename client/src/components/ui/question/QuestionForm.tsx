@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Box, Button, Grid, TextField } from '@mui/material';
 import { useParams } from 'react-router-dom';
-import { buttonStyle, postFormGridStyles, textFieldStyle } from '../../styles';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { addQuestionsThunk } from '../../../redux/slices/test/testThunk';
+import './QuestionStyles.css'
 
 export default function QuestionForm(): JSX.Element {
   const [input, setInput] = useState({ question: '' });
@@ -21,37 +21,31 @@ export default function QuestionForm(): JSX.Element {
     }
   };
   return (
-    <Grid container direction="row" sx={postFormGridStyles}>
+    <Grid container direction="row"
+    className='question-form-container' >
       <Grid item xs={3} />
-      <Grid item xs={6}>
-        <Box
-          py={5}
-          display="flex"
-          flexDirection="row"
-          alignItems="center"
-          justifyContent="space-around"
-        >
+      <Grid item xs={10}>
+        <Box className='question-box'
+           >
           <TextField
-            size="small"
-            variant="outlined"
+            className='question-text'
             name="question"
-            label="question"
+            label="введите вопрос"
             value={input.question}
             onKeyDown={handleKeyDown}
             onChange={changeHandler}
-            sx={textFieldStyle}
-          />
+            />
 
-          <Button
-            variant="outlined"
-            sx={buttonStyle}
+          <button
+          type='button'
+          className='question-button'
             onClick={() => {
               void dispatch(addQuestionsThunk({ courseId: Number(courseId), input }));
               setInput({ question: '' });
             }}
           >
             Записать вопрос
-          </Button>
+          </button>
         </Box>
       </Grid>
     </Grid>

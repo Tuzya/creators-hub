@@ -3,10 +3,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 50px;
+    margin: 10px;
     font-family: Source Sans Pro;
-    height: 800px;
-  }
+    padding: 20px;
+      }
   .course-title {
     color: #FCA311
   }
@@ -28,7 +28,7 @@
     flex-direction:column;
     align-items: center;
     justify-content: center;
-    margin-top: 50px;
+    margin-top: 10px;
   }
   
   .li-question {
