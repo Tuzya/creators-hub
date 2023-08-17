@@ -5,7 +5,8 @@ import { postListPaperStyles } from '../../styles';
 import AllCourseItem from './AllCourseItem';
 import SearchBar from './SearchBar';
 import { setSearchParams } from '../../../redux/slices/allcourses/allCoursesSlice';
-import './course.css'
+
+import './AllCoursesStyles.css'
 
 export default function AllCoursesList(): JSX.Element {
   const dispatch = useAppDispatch()
@@ -14,16 +15,26 @@ export default function AllCoursesList(): JSX.Element {
 
   const filteredCourses = allcourses.filter((cource) => cource.title.toLowerCase().includes(searchParams.query))
   return (
-    <Paper className='body3' elevation={0} sx={postListPaperStyles}>
-      <Box mt={1} py={2} px={2} display="flex" flexDirection="row" flexWrap="wrap">
+    <>
+      <SearchBar
 
-        <SearchBar setSearchParams={(params) => dispatch(setSearchParams(params))} />
-        {filteredCourses?.map((course) => (
-          <Box key={course.id} p={1}>
-            <AllCourseItem key={course.id} course={course} />
-          </Box>
-        ))}
-      </Box>
-    </Paper>
+        setSearchParams={(params) => dispatch(setSearchParams(params))} />
+      <Paper elevation={0}
+
+      >
+        <Box mt={5} py={8} px={2} display="flex" flexDirection="row" flexWrap="wrap">
+
+
+          {filteredCourses?.map((course) => (
+            <div className='all-course-list'>
+              <Box
+                key={course.id} p={1}>
+                <AllCourseItem key={course.id} course={course} />
+              </Box>
+            </div>
+          ))}
+        </Box>
+      </Paper>
+    </>
   );
 }
