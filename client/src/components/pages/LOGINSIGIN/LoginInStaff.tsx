@@ -580,7 +580,15 @@ export default function LoginInStaff(): JSX.Element {
 
         <div className="inputGroup inputGroup1">
           <label htmlFor="email1">Email</label>
-          <input type="text" id="email" className="email" name="email" maxLength={256} />
+
+          <input
+            type="text"
+            id="email"
+            autoComplete="off"
+            className="email"
+            name="email"
+            maxLength={256}
+          />
 
           <span className="indicator" />
         </div>

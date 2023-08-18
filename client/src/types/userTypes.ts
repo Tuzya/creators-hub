@@ -3,7 +3,7 @@ export type UserModelType = {
   username: string;
   email: string;
   company_id: number;
-  People: PersonModelType[];
+  People?: PersonModelType[];
 };
 
 export type PersonModelType = {

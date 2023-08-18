@@ -1,13 +1,13 @@
 import type { ChangeEvent, FormEvent } from 'react';
-import React, { useState, useEffect } from 'react';
-import { Button, TextField } from '@mui/material';
-import { redirect, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Button, TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { DatePicker, LocalizationProvider } from '@mui/lab';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import type { PersonInfoType } from '../../../types/profileType/profileTypes';
 import { editProfileThunk } from '../../../redux/slices/profiles/profileThunk';
-import './editPerson.css'
-import { DatePicker, LocalizationProvider } from '@mui/lab';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import './editPerson.css';
 
 export default function EditPersonInfoForm(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -16,27 +16,19 @@ export default function EditPersonInfoForm(): JSX.Element {
   const person = useAppSelector((store) => store.profile.personLoggedInfo);
   const [formData, setFormData] = useState<PersonInfoType>({
     city: person?.city || '',
-    birthDate: person?.birthDate || '',
-    phone: person?.phone || '',
-    about: person?.about || '',
     companies: person?.companies || '',
+    about: person?.about || '',
+    phone: person?.phone || '',
+    birthDate: person?.birthDate || '',
     sex: person?.sex || '',
-    photo: person?.photo || '', // Изменили значение на null, так как это будет объект типа File | null
+    photo: person?.photo || null,
   });
 
-  // useEffect(() => {
-  //   if (editProfile) {
-  //     console.log({ editProfile });
-
-  //     setFormData(editProfile);
-  //   }
-  // }, [editProfile]);
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name as string]: value,
     }));
   };
 
@@ -44,7 +36,7 @@ export default function EditPersonInfoForm(): JSX.Element {
     if (e.target.files && e.target.files[0]) {
       setFormData((prevData) => ({
         ...prevData,
-        photo: e.target.files[0], // Устанавливаем файл в поле photo
+        photo: e.target.files[0],
       }));
     }
   };
@@ -53,10 +45,10 @@ export default function EditPersonInfoForm(): JSX.Element {
     e.preventDefault();
     const formDataToSend = new FormData();
     formDataToSend.append('city', formData.city);
-    formDataToSend.append('birthDate', formData.birthDate);
-    formDataToSend.append('phone', formData.phone);
-    formDataToSend.append('about', formData.about);
     formDataToSend.append('companies', formData.companies);
+    formDataToSend.append('about', formData.about);
+    formDataToSend.append('phone', formData.phone);
+    formDataToSend.append('birthDate', formData.birthDate);
     formDataToSend.append('sex', formData.sex);
     if (formData.photo) {
       formDataToSend.append('photo', formData.photo);
@@ -69,73 +61,78 @@ export default function EditPersonInfoForm(): JSX.Element {
       console.error('Error editing profile:', error);
     }
   };
+
   return (
     <form className="edit-person-form" onSubmit={handleSubmit}>
-      <input
-        className="edit-person-file-input"
-        type="file"
-        name="photo"
-        accept="image/*"
-        onChange={handleFileChange}
-      />
-      <TextField
-        className="edit-person-input"
-        variant="outlined"
-        name="city"
-        label="City"
-        value={formData.city}
-        onChange={handleChange}
-      />
-      <TextField
-        className="edit-person-input"
-        variant="outlined"
-        name="birthDate"
-        label="Birth Date"
-        value={formData.birthDate}
-        onChange={handleChange}
-      />
-      <TextField
-        className="edit-person-input"
-        variant="outlined"
-        name="phone"
-        label="Phone"
-        value={formData.phone}
-        onChange={handleChange}
-      />
-      <TextField
-        className="edit-person-input"
-        variant="outlined"
-        name="about"
-        label="About"
-        value={formData.about}
-        onChange={handleChange}
-      />
-      <TextField
-        className="edit-person-input"
-        variant="outlined"
-        name="companies"
-        label="Companies"
-        value={formData.companies}
-        onChange={handleChange}
-      />
-      <TextField
-        className="edit-person-input"
-        variant="outlined"
-        name="sex"
-        label="Sex"
-        value={formData.sex}
-        onChange={handleChange}
-      />
-      <button
-
-        className='question-button'
+      <div className="input-group">
+        <TextField
+          className="edit-person-input"
+          variant="outlined"
+          name="city"
+          label="City"
+          value={formData.city}
+          onChange={handleChange}
+          sx={{ width: '1200px', marginTop: '-150px' }}
+        />
+        <TextField
+          className="edit-person-input"
+          variant="outlined"
+          name="companies"
+          label="Companies"
+          value={formData.companies}
+          onChange={handleChange}
+          sx={{ width: '1200px', marginTop: '-90px' }}
+        />
+        <TextField
+          className="edit-person-input"
+          variant="outlined"
+          name="phone"
+          label="Phone"
+          value={formData.phone}
+          onChange={handleChange}
+          sx={{ width: '1200px', marginTop: '-30px' }}
+        />
+        <TextField
+          className="edit-person-input"
+          variant="outlined"
+          name="about"
+          label="About"
+          value={formData.about}
+          onChange={handleChange}
+          multiline
+          rows={4}
+          sx={{ width: '1200px', marginTop: '30px' }}
+        />
+        <FormControl variant="outlined" className="edit-person-input">
+          <InputLabel sx={{ marginTop: '20px' }}>Sex</InputLabel>
+          <Select
+            name="sex"
+            value={formData.sex}
+            onChange={handleChange}
+            sx={{ width: '1200px', marginTop: '30px' }}
+          >
+            <MenuItem value="male">Male</MenuItem>
+            <MenuItem value="female">Female</MenuItem>
+            <MenuItem value="unspecified">Unspecified</MenuItem>
+          </Select>
+        </FormControl>
+      </div>
+      <div className="input-group">
+        <input
+          className="edit-person-file-input"
+          type="file"
+          name="photo"
+          accept="image/*"
+          onChange={handleFileChange}
+        />
+      </div>
+      <Button
+        className="question-button"
         type="submit"
-
-
+        style={{ backgroundColor: '#FFA500', color: '#FFFFFF' }}
       >
-        Edit Profile
-      </button>
+        Сохранить изменения
+      </Button>
     </form>
   );
 }
-

@@ -1,7 +1,8 @@
 .carousel-slide {
   position: relative;
+  background-color: #e5e5e5;
   width: 100vw;
-  height: 100vh;
+  height: 1vh;
   /* overflow: hidden; */
 }
 

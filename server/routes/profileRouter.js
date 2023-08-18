@@ -1,5 +1,5 @@
 const express = require('express');
-const { User } = require('../db/models');
+const { User, CoursesUser, Course } = require('../db/models');
 
 const router = express.Router();
 
@@ -40,25 +40,6 @@ router.get('/lk', async (req, res) => {
         console.log('User not found');
         res.sendStatus(404);
       }
-    }
-  } catch (error) {
-    console.error('Error fetching user:', error);
-    res.sendStatus(500);
-  }
-});
-
-router.get('/lk/:profileId', async (req, res) => {
-  console.log(req.params);
-  const { profileId } = req.params;
-  console.log('Received profileId:', profileId);
-  try {
-    const user = await User.findByPk(profileId);
-
-    if (user) {
-      res.status(200).json(user);
-    } else {
-      console.log('User not found');
-      res.sendStatus(404);
     }
   } catch (error) {
     console.error('Error fetching user:', error);

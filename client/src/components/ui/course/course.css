@@ -1,46 +1,51 @@
 /* all-course-one-user-item.css */
-
+#root {
+  background-color: #e5e5e5;
+  height: 300vh;
+}
 .course-card {
-   display: flex;
-   flex-direction: column;
-   position: relative;
-   background-color: #E5E5E5;
-   border: 1px solid #e5e5e5;
-   border-radius: 8px;
-   padding: 16px;
-   margin-bottom: 16px;
-   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-   font-family: Source Sans Pro;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: #e5e5e5;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  width: 700px;
+  padding: 16px;
+  margin-bottom: 16px;
+  margin-left: 150px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: Source Sans Pro;
 }
 
 .course-title {
-   font-size: 18px;
-   margin-bottom: 8px;
-   font-family: Source Sans Pro;
+  font-size: 18px;
+  margin-bottom: 8px;
+  font-family: Source Sans Pro;
 }
 
 .course-status {
-   position: absolute;
-   top: 10px;
-   right: 10px;
-   font-weight: bold;
-   color: green;
-   font-family: Source Sans Pro;
-   /* Ваш цвет для выполненных курсов */
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-weight: bold;
+  color: green;
+  font-family: Source Sans Pro;
+  /* Ваш цвет для выполненных курсов */
 }
 
 .course-status.incomplete {
-   color: red;
-   /* Ваш цвет для невыполненных курсов */
-   font-family: Source Sans Pro;
+  color: red;
+  /* Ваш цвет для невыполненных курсов */
+  font-family: Source Sans Pro;
 }
 
 .course-button {
-   background-color: #fca311;
-   /* Ваш цвет для кнопки */
-   color: #f4eded;
-   font-family: Source Sans Pro;
-   /* Цвет текста на кнопке */
+  background-color: #fca311;
+  /* Ваш цвет для кнопки */
+  color: #f4eded;
+  font-family: Source Sans Pro;
+  /* Цвет текста на кнопке */
 }
 
 /* 

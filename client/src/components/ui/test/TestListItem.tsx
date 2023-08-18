@@ -168,24 +168,28 @@ export default function TestListItem(): JSX.Element {
               {(score / questions.length) * 100 > 60 ? (
                 <>
                   <span>Вы прошли!</span>
-                    
+
                   <Link to="/profile/lk">
-              <button
-              type='button'
+                    <button
+                      type="button"
                       onClick={() => void dispatch(updateStatusThunk(courseId))}
-                      className="test-button-close"  > Закрыть </button>
-            </Link>
+                      className="test-button-close"
+                    >
+                      {' '}
+                      Закрыть{' '}
+                    </button>
+                  </Link>
                 </>
               ) : (
                 <>
                   <span>Вы не прошли!</span>
-                  
-                    
-            <Link to="/profile/lk">
-              <button
-              type='button'
-              className="test-button-close"> Закрыть </button>
-            </Link>
+
+                  <Link to="/profile/lk">
+                    <button type="button" className="test-button-close">
+                      {' '}
+                      Закрыть{' '}
+                    </button>
+                  </Link>
                 </>
               )}
             </h3>
@@ -193,7 +197,10 @@ export default function TestListItem(): JSX.Element {
         ) : (
           <div className="question-card">
             <h3>
-            <span className='question-from-allquestions'> {currentQuestion + 1}/{questions.length}</span>
+              <span className="question-from-allquestions">
+                {' '}
+                {currentQuestion + 1}/{questions.length}
+              </span>
             </h3>
 
             {questions.length > 0 && <h2>{questions[currentQuestion].question}</h2>}
@@ -211,8 +218,8 @@ export default function TestListItem(): JSX.Element {
             </ul>
 
             <button
-            type='button'
-              className='test-button-next'
+              type="button"
+              className="test-button-next"
               onClick={() =>
                 elClicked(
                   selectedAnswer !== null &&

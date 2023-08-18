@@ -1,4 +1,4 @@
-import { Box, Button, Container, TextField } from '@mui/material';
+import { Box, Button, Container, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useAppDispatch } from '../../../redux/hooks';
 import { signUpUserThunk } from '../../../redux/slices/user/userThunks';
@@ -33,14 +33,36 @@ export default function AdminSignUpUser(): JSX.Element {
   };
 
   return (
-    <Container>
-      <Box component="form" onSubmit={submitHandler}>
+    <Container
+      sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}
+    >
+      <Box
+        component="form"
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          width: '100%',
+          maxWidth: '1000px',
+          padding: '200px',
+          marginBottom: '250px',
+          border: '1px solid #ccc',
+          borderRadius: '20px',
+          backgroundColor: '#F5F5F5',
+        }}
+        onSubmit={submitHandler}
+      >
+        <Typography variant="h6" gutterBottom>
+          Admin SignUp User
+        </Typography>
         <TextField
           variant="outlined"
           name="username"
           label="Username"
           value={formData.username}
           onChange={inputChangeHandler}
+          sx={{ marginBottom: '10px' }}
+          autoComplete="off"
         />
         <TextField
           variant="outlined"
@@ -49,11 +71,21 @@ export default function AdminSignUpUser(): JSX.Element {
           type="email"
           value={formData.email}
           onChange={inputChangeHandler}
+          sx={{ marginBottom: '20px' }}
+          autoComplete="off"
         />
-        <Button variant="contained" type="submit">
-          Register User (for testing purposes, remove in the future)
+        <Button
+          variant="contained"
+          type="submit"
+          sx={{ backgroundColor: '#FFA500', color: 'white' }}
+        >
+          Register User
         </Button>
-        {signupStatus && <p>{signupStatus}</p>}
+        {signupStatus && (
+          <Typography variant="body2" sx={{ marginTop: '10px', color: 'green' }}>
+            {signupStatus}
+          </Typography>
+        )}
       </Box>
     </Container>
   );

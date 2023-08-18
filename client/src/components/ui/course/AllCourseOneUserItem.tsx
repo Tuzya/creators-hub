@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import type { CourseType } from '../../../types/courseType/courseType';
 import { cardStyle } from '../../styles';
 
-import './course.css'
+import './course.css';
 
 type CourseItemProps = {
   course: CourseType;
@@ -16,9 +16,11 @@ function AllCourseOneUserItem({ course }: CourseItemProps): JSX.Element {
   const coursesStatus = useAppSelector((store) => store.coursesStatus.status);
 
   return (
-    <Container className='body0'>
-      <Card className="course-card"> {/* Используем класс стилей */}
-        <CardContent className='body1'>
+    <Container className="body0 ">
+      <Card className="course-card">
+        {' '}
+        {/* Используем класс стилей */}
+        <CardContent className="body1">
           <Typography className="course-title" color="text.secondary" gutterBottom>
             Курс
           </Typography>
@@ -26,12 +28,14 @@ function AllCourseOneUserItem({ course }: CourseItemProps): JSX.Element {
             Course {course.title}
           </Typography>
         </CardContent>
-        <div className={`course-status ${coursesStatus ? 'complete' : 'incomplete'}`}> {/* Используем классы стилей */}
+        <div className={`course-status ${coursesStatus ? 'complete' : 'incomplete'}`}>
+          {' '}
+          {/* Используем классы стилей */}
           {coursesStatus ? 'Выполнено' : 'К прохождению'}
         </div>
         <CardActions>
           <Link to={`/company/allcourses/${course.id}`}>
-            <button className="question-button" type='button' >
+            <button className="question-button" type="button">
               Страница курса
             </button>
           </Link>

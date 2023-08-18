@@ -25,7 +25,7 @@ export default function ProfileLoggedPage(): JSX.Element {
   }, []);
 
   return (
-    <Container>
+    <Container sx={{ backgroundColor: '#f0f0f0', minHeight: '100vh' }}>
       <PersonProfileLoggedItem />
       <AllCourseOneUserList />
     </Container>
