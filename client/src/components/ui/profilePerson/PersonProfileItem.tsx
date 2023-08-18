@@ -46,9 +46,9 @@ export default function PersonProfileItem(): JSX.Element {
         <Typography sx={{ fontSize: 18, fontFamily: 'Roboto', color: 'white' }} variant="subtitle1">
           Ваш Телефон: {person?.phone}
         </Typography>
-        <Typography sx={{ fontSize: 18, fontFamily: 'Roboto', color: 'white' }} variant="subtitle1">
+        {/* <Typography sx={{ fontSize: 18, fontFamily: 'Roboto', color: 'white' }} variant="subtitle1">
           Дата Рождения: {person?.birthDate}
-        </Typography>
+        </Typography> */}
         <Typography sx={{ fontSize: 18, fontFamily: 'Roboto', color: 'white' }} variant="subtitle1">
           Ваш Пол: {person?.sex}
         </Typography>
@@ -56,7 +56,7 @@ export default function PersonProfileItem(): JSX.Element {
           sx={{ fontSize: 18, fontFamily: 'Roboto', color: 'white', marginTop: '20px' }}
           variant="subtitle1"
         >
-          О Себе: {person?.about}
+          Любимая фраза: {person?.about}
         </Typography>
       </CardContent>
     </Card>

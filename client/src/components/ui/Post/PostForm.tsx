@@ -4,6 +4,8 @@ import { useAppDispatch } from '../../../redux/hooks';
 
 import type { PostInfoType, PostType } from '../../../types/postType/postType';
 import { addPostThunk } from '../../../redux/slices/posts/postThunk';
+import { textFieldStyle } from '../../styles/styles';
+import '../../styles/index.css';
 
 export default function PostForm(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -56,25 +58,24 @@ export default function PostForm(): JSX.Element {
 
   return (
     <Container>
-      <Typography variant="h6" gutterBottom sx={{ color: 'black' }}>
-        Add News
-      </Typography>
       <form onSubmit={handleFormSubmit}>
         <TextField
           variant="outlined"
           name="title"
-          label="Title"
+          label="Название"
           value={formData.title}
           onChange={handleInputChange}
+          sx={textFieldStyle}
           fullWidth
           margin="normal"
         />
         <TextField
           variant="outlined"
           name="body"
-          label="Body"
+          label="Описание"
           value={formData.body}
           onChange={handleInputChange}
+          sx={textFieldStyle}
           fullWidth
           multiline
           rows={4}
@@ -82,8 +83,8 @@ export default function PostForm(): JSX.Element {
         />
         <Box display="flex" alignItems="center">
           <input type="file" name="img" accept="image/*" onChange={handleAddPhoto} />
-          <Button type="submit" variant="contained" color="primary">
-            Add Post
+          <Button type="submit" variant="contained" id="butId2" color="primary">
+            Добавить
           </Button>
         </Box>
       </form>

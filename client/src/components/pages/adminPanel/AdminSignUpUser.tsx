@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { useAppDispatch } from '../../../redux/hooks';
 import { signUpUserThunk } from '../../../redux/slices/user/userThunks';
 import type { UserSignUpFormType } from '../../../types/userTypes';
+import { textFieldStyle } from '../../styles/styles';
+import '../../styles/index.css';
 
 export default function AdminSignUpUser(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -53,33 +55,29 @@ export default function AdminSignUpUser(): JSX.Element {
         onSubmit={submitHandler}
       >
         <Typography variant="h6" gutterBottom>
-          Admin SignUp User
+          Введите данные нового сотрудника
         </Typography>
         <TextField
           variant="outlined"
           name="username"
-          label="Username"
+          label="Введите имя пользователя"
           value={formData.username}
           onChange={inputChangeHandler}
-          sx={{ marginBottom: '10px' }}
+          sx={textFieldStyle}
           autoComplete="off"
         />
         <TextField
           variant="outlined"
           name="email"
-          label="Email"
+          label="Введите почту"
           type="email"
           value={formData.email}
           onChange={inputChangeHandler}
-          sx={{ marginBottom: '20px' }}
+          sx={textFieldStyle}
           autoComplete="off"
         />
-        <Button
-          variant="contained"
-          type="submit"
-          sx={{ backgroundColor: '#FFA500', color: 'white' }}
-        >
-          Register User
+        <Button variant="contained" type="submit" id="butId3">
+          Зарегистрировать
         </Button>
         {signupStatus && (
           <Typography variant="body2" sx={{ marginTop: '10px', color: 'green' }}>

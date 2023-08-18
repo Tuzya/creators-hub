@@ -15,7 +15,7 @@ export default function PostList(): JSX.Element {
     if (!(posts.length === 0)) {
       const interval = setInterval(() => {
         setActiveIndex((prevIndex) => (prevIndex + 1) % posts.length);
-      }, 5000); // миллисекунд = 3 секунд
+      }, 3000); // миллисекунд = 3 секунд
 
       return () => clearInterval(interval);
     } // Очистка интервала при размонтировании
