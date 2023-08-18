@@ -10,9 +10,9 @@ module.exports = {
           password: '1',
         },
         {
-          name: 'Companya 222Adidasdasdas',
-          email: 'b@b',
-          password: '2',
+          name: 'Elbrus Bootcamp',
+          email: 'elbrus@elbrus',
+          password: 'elbrus',
         },
       ],
       {}
@@ -21,20 +21,26 @@ module.exports = {
       'Users',
       [
         {
-          username: 'Юра',
+          username: 'Александр Князев',
           email: '1@1',
           password: '1',
-          company_id: 1,
+          company_id: 2,
         },
         {
-          username: 'Владос',
+          username: 'Юлия Павлова',
           email: '4@4',
           password: '1',
           company_id: 2,
         },
         {
-          username: 'Антон Алексеевич',
+          username: 'Гоша Бабаян',
           email: '5@5',
+          password: '1',
+          company_id: 2,
+        },
+        {
+          username: 'Адам Балкоев',
+          email: '2@2',
           password: '1',
           company_id: 2,
         },
@@ -42,7 +48,7 @@ module.exports = {
           username: 'admin',
           email: 'admin@admin',
           password: '1',
-          company_id: null,
+          company_id: 1,
         },
       ],
       {}
@@ -51,33 +57,33 @@ module.exports = {
       'Courses',
       [
         {
-          title: 'Название курса 1',
+          title: 'Sequelize',
           body: 'Node.js — это среда выполнения JavaScript, построенная на движке V8 от Google. Node.js была создана в 2009 году Райаном Далем (Ryan Dahl), который хотел улучшить возможности серверных приложений того времени. Он заметил, что большинство серверов работали по принципу одновременного обслуживания ограниченного количества соединений, что приводило к низкой производительности и высокому потреблению ресурсов. Райану пришла в голову идея использовать JavaScript на сервере и сделать его асинхронным и неблокирующим, то есть способным обрабатывать множество соединений параллельно без задержек.',
           downloadLink: '1692291181174-814833890-1iie2415.pdf',
           company_id: 1,
         },
         {
-          title: 'Название курса 2',
+          title: 'React',
           body: 'Node.js — это среда выполнения JavaScript, построенная на движке V8 от Google. Node.js была создана в 2009 году Райаном Далем (Ryan Dahl), который хотел улучшить возможности серверных приложений того времени. Он заметил, что большинство серверов работали по принципу одновременного обслуживания ограниченного количества соединений, что приводило к низкой производительности и высокому потреблению ресурсов. Райану пришла в голову идея использовать JavaScript на сервере и сделать его асинхронным и неблокирующим, то есть способным обрабатывать множество соединений параллельно без задержек.',
           downloadLink: '1692291181174-814833890-1iie2415.pdf',
           company_id: 2,
         },
         {
-          title: 'Название курса 3',
+          title: 'Mob X',
           body: 'Node.js — это среда выполнения JavaScript, построенная на движке V8 от Google. Node.js была создана в 2009 году Райаном Далем (Ryan Dahl), который хотел улучшить возможности серверных приложений того времени. Он заметил, что большинство серверов работали по принципу одновременного обслуживания ограниченного количества соединений, что приводило к низкой производительности и высокому потреблению ресурсов. Райану пришла в голову идея использовать JavaScript на сервере и сделать его асинхронным и неблокирующим, то есть способным обрабатывать множество соединений параллельно без задержек.',
           downloadLink: '1692291181174-814833890-1iie2415.pdf',
           company_id: 2,
         },
         {
-          title: 'Название курса 4',
+          title: 'Electron',
           body: 'Node.js — это среда выполнения JavaScript, построенная на движке V8 от Google. Node.js была создана в 2009 году Райаном Далем (Ryan Dahl), который хотел улучшить возможности серверных приложений того времени. Он заметил, что большинство серверов работали по принципу одновременного обслуживания ограниченного количества соединений, что приводило к низкой производительности и высокому потреблению ресурсов. Райану пришла в голову идея использовать JavaScript на сервере и сделать его асинхронным и неблокирующим, то есть способным обрабатывать множество соединений параллельно без задержек.',
           downloadLink: '1692291181174-814833890-1iie2415.pdf',
           company_id: 2,
         },
         {
-          title: 'Название курса 5',
+          title: 'Курс по Node.js',
           body: 'Node.js — это среда выполнения JavaScript, построенная на движке V8 от Google. Node.js была создана в 2009 году Райаном Далем (Ryan Dahl), который хотел улучшить возможности серверных приложений того времени. Он заметил, что большинство серверов работали по принципу одновременного обслуживания ограниченного количества соединений, что приводило к низкой производительности и высокому потреблению ресурсов. Райану пришла в голову идея использовать JavaScript на сервере и сделать его асинхронным и неблокирующим, то есть способным обрабатывать множество соединений параллельно без задержек.',
-          downloadLink: '1692291181174-814833890-1iie2415.pdf',
+          downloadLink: 'Nodejs.pdf',
           company_id: 2,
         },
       ],
@@ -87,39 +93,48 @@ module.exports = {
       'People',
       [
         {
+          city: 'Москва',
+          birthDate: '22.12.2010',
+          phone: '+7922..........',
+          about: 'Всегда можно погуглить. Погугли!',
+          companies: 'Elbrus Bootcamp',
+          sex: 'Муж',
+          photo: 'adam.jpg',
+          user_id: 4,
+        },
+        {
           city: 'Moscow',
           birthDate: '22.12.2010',
-          phone: '+792266479644',
-          about: 'Люблю Оладушки',
-          companies: 'OOO Швабибас',
-          sex: 'Жен',
-          photo: '1692275508938.webp',
+          phone: '+7922.....',
+          about: 'Здравствуйте, дорогие студенты',
+          companies: 'Elbrus Bootcamp',
+          sex: 'Муж',
+          photo: 'sasha.jpg',
           user_id: 1,
         },
         {
-          city: 'Париж',
+          city: 'Москва',
           birthDate: '22.12.2010',
-          phone: '+792266479644',
-          about: 'Люблю Оладушки',
-          companies: 'OOO Швабибас',
+          phone: '+7922.......',
+          about: 'Очень хорошо знаю JS, TS, Redux, etc',
+          companies: 'Elbrus Bootcamp',
           sex: 'Жен',
-          photo: '1692275508938.webp',
+          photo: 'july.jpg',
           user_id: 2,
         },
         {
-          city: 'Берлин',
+          city: 'Москва',
           birthDate: '22.12.2010',
-          phone: '+792266479644',
-          about: 'Люблю Оладушки',
-          companies: 'OOO Швабибас',
-          sex: 'Жен',
-          photo: '1692275508938.webp',
+          phone: '+7922..........',
+          about: 'Создатель Elbrus Bootcamp',
+          companies: 'Elbrus Bootcamp',
+          sex: 'Муж',
+          photo: 'goga.jpg',
           user_id: 3,
         },
       ],
       {}
     );
-
     await queryInterface.bulkInsert(
       'CoursesUsers',
       [
@@ -141,25 +156,20 @@ module.exports = {
       ],
       {}
     );
-
     await queryInterface.bulkInsert(
       'Questions',
       [
         {
-          question: 'John Doe',
-          courses_id: 1,
+          question: 'Node.js - это',
+          courses_id: 5,
         },
         {
-          question: 'John Doe',
-          courses_id: 1,
+          question: 'В каком году была создана Node.js',
+          courses_id: 5,
         },
         {
-          question: 'John Doe',
-          courses_id: 1,
-        },
-        {
-          question: 'John Doe',
-          courses_id: 1,
+          question: 'Выберите главную особенность Node.js',
+          courses_id: 5,
         },
       ],
       {}
@@ -168,70 +178,68 @@ module.exports = {
       'Answers',
       [
         {
-          answer: 'John',
-          isCorrect: false,
-          question_id: 1,
-        },
-        {
-          answer: 'Do2e',
-          isCorrect: false,
-          question_id: 1,
-        },
-        {
-          answer: 'John2 Doe2',
+          answer:
+            'это среда выполнения JavaScript, построенная на движке V8 от Google',
           isCorrect: true,
           question_id: 1,
         },
         {
-          answer: 'John',
+          answer:
+            'это среда, разработанная в Amazon для внутренних сотрудников',
+          isCorrect: false,
+          question_id: 1,
+        },
+        {
+          answer: 'это среда, которая маленькая пятница',
+          isCorrect: false,
+          question_id: 1,
+        },
+        {
+          answer: '2019',
           isCorrect: false,
           question_id: 2,
         },
         {
-          answer: 'Do2e',
+          answer: '1999',
           isCorrect: false,
           question_id: 2,
         },
         {
-          answer: 'John2 Doe2',
+          answer: '2009',
           isCorrect: true,
           question_id: 2,
         },
         {
-          answer: 'John',
+          answer: 'создавать особые условия разработки для разработчиков',
           isCorrect: false,
           question_id: 3,
         },
         {
-          answer: 'Do2e',
+          answer: 'обрабатывать get и post запросы',
           isCorrect: false,
           question_id: 3,
         },
         {
-          answer: 'John2 Doe2',
+          answer: 'обрабатывать множество соединений параллельно без задержек',
           isCorrect: true,
           question_id: 3,
         },
+      ],
+      {}
+    );
+    await queryInterface.bulkInsert(
+      'Posts',
+      [
         {
-          answer: 'John',
-          isCorrect: false,
-          question_id: 4,
-        },
-        {
-          answer: 'Do2e',
-          isCorrect: false,
-          question_id: 4,
-        },
-        {
-          answer: 'John2 Doe2',
-          isCorrect: true,
-          question_id: 4,
+          title: 'Добро Пожаловать',
+          body: '',
+          img: '/img/fon.png',
+          company_id: 2,
         },
       ],
       {}
     );
   },
-
   async down(queryInterface, Sequelize) {
     await queryInterface.bulkDelete('Courses', null, {});
     await queryInterface.bulkDelete('Users', null, {});

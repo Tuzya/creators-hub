@@ -12,7 +12,6 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(Person, { foreignKey: 'user_id' });
 
       this.belongsTo(Company, { foreignKey: 'company_id' });
-      this.hasMany(CoursesUser, { foreignKey: 'user_id' });
       this.belongsToMany(Course, {
         through: 'CoursesUsers',
         foreignKey: 'user_id',
