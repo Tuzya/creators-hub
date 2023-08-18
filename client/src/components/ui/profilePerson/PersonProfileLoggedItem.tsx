@@ -1,70 +1,19 @@
-// import React, { useEffect } from 'react';
-// import Box from '@mui/material/Box';
-// import Card from '@mui/material/Card';
-// import CardActions from '@mui/material/CardActions';
-// import CardContent from '@mui/material/CardContent';
-// import Button from '@mui/material/Button';
-// import Typography from '@mui/material/Typography';
-// import EditIcon from '@mui/icons-material/Edit';
-// import { Link } from 'react-router-dom';
-// import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
-// import PersonLoggedInfoItem from './PersonLoggedInfoItem';
-
-// const bull = (
-//   <Box component="span" sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>
-//     •
-//   </Box>
-// );
-// export default function PersonProfileLoggedItem(): JSX.Element {
-//   const dispatch = useAppDispatch();
-
-//   const profile = useAppSelector((store) => store.profile.oneProfile);
-
-//   return (
-//     <Card sx={{ minWidth: 275 }}>
-//       <CardContent>
-//         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-//           {profile?.username} Привет!
-//         </Typography>
-//         <Typography variant="h5" component="div">
-//           be{bull}nev{bull}o{bull}lent
-//         </Typography>
-//       </CardContent>
-//       <CardActions>
-//         <Button size="small">Learn More</Button>
-//       </CardActions>
-//       <Link to="/profile/lk/edit">
-//         <EditIcon />
-//       </Link>
-//       <PersonLoggedInfoItem />
-//     </Card>
-//   );
-// }
-
 import React from 'react';
-import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import EditIcon from '@mui/icons-material/Edit';
-import { Link } from 'react-router-dom';
+
 import { CircularProgress } from '@mui/material';
-import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import { Link } from 'react-router-dom';
+import EditIcon from '@mui/icons-material/Edit';
+import { useAppSelector } from '../../../redux/hooks';
 import PersonLoggedInfoItem from './PersonLoggedInfoItem';
 
-const bull = (
-  <Box component="span" sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>
-    •
-  </Box>
-);
-
 export default function PersonProfileLoggedItem(): JSX.Element {
-  const dispatch = useAppDispatch();
   const profile = useAppSelector((store) => store.profile.oneProfile);
   const questions = useAppSelector((store) => store.questionsAnswers.questionsAnswers);
-
+  const person = useAppSelector((store) => store.profile.personLoggedInfo);
+  console.log(profile);
   // Calculate completion percentage
   const completedCount = questions.reduce((count, question) => {
     if (question.Answers.every((answer) => answer.isCorrect)) {
@@ -73,30 +22,57 @@ export default function PersonProfileLoggedItem(): JSX.Element {
     return count;
   }, 0);
 
-  const completionPercentage = (completedCount / questions.length) * 100;
+  const completionPercentage = questions.length > 0 ? (completedCount / questions.length) * 100 : 0;
 
   return (
-    <Card sx={{ minWidth: 275 }}>
-      <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          {profile?.username} Привет!
+    <Card
+      sx={{
+        display: 'flex',
+        width: '1000px',
+        backgroundColor: '#383636',
+        margin: '0 auto',
+        alignItems: 'center',
+        padding: '20px',
+      }}
+    >
+      <div style={{ padding: '20px' }}>
+        {person?.photo && (
+          <img
+            src={`http://localhost:3001/public/img/${person?.photo}`}
+            alt="Ваше Фото"
+            style={{ width: '150px', height: '150px', borderRadius: '50%' }}
+          />
+        )}
+      </div>
+      <CardContent style={{ flexGrow: 1 }}>
+        <Typography sx={{ fontSize: 24, fontFamily: 'Roboto', color: 'white' }} gutterBottom>
+          {profile?.username}
         </Typography>
-        {/* <Typography variant="h5" component="div">
-          be{bull}nev{bull}o{bull}lent
-        </Typography> */}
-        <Box mt={2}>
-          <Typography variant="subtitle1">Прогресс выполнения:</Typography>
-          <CircularProgress variant="determinate" value={completionPercentage} />
-          <Typography>{completionPercentage.toFixed(2)}%</Typography>
-        </Box>
+        <Link to="/profile/lk/edit" style={{ color: 'white' }}>
+          <EditIcon />
+        </Link>
+        <Typography variant="h6" sx={{ fontSize: 18, fontFamily: 'Roboto', color: 'white' }}>
+          Ваш Город: {person?.city}
+        </Typography>
+        <Typography variant="h6" sx={{ fontSize: 18, fontFamily: 'Roboto', color: 'white' }}>
+          Ваша Компания: {person?.companies}
+        </Typography>
+        <Typography variant="h6" sx={{ fontSize: 18, fontFamily: 'Roboto', color: 'white' }}>
+          Ваш Телефон: {person?.phone}
+        </Typography>
+        <Typography variant="h6" sx={{ fontSize: 18, fontFamily: 'Roboto', color: 'white' }}>
+          Дата Рождения: {person?.birthDate}
+        </Typography>
+        <Typography variant="h6" sx={{ fontSize: 18, fontFamily: 'Roboto', color: 'white' }}>
+          Ваш Пол: {person?.sex}
+        </Typography>
+        <Typography
+          variant="h6"
+          sx={{ fontSize: 18, fontFamily: 'Roboto', color: 'white', marginTop: '20px' }}
+        >
+          О Себе: {person?.about}
+        </Typography>
       </CardContent>
-      {/* <CardActions>
-        <Button size="small">Learn More</Button>
-      </CardActions> */}
-      <Link to="/profile/lk/edit">
-        <EditIcon />
-      </Link>
-      <PersonLoggedInfoItem />
     </Card>
   );
 }

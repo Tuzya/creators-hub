@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Button, TextField } from '@mui/material';
+import { Button, TextField, Container, Typography, Box } from '@mui/material';
 import { useAppDispatch } from '../../../redux/hooks';
 
 import type { PostInfoType, PostType } from '../../../types/postType/postType';
@@ -26,19 +26,22 @@ export default function PostForm(): JSX.Element {
     if (file) {
       setFormData((prevData) => ({
         ...prevData,
-        img: [...prevData.img, file], // Добавляем URL изображения в массив img
+        img: [...prevData.img, file],
       }));
     }
   };
-  const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
+
+  const handleFormSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    // Создаем объект FormData для отправки данных вместе с изображением
+
     const formDataToSend = new FormData();
     formDataToSend.append('title', formData.title);
     formDataToSend.append('body', formData.body);
+
     if (formData.img) {
       formDataToSend.append('img', formData.img[0]);
     }
+
     try {
       await dispatch(addPostThunk(formDataToSend));
       setFormData({
@@ -46,23 +49,25 @@ export default function PostForm(): JSX.Element {
         body: '',
         img: [],
       });
-
-      // navigate('/profile/lk');
     } catch (error) {
-      console.error('Error editing profile:', error);
+      console.error('Error adding post:', error);
     }
   };
-  console.log(formData);
 
   return (
-    <form onSubmit={handleFormSubmit}>
-      <div>
+    <Container>
+      <Typography variant="h6" gutterBottom sx={{ color: 'black' }}>
+        Add News
+      </Typography>
+      <form onSubmit={handleFormSubmit}>
         <TextField
           variant="outlined"
           name="title"
           label="Title"
           value={formData.title}
           onChange={handleInputChange}
+          fullWidth
+          margin="normal"
         />
         <TextField
           variant="outlined"
@@ -70,12 +75,18 @@ export default function PostForm(): JSX.Element {
           label="Body"
           value={formData.body}
           onChange={handleInputChange}
+          fullWidth
+          multiline
+          rows={4}
+          margin="normal"
         />
-        <input type="file" name="img" accept="image/*" onChange={handleAddPhoto} />
-      </div>
-      <Button type="submit" variant="contained" color="primary">
-        Add Post
-      </Button>
-    </form>
+        <Box display="flex" alignItems="center">
+          <input type="file" name="img" accept="image/*" onChange={handleAddPhoto} />
+          <Button type="submit" variant="contained" color="primary">
+            Add Post
+          </Button>
+        </Box>
+      </form>
+    </Container>
   );
 }

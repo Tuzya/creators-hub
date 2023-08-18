@@ -166,7 +166,7 @@ export default function PersistentDrawerLeft(): JSX.Element {
             )}
             <Link to="/logincompany" style={{ color: 'inherit', textDecoration: 'none' }}>
               <IconButton color="inherit">
-                {!( company.status === 'logged' || user.status === 'logged') && (
+                {!(company.status === 'logged' || user.status === 'logged') && (
                   <>
                     <LockOpenIcon />
                     <span style={{ fontSize: '20px' }}> Компания</span>
@@ -192,7 +192,7 @@ export default function PersistentDrawerLeft(): JSX.Element {
                 {!(company.status === 'logged' || user.status === 'logged') && (
                   <>
                     <PersonAddIcon />
-                    <span style={{ fontSize: '20px' }}> Регестрация </span>
+                    <span style={{ fontSize: '20px' }}> Регистрация </span>
                   </>
                 )}
               </IconButton>

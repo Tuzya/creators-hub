@@ -7,7 +7,6 @@ import { cardStyle } from '../../styles';
 import { deleteCourseThunk } from '../../../redux/slices/allcourses/allCoursesThunk';
 import DeleteModal from '../deleteModal/deleteCourseModal';
 
-
 type CourseItemProps = {
   course: CourseType;
 };
@@ -18,32 +17,27 @@ function AllCourseItem({ course }: CourseItemProps): JSX.Element {
   const company = useAppSelector((store) => store.company);
 
   return (
-    <Container >
+    <Container>
       <DeleteModal setOpen={setOpen} open={open} />
-      <Card >
+      <Card>
         <CardContent>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+          <Typography sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
             Курс
           </Typography>
-          <Typography >
+          <Typography>
             <h3>{course.title}</h3>
           </Typography>
-          {/* <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          {course.body}...
-        </Typography> */}
         </CardContent>
         <CardActions>
           <Link to={`/company/allcourses/${course.id}`}>
-            <button
-            type='button'
-            className="allcourses-button"
-             >
-              Страница курса</button>
+            <button type="button" className="allcourses-button">
+              Страница курса
+            </button>
           </Link>
           {company.status === 'logged' && (
             <button
-            type='button'
-            className="allcourses-button"
+              type="button"
+              className="allcourses-button"
               onClick={() => {
                 setOpen(course.id);
               }}

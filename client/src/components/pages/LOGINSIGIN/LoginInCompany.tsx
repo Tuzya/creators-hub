@@ -941,7 +941,7 @@ export default function LoginInCompany(): JSX.Element {
           <label htmlFor="loginEmail" id="loginEmailLabel">
             Email
           </label>
-          <input type="email" id="loginEmail" maxLength="254" name="email" />
+          <input type="email" id="loginEmail" autoComplete="off" maxLength={254} name="email" />
         </div>
 
         <div className="inputGroup inputGroup2">

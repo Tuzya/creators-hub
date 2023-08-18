@@ -1,44 +1,64 @@
-import React, { useEffect } from 'react';
-import Box from '@mui/material/Box';
+import React from 'react';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import { Box, CircularProgress } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
+import { Link } from 'react-router-dom';
+import { useAppSelector } from '../../../redux/hooks';
 import PersonInfoItem from './PersonInfoItem';
 
-const bull = (
-  <Box component="span" sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>
-    •
-  </Box>
-);
 export default function PersonProfileItem(): JSX.Element {
-  const dispatch = useAppDispatch();
-
   const profile = useAppSelector((store) => store.profile.onePersonProfile);
+  const person = useAppSelector((store) => store.profile.personInfo);
 
   return (
-    <Card sx={{ minWidth: 275 }}>
-      <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          {profile?.username} Привет!
+    <Card
+      sx={{
+        display: 'flex',
+        width: '1000px',
+        backgroundColor: '#383636',
+        margin: '0 auto',
+        alignItems: 'center',
+        padding: '20px',
+      }}
+    >
+      <div style={{ padding: '20px' }}>
+        {person?.photo && (
+          <img
+            src={`http://localhost:3001/public/img/${person?.photo}`}
+            alt="Ваше Фото"
+            style={{ width: '150px', height: '150px', borderRadius: '50%' }}
+          />
+        )}
+      </div>
+      <CardContent style={{ flexGrow: 1 }}>
+        <Typography sx={{ fontSize: 24, fontFamily: 'Roboto', color: 'white' }} gutterBottom>
+          {profile?.username}
         </Typography>
-        <Typography variant="h5" component="div">
-          be{bull}nev{bull}o{bull}lent
+        <Typography variant="h5" component="div" />
+        <Typography sx={{ fontSize: 18, fontFamily: 'Roboto', color: 'white' }} variant="subtitle1">
+          Ваш Город: {person?.city}
         </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          adjective
+        <Typography sx={{ fontSize: 18, fontFamily: 'Roboto', color: 'white' }} variant="subtitle1">
+          Ваша Компания: {person?.companies}
         </Typography>
-        <Typography variant="body2">
-          well meaning and kindly.
-          <br />a benevolent smile
+        <Typography sx={{ fontSize: 18, fontFamily: 'Roboto', color: 'white' }} variant="subtitle1">
+          Ваш Телефон: {person?.phone}
+        </Typography>
+        <Typography sx={{ fontSize: 18, fontFamily: 'Roboto', color: 'white' }} variant="subtitle1">
+          Дата Рождения: {person?.birthDate}
+        </Typography>
+        <Typography sx={{ fontSize: 18, fontFamily: 'Roboto', color: 'white' }} variant="subtitle1">
+          Ваш Пол: {person?.sex}
+        </Typography>
+        <Typography
+          sx={{ fontSize: 18, fontFamily: 'Roboto', color: 'white', marginTop: '20px' }}
+          variant="subtitle1"
+        >
+          О Себе: {person?.about}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small">Learn More</Button>
-      </CardActions>
-      <PersonInfoItem />
     </Card>
   );
 }

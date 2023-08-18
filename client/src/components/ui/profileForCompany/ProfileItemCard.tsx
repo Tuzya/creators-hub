@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { Button } from '@mui/material';
+import { Button, colors } from '@mui/material';
 import { Link, useParams } from 'react-router-dom';
 import { cardStyle } from '../../styles';
 import type {} from '../../../types/profileType/profileTypes';
@@ -27,16 +27,11 @@ export default function ProfileItemCard({ profile }: ProfileItemCardProps): JSX.
   };
 
   return (
-    <Card sx={cardStyle}>
+    <Card sx={{ ...cardStyle, height: '470px', borderRadius: '20px' }}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Profile Details
         </Typography>
-        {/* {profile?.id && (
-          <Link to={`/profile/lk/${profile.id}`}>
-            <Button size="small"> {profile?.username} </Button>
-          </Link>
-        )} */}
         {profile?.People[0]?.photo ? (
           <a href={`/profile/lk/${profile?.id}`}>
             <img
@@ -56,7 +51,7 @@ export default function ProfileItemCard({ profile }: ProfileItemCardProps): JSX.
           </a>
         )}
         <Typography variant="h5" component="div">
-          {profile?.username}
+          <span style={{ fontFamily: 'Robot' }}>{profile?.username}</span>
         </Typography>
 
         {/* Другие поля профиля */}
@@ -64,13 +59,11 @@ export default function ProfileItemCard({ profile }: ProfileItemCardProps): JSX.
       {/* Кнопки для редактирования, удаления и т.д. */}
       <Button
         type="button"
-        variant="outlined"
-        color="secondary"
         size="small"
-        sx={{ mr: 2, mt: 20, width: '100%' }}
+        sx={{ mr: 2, mt: 2, width: '100%', backgroundColor: 'orange' }}
         onClick={handleOpen}
       >
-        Назначить курс
+        <p style={{ color: 'white' }}>Назначить курс</p>
       </Button>
       <ModalAssigningCourseToUser profile={profile} setOpen={setOpen} open={open} />
     </Card>
