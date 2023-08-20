@@ -60,9 +60,9 @@ export default function PersonProfileLoggedItem(): JSX.Element {
         <Typography variant="h6" sx={{ fontSize: 18, fontFamily: 'Roboto', color: 'white' }}>
           Ваш Телефон: {person?.phone}
         </Typography>
-        <Typography variant="h6" sx={{ fontSize: 18, fontFamily: 'Roboto', color: 'white' }}>
+        {/* <Typography variant="h6" sx={{ fontSize: 18, fontFamily: 'Roboto', color: 'white' }}>
           Дата Рождения: {person?.birthDate}
-        </Typography>
+        </Typography> */}
         <Typography variant="h6" sx={{ fontSize: 18, fontFamily: 'Roboto', color: 'white' }}>
           Ваш Пол: {person?.sex}
         </Typography>
@@ -70,7 +70,7 @@ export default function PersonProfileLoggedItem(): JSX.Element {
           variant="h6"
           sx={{ fontSize: 18, fontFamily: 'Roboto', color: 'white', marginTop: '20px' }}
         >
-          О Себе: {person?.about}
+          Любимая фраза: {person?.about}
         </Typography>
       </CardContent>
     </Card>

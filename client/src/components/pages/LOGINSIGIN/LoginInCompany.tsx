@@ -3,7 +3,6 @@ import gsap, { Expo, Power2, Quad } from 'gsap';
 import { useAppDispatch } from '../../../redux/hooks';
 import { loginCompanyThunk } from '../../../redux/slices/company/companyThunks';
 import type { CompanyLoginFormType } from '../../../types/companyTypes';
-// import './LoginInCompany.module.css';
 
 export default function LoginInCompany(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -937,27 +936,79 @@ export default function LoginInCompany(): JSX.Element {
           </div>
         </div>
 
+        <div className="inputGroup inputGroup1" style={{ marginBottom: '20px' }}>
+          <label htmlFor="loginEmail" id="loginEmailLabel">
+            Email
+          </label>
+          <input
+            type="email"
+            id="loginEmail"
+            autoComplete="off"
+            maxLength={254}
+            name="email"
+            style={{
+              width: '100%',
+              padding: '8px',
+              borderRadius: '4px',
+              border: '1px solid #ccc',
+            }}
+          />
+        </div>
+
         <div className="inputGroup inputGroup1">
           <label htmlFor="loginEmail" id="loginEmailLabel">
             Email
           </label>
-          <input type="email" id="loginEmail" autoComplete="off" maxLength={254} name="email" />
+          <input
+            type="email"
+            id="loginEmail"
+            maxLength={254}
+            name="email "
+            style={{
+              width: '100%',
+              padding: '8px',
+              border: '1px solid #ccc',
+              borderRadius: '4px',
+              fontSize: '14px',
+            }}
+          />
         </div>
-
         <div className="inputGroup inputGroup2">
           <label htmlFor="loginPassword" id="loginPasswordLabel">
             Password
           </label>
-          <input type="password" id="loginPassword" name="password" />
+          <input
+            type="password"
+            id="loginPassword"
+            name="password"
+            style={{
+              width: '100%',
+              padding: '8px',
+              border: '1px solid #ccc',
+              borderRadius: '4px',
+              fontSize: '14px',
+            }}
+          />
           <label id="showPasswordToggle" htmlFor="showPasswordCheck">
             Show
             <input id="showPasswordCheck" type="checkbox" name="password" />
             <div className="indicator" />
           </label>
         </div>
-
         <div className="inputGroup inputGroup3">
-          <button id="login" type="submit">
+          <button
+            id="login"
+            type="submit"
+            style={{
+              padding: '10px 20px',
+              backgroundColor: '#FF6800',
+              color: '#fff',
+              border: 'none',
+              borderRadius: '4px',
+              fontSize: '16px',
+              cursor: 'pointer',
+            }}
+          >
             Log in
           </button>
         </div>

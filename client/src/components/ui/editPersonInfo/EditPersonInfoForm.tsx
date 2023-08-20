@@ -1,6 +1,14 @@
 import type { ChangeEvent, FormEvent } from 'react';
 import React, { useState } from 'react';
-import { Button, TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import {
+  Button,
+  TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  textFieldClasses,
+} from '@mui/material';
 import { DatePicker, LocalizationProvider } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { useNavigate } from 'react-router-dom';
@@ -8,6 +16,7 @@ import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import type { PersonInfoType } from '../../../types/profileType/profileTypes';
 import { editProfileThunk } from '../../../redux/slices/profiles/profileThunk';
 import './editPerson.css';
+import { textFieldStyle } from '../../styles/styles';
 
 export default function EditPersonInfoForm(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -69,7 +78,7 @@ export default function EditPersonInfoForm(): JSX.Element {
           className="edit-person-input"
           variant="outlined"
           name="city"
-          label="City"
+          label="Город"
           value={formData.city}
           onChange={handleChange}
           sx={{ width: '1200px', marginTop: '-150px' }}
@@ -78,16 +87,18 @@ export default function EditPersonInfoForm(): JSX.Element {
           className="edit-person-input"
           variant="outlined"
           name="companies"
-          label="Companies"
+          label="Компания"
           value={formData.companies}
           onChange={handleChange}
           sx={{ width: '1200px', marginTop: '-90px' }}
+
+          // sx={{}}
         />
         <TextField
           className="edit-person-input"
           variant="outlined"
           name="phone"
-          label="Phone"
+          label="Телефон"
           value={formData.phone}
           onChange={handleChange}
           sx={{ width: '1200px', marginTop: '-30px' }}
@@ -96,24 +107,25 @@ export default function EditPersonInfoForm(): JSX.Element {
           className="edit-person-input"
           variant="outlined"
           name="about"
-          label="About"
+          label="Любимая фраза"
           value={formData.about}
           onChange={handleChange}
           multiline
-          rows={4}
+          rows={2}
           sx={{ width: '1200px', marginTop: '30px' }}
         />
         <FormControl variant="outlined" className="edit-person-input">
-          <InputLabel sx={{ marginTop: '20px' }}>Sex</InputLabel>
+          <InputLabel sx={{ marginTop: '20px' }}>Ваш Пол</InputLabel>
           <Select
             name="sex"
             value={formData.sex}
             onChange={handleChange}
             sx={{ width: '1200px', marginTop: '30px' }}
           >
-            <MenuItem value="male">Male</MenuItem>
-            <MenuItem value="female">Female</MenuItem>
-            <MenuItem value="unspecified">Unspecified</MenuItem>
+            <MenuItem value="Муж">Муж</MenuItem>
+            <MenuItem value="Жен">Жен</MenuItem>
+            <MenuItem value="Не выбрано">Не выбрано</MenuItem>
+            <MenuItem value="Боевой вертолёт">Боевой вертолёт</MenuItem>
           </Select>
         </FormControl>
       </div>

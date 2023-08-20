@@ -30,7 +30,7 @@ export default function CompanyPage(): JSX.Element {
           onClick={() => setActiveForm('company')}
           style={{ marginRight: '10px', backgroundColor: '#FFA500', color: 'white' }}
         >
-          Add Course
+          Добавить Курс
         </Button>
         <Button
           variant={activeForm === 'post' ? 'contained' : 'outlined'}
@@ -38,7 +38,7 @@ export default function CompanyPage(): JSX.Element {
           onClick={() => setActiveForm('post')}
           style={{ backgroundColor: '#FFA500', color: 'white' }}
         >
-          Add Post
+          Добавить Новость
         </Button>
       </div>
 

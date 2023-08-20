@@ -25,7 +25,7 @@ function AllCourseOneUserItem({ course }: CourseItemProps): JSX.Element {
             Курс
           </Typography>
           <Typography variant="h5" component="div">
-            Course {course.title}
+            {course.title}
           </Typography>
         </CardContent>
         <div className={`course-status ${coursesStatus ? 'complete' : 'incomplete'}`}>

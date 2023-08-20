@@ -12,6 +12,8 @@ import {
 import { addCompanyThunk } from '../../redux/slices/coursesOne/coursesThunk';
 import type { CoursesOneFormType } from '../../types/coursesOneType';
 import { useAppDispatch } from '../../redux/hooks';
+import { textFieldStyle } from '../styles/styles';
+import '../styles/index.css';
 
 export default function CompanyFormAddCourses(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -58,35 +60,34 @@ export default function CompanyFormAddCourses(): JSX.Element {
 
   return (
     <Container>
-      <Typography variant="h6" gutterBottom sx={{ color: 'black' }}>
-        Add Course
-      </Typography>
       <form onSubmit={handleSubmit}>
         <TextField
           variant="outlined"
           name="title"
-          label="Title"
+          label="Название"
           value={courseData.title}
           onChange={changeHandler}
+          sx={textFieldStyle}
           fullWidth
           margin="normal"
         />
         <TextField
           variant="outlined"
           name="body"
-          label="Body"
+          label="Описание"
           value={courseData.body}
           onChange={changeHandler}
+          sx={textFieldStyle}
           fullWidth
           multiline
           rows={4}
           margin="normal"
         />
         <FormControl fullWidth margin="normal">
-          <Input type="file" accept=".pdf" onChange={handleFileChange} />
+          <Input type="file" accept=".pdf" onChange={handleFileChange} sx={textFieldStyle} />
         </FormControl>
-        <Button type="submit" variant="contained">
-          Add Course
+        <Button type="submit" variant="contained" id="butId" sx={{ backgroundColor: '#ffa500' }}>
+          Добавить
         </Button>
       </form>
     </Container>

@@ -115,13 +115,13 @@ export default function PersistentDrawerLeft(): JSX.Element {
     company.status === 'logged'
       ? [
           { to: '/', name: 'Home', icon: <HomeIcon /> },
-          { to: '/company/lk', name: 'Лк компании', icon: <BusinessIcon /> },
+          { to: '/company/lk', name: 'Личный кабинет компании', icon: <BusinessIcon /> },
           { to: '/company/allcourses/', name: 'База Знаний', icon: <BookIcon /> },
           { to: '/admin/signup-user', name: 'Панель Управления', icon: <LogoutIcon /> },
         ]
       : [
           { to: '/', name: 'Home', icon: <HomeIcon /> },
-          { to: '/profile/lk', name: 'Лк Юзер', icon: <PersonIcon /> },
+          { to: '/profile/lk', name: 'Личный кабинет сотрудника', icon: <PersonIcon /> },
           { to: '/company/allcourses/', name: 'База Знаний', icon: <BookIcon /> },
         ];
 
@@ -150,7 +150,7 @@ export default function PersistentDrawerLeft(): JSX.Element {
             </Link>
           )}
           <Typography variant="h6" noWrap component="div">
-            Createros Hub
+            Creator's Hub
           </Typography>
           <div style={{ marginLeft: 'auto' }}>
             {(company.status === 'logged' || user.status === 'logged') && (
@@ -246,7 +246,7 @@ export default function PersistentDrawerLeft(): JSX.Element {
                 />
               </a>
               <Typography variant="h5" paddingLeft="20px" component="h2">
-                Привет! {profile?.username}
+                Привет, {profile?.username} !
               </Typography>
             </>
           )}

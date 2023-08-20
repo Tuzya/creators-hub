@@ -11,17 +11,14 @@ module.exports = {
       title: {
         type: Sequelize.TEXT,
         allowNull: false,
-
       },
       body: {
         type: Sequelize.TEXT,
         allowNull: false,
-
       },
       img: {
         type: Sequelize.TEXT,
         allowNull: false,
-
       },
       company_id: {
         type: Sequelize.INTEGER,
@@ -34,10 +31,12 @@ module.exports = {
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW'),
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW'),
       },
     });
   },

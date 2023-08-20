@@ -4,6 +4,8 @@ import { useAppDispatch } from '../../../redux/hooks';
 import { loginUserThunk } from '../../../redux/slices/user/userThunks';
 import type { UserLoginFormType } from '../../../types/userTypes';
 // import './LoginInStaff.module.css';
+import '../../styles/index.css';
+import { Button, Container } from '@mui/material';
 
 export default function LoginInStaff(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -577,31 +579,57 @@ export default function LoginInStaff(): JSX.Element {
             </g>
           </svg>
         </div>
+        <div style={{ paddingBottom: '400px' }}>
+          <div className="inputGroup inputGroup1">
+            <label htmlFor="email1" style={{ fontFamily: 'Robot' }}>
+              Email
+            </label>
 
-        <div className="inputGroup inputGroup1">
-          <label htmlFor="email1">Email</label>
+            <input
+              type="text"
+              id="email"
+              autoComplete="off"
+              className="email"
+              name="email"
+              placeholder="Введите вашу почту"
+              maxLength={256}
+              style={{
+                width: '100%',
+                padding: '8px',
+                border: '1px solid #ccc',
+                borderRadius: '4px',
+                fontSize: '14px',
+              }}
+            />
 
-          <input
-            type="text"
-            id="email"
-            autoComplete="off"
-            className="email"
-            name="email"
-            maxLength={256}
-          />
+            <span className="indicator" />
+          </div>
 
-          <span className="indicator" />
-        </div>
+          <div className="inputGroup inputGroup2">
+            <label htmlFor="password" style={{ fontFamily: 'Robot' }}>
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Введите ваш пароль"
+              className="password"
+              style={{
+                width: '100%',
+                padding: '8px',
+                border: '1px solid #ccc',
+                borderRadius: '4px',
+                fontSize: '14px',
+              }}
+            />
+          </div>
 
-        <div className="inputGroup inputGroup2">
-          <label htmlFor="password">Password</label>
-          <input type="password" id="password" name="password" className="password" />
-        </div>
-
-        <div className="inputGroup inputGroup3">
-          <button id="login" type="submit">
-            Log in
-          </button>
+          <div className="inputGroup inputGroup3">
+            <Button id="login2" type="submit">
+              Log in
+            </Button>
+          </div>
         </div>
       </form>
     </div>

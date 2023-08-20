@@ -1,0 +1,60 @@
+.buttonStyle {
+  background-color: #ffa500;
+  color: white;
+  margin-top: 15px;
+}
+
+.buttonStyle:hover {
+  background-color: #c0c4cc;
+  border-color: #c0c4cc;
+}
+
+#butId {
+  background-color: #ffa500;
+  color: white;
+  margin-top: 15px;
+}
+#butId:hover {
+  background-color: #c0c4cc;
+  border-color: #c0c4cc;
+}
+
+#butId2 {
+  background-color: #ffa500;
+  color: white;
+  margin-top: 15px;
+}
+#butId2:hover {
+  background-color: #c0c4cc;
+  border-color: #c0c4cc;
+}
+
+#butId3 {
+  background-color: #ffa500;
+  color: white;
+  margin-top: 15px;
+}
+#butId3:hover {
+  background-color: #c0c4cc;
+  border-color: #c0c4cc;
+}
+
+#login {
+  background-color: #ffa500;
+  color: white;
+  margin-top: 15px;
+}
+#login:hover {
+  background-color: #c0c4cc;
+  border-color: #c0c4cc;
+}
+
+#login2 {
+  background-color: #ffa500;
+  color: white;
+  margin-top: 15px;
+}
+#login2:hover {
+  background-color: #c0c4cc;
+  border-color: #c0c4cc;
+}

@@ -44,10 +44,7 @@ export default function AllCoursesList(): JSX.Element {
       >
         Здесь вы можете изучить все материалы, которые предоставляет ваша компания.
       </Typography>
-      <SearchBar
-        setSearchParams={(params) => dispatch(setSearchParams(params))}
-        sx={{ margin: '0 auto' }}
-      />
+      <SearchBar setSearchParams={(params) => dispatch(setSearchParams(params))} />
 
       <Paper elevation={0} sx={{ backgroundColor: '#F5F5F5' }}>
         <Box mt={5} py={8} px={2} display="flex" flexDirection="row" flexWrap="wrap">

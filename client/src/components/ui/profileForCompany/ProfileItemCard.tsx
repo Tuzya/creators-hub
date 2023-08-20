@@ -29,9 +29,6 @@ export default function ProfileItemCard({ profile }: ProfileItemCardProps): JSX.
   return (
     <Card sx={{ ...cardStyle, height: '470px', borderRadius: '20px' }}>
       <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Profile Details
-        </Typography>
         {profile?.People[0]?.photo ? (
           <a href={`/profile/lk/${profile?.id}`}>
             <img
@@ -53,14 +50,15 @@ export default function ProfileItemCard({ profile }: ProfileItemCardProps): JSX.
         <Typography variant="h5" component="div">
           <span style={{ fontFamily: 'Robot' }}>{profile?.username}</span>
         </Typography>
-
-        {/* Другие поля профиля */}
+        <Typography variant="h5" component="div">
+          <h6 style={{ fontFamily: 'Robot' }}>{profile?.People[0]?.about} .</h6>
+        </Typography>
       </CardContent>
-      {/* Кнопки для редактирования, удаления и т.д. */}
+
       <Button
         type="button"
         size="small"
-        sx={{ mr: 2, mt: 2, width: '100%', backgroundColor: 'orange' }}
+        sx={{ mr: 2, mt: -6, width: '100%', backgroundColor: 'orange' }}
         onClick={handleOpen}
       >
         <p style={{ color: 'white' }}>Назначить курс</p>
